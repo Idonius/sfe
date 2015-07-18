@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UserViewDlg" widgetVar="UserViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewUserTitle}">
+            <h:form id="UserViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{userController.selected != null}">
+                        <h:outputText value="#{bundle.ViewUserLabel_useCode}"/>
+                        <h:outputText value="#{userController.selected.useCode}" title="#{bundle.ViewUserTitle_useCode}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_useName}"/>
+                        <h:outputText value="#{userController.selected.useName}" title="#{bundle.ViewUserTitle_useName}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_usePassword}"/>
+                        <h:outputText value="#{userController.selected.usePassword}" title="#{bundle.ViewUserTitle_usePassword}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_useRuc}"/>
+                        <h:outputText value="#{userController.selected.useRuc}" title="#{bundle.ViewUserTitle_useRuc}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_useFirstName}"/>
+                        <h:outputText value="#{userController.selected.useFirstName}" title="#{bundle.ViewUserTitle_useFirstName}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_useLastName}"/>
+                        <h:outputText value="#{userController.selected.useLastName}" title="#{bundle.ViewUserTitle_useLastName}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_useComName}"/>
+                        <h:outputText value="#{userController.selected.useComName}" title="#{bundle.ViewUserTitle_useComName}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_usePrincipalAddr}"/>
+                        <h:outputText value="#{userController.selected.usePrincipalAddr}" title="#{bundle.ViewUserTitle_usePrincipalAddr}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_useLocalAddr}"/>
+                        <h:outputText value="#{userController.selected.useLocalAddr}" title="#{bundle.ViewUserTitle_useLocalAddr}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_useLocalCode}"/>
+                        <h:outputText value="#{userController.selected.useLocalCode}" title="#{bundle.ViewUserTitle_useLocalCode}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_useResolution}"/>
+                        <h:outputText value="#{userController.selected.useResolution}" title="#{bundle.ViewUserTitle_useResolution}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_useAccounting}"/>
+                        <p:selectBooleanCheckbox value="#{userController.selected.useAccounting}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_useImage}"/>
+                        <h:outputText value="#{userController.selected.useImage}" title="#{bundle.ViewUserTitle_useImage}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_useEmissionPoint}"/>
+                        <h:outputText value="#{userController.selected.useEmissionPoint}" title="#{bundle.ViewUserTitle_useEmissionPoint}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_useEnabled}"/>
+                        <p:selectBooleanCheckbox value="#{userController.selected.useEnabled}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_comCode}"/>
+                        <h:outputText value="#{userController.selected.comCode}" title="#{bundle.ViewUserTitle_comCode}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_rolCode}"/>
+                        <h:outputText value="#{userController.selected.rolCode}" title="#{bundle.ViewUserTitle_rolCode}"/>
+                        <h:outputText value="#{bundle.ViewUserLabel_emiTypCode}"/>
+                        <h:outputText value="#{userController.selected.emiTypCode}" title="#{bundle.ViewUserTitle_emiTypCode}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="UserViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

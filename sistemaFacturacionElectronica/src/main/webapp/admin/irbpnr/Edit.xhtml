@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="IrbpnrEditDlg" widgetVar="IrbpnrEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditIrbpnrTitle}">
+            <h:form id="IrbpnrEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{irbpnrController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditIrbpnrLabel_irbCode}" for="irbCode" />
+                        <p:inputText id="irbCode" value="#{irbpnrController.selected.irbCode}" title="#{bundle.EditIrbpnrTitle_irbCode}" required="true" requiredMessage="#{bundle.EditIrbpnrRequiredMessage_irbCode}"/>
+                        <p:outputLabel value="#{bundle.EditIrbpnrLabel_irbDescription}" for="irbDescription" />
+                        <p:inputText id="irbDescription" value="#{irbpnrController.selected.irbDescription}" title="#{bundle.EditIrbpnrTitle_irbDescription}" required="true" requiredMessage="#{bundle.EditIrbpnrRequiredMessage_irbDescription}"/>
+                        <p:outputLabel value="#{bundle.EditIrbpnrLabel_irbValue}" for="irbValue" />
+                        <p:inputText id="irbValue" value="#{irbpnrController.selected.irbValue}" title="#{bundle.EditIrbpnrTitle_irbValue}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{irbpnrController.update}" value="#{bundle.Save}" update="display,:IrbpnrListForm:datalist,:growl" oncomplete="handleSubmit(args, 'IrbpnrEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="IrbpnrEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

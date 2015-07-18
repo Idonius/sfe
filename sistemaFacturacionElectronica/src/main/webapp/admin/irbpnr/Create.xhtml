@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="IrbpnrCreateDlg" widgetVar="IrbpnrCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateIrbpnrTitle}">
+            <h:form id="IrbpnrCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{irbpnrController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateIrbpnrLabel_irbCode}" for="irbCode" />
+                        <p:inputText id="irbCode" value="#{irbpnrController.selected.irbCode}" title="#{bundle.CreateIrbpnrTitle_irbCode}" required="true" requiredMessage="#{bundle.CreateIrbpnrRequiredMessage_irbCode}"/>
+                        <p:outputLabel value="#{bundle.CreateIrbpnrLabel_irbDescription}" for="irbDescription" />
+                        <p:inputText id="irbDescription" value="#{irbpnrController.selected.irbDescription}" title="#{bundle.CreateIrbpnrTitle_irbDescription}" required="true" requiredMessage="#{bundle.CreateIrbpnrRequiredMessage_irbDescription}"/>
+                        <p:outputLabel value="#{bundle.CreateIrbpnrLabel_irbValue}" for="irbValue" />
+                        <p:inputText id="irbValue" value="#{irbpnrController.selected.irbValue}" title="#{bundle.CreateIrbpnrTitle_irbValue}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{irbpnrController.create}" value="#{bundle.Save}" update="display,:IrbpnrListForm:datalist,:growl" oncomplete="handleSubmit(args,'IrbpnrCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="IrbpnrCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

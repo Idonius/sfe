@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListProductTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="ProductListForm">
+                <p:dataTable id="datalist" value="#{productController.items}" var="item"
+                             paginator="true"
+                             rowKey="#{item.proCode}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             >
+
+                    <f:facet name="header">         
+                        <h:panelGrid columns="2" styleClass="borderLess">
+                            <h:outputLabel value="Lista de Product" style="float:left;" />
+                            <p:commandButton id="createButton2" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{productController.prepareCreate}" update=":ProductCreateForm" oncomplete="PF('ProductCreateDialog').show()"  style="float:right;" />
+                        </h:panelGrid>  
+                    </f:facet>
+
+
+                    <p:column filterBy="#{item.proCode}" sortBy="#{item.proCode}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListProductTitle_proCode}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.proCode}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.proPrincipalCode}" sortBy="#{item.proPrincipalCode}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListProductTitle_proPrincipalCode}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.proPrincipalCode}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.proAuxCode}" sortBy="#{item.proAuxCode}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListProductTitle_proAuxCode}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.proAuxCode}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.proName}" sortBy="#{item.proName}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListProductTitle_proName}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.proName}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.proValue}" sortBy="#{item.proValue}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListProductTitle_proValue}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.proValue}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.proAttribute1}" sortBy="#{item.proAttribute1}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListProductTitle_proAttribute1}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.proAttribute1}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.proAttribute2}" sortBy="#{item.proAttribute2}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListProductTitle_proAttribute2}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.proAttribute2}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.proAttribute3}" sortBy="#{item.proAttribute3}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListProductTitle_proAttribute3}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.proAttribute3}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.proAttributeDesc1}" sortBy="#{item.proAttributeDesc1}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListProductTitle_proAttributeDesc1}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.proAttributeDesc1}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.proAttributeDesc2}" sortBy="#{item.proAttributeDesc2}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListProductTitle_proAttributeDesc2}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.proAttributeDesc2}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.proAttributeDesc3}" sortBy="#{item.proAttributeDesc3}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListProductTitle_proAttributeDesc3}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.proAttributeDesc3}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.proEnabled}" sortBy="#{item.proEnabled}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListProductTitle_proEnabled}"/>
+                        </f:facet>
+                        <p:selectBooleanCheckbox value="#{item.proEnabled}" disabled="true"/>
+                    </p:column>
+                    <p:column filterBy="#{item.proTypCode}" sortBy="#{item.proTypCode}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListProductTitle_proTypCode}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.proTypCode}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.iceCode}" sortBy="#{item.iceCode}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListProductTitle_iceCode}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.iceCode}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.ivaCode}" sortBy="#{item.ivaCode}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListProductTitle_ivaCode}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.ivaCode}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.irbCode}" sortBy="#{item.irbCode}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListProductTitle_irbCode}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.irbCode}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Accion"/>
+                        </f:facet>
+                        <h:panelGrid columns="3" cellpadding="1" styleClass="actions">
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ProductEditForm" oncomplete="PF('ProductEditDialog').show()" >
+                                <f:setPropertyActionListener value="#{item}" target="#{productController.selected}" />
+                            </p:commandButton>
+                        </h:panelGrid>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{productController.prepareCreate}" update=":ProductCreateForm" oncomplete="PF('ProductCreateDialog').show()"/>
+                    </f:facet>
+                </p:dataTable>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

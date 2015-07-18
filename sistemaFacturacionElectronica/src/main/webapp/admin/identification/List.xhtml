@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListIdentificationTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="IdentificationListForm">
+                <p:dataTable id="datalist" value="#{identificationController.items}" var="item"
+                             paginator="true"
+                             rowKey="#{item.ideCode}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             >
+
+                    <f:facet name="header">         
+                        <h:panelGrid columns="2" styleClass="borderLess">
+                            <h:outputLabel value="Lista de Identification" style="float:left;" />
+                            <p:commandButton id="createButton2" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{identificationController.prepareCreate}" update=":IdentificationCreateForm" oncomplete="PF('IdentificationCreateDialog').show()"  style="float:right;" />
+                        </h:panelGrid>  
+                    </f:facet>
+
+
+                    <p:column filterBy="#{item.ideCode}" sortBy="#{item.ideCode}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListIdentificationTitle_ideCode}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.ideCode}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.ideDescription}" sortBy="#{item.ideDescription}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListIdentificationTitle_ideDescription}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.ideDescription}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.ideEnabled}" sortBy="#{item.ideEnabled}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListIdentificationTitle_ideEnabled}"/>
+                        </f:facet>
+                        <p:selectBooleanCheckbox value="#{item.ideEnabled}" disabled="true"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Accion"/>
+                        </f:facet>
+                        <h:panelGrid columns="3" cellpadding="1" styleClass="actions">
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":IdentificationEditForm" oncomplete="PF('IdentificationEditDialog').show()" >
+                                <f:setPropertyActionListener value="#{item}" target="#{identificationController.selected}" />
+                            </p:commandButton>
+                        </h:panelGrid>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{identificationController.prepareCreate}" update=":IdentificationCreateForm" oncomplete="PF('IdentificationCreateDialog').show()"/>
+                    </f:facet>
+                </p:dataTable>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

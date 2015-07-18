@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UserCreateDlg" widgetVar="UserCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUserTitle}">
+            <h:form id="UserCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{userController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateUserLabel_useCode}" for="useCode" />
+                        <p:inputText id="useCode" value="#{userController.selected.useCode}" title="#{bundle.CreateUserTitle_useCode}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_useCode}"/>
+                        <p:outputLabel value="#{bundle.CreateUserLabel_useName}" for="useName" />
+                        <p:inputText id="useName" value="#{userController.selected.useName}" title="#{bundle.CreateUserTitle_useName}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_useName}"/>
+                        <p:outputLabel value="#{bundle.CreateUserLabel_usePassword}" for="usePassword" />
+                        <p:inputText id="usePassword" value="#{userController.selected.usePassword}" title="#{bundle.CreateUserTitle_usePassword}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_usePassword}"/>
+                        <p:outputLabel value="#{bundle.CreateUserLabel_useRuc}" for="useRuc" />
+                        <p:inputText id="useRuc" value="#{userController.selected.useRuc}" title="#{bundle.CreateUserTitle_useRuc}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_useRuc}"/>
+                        <p:outputLabel value="#{bundle.CreateUserLabel_useFirstName}" for="useFirstName" />
+                        <p:inputText id="useFirstName" value="#{userController.selected.useFirstName}" title="#{bundle.CreateUserTitle_useFirstName}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_useFirstName}"/>
+                        <p:outputLabel value="#{bundle.CreateUserLabel_useLastName}" for="useLastName" />
+                        <p:inputText id="useLastName" value="#{userController.selected.useLastName}" title="#{bundle.CreateUserTitle_useLastName}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_useLastName}"/>
+                        <p:outputLabel value="#{bundle.CreateUserLabel_useComName}" for="useComName" />
+                        <p:inputText id="useComName" value="#{userController.selected.useComName}" title="#{bundle.CreateUserTitle_useComName}" />
+                        <p:outputLabel value="#{bundle.CreateUserLabel_usePrincipalAddr}" for="usePrincipalAddr" />
+                        <p:inputTextarea rows="4" cols="30" id="usePrincipalAddr" value="#{userController.selected.usePrincipalAddr}" title="#{bundle.CreateUserTitle_usePrincipalAddr}" />
+                        <p:outputLabel value="#{bundle.CreateUserLabel_useLocalAddr}" for="useLocalAddr" />
+                        <p:inputTextarea rows="4" cols="30" id="useLocalAddr" value="#{userController.selected.useLocalAddr}" title="#{bundle.CreateUserTitle_useLocalAddr}" />
+                        <p:outputLabel value="#{bundle.CreateUserLabel_useLocalCode}" for="useLocalCode" />
+                        <p:inputText id="useLocalCode" value="#{userController.selected.useLocalCode}" title="#{bundle.CreateUserTitle_useLocalCode}" />
+                        <p:outputLabel value="#{bundle.CreateUserLabel_useResolution}" for="useResolution" />
+                        <p:inputText id="useResolution" value="#{userController.selected.useResolution}" title="#{bundle.CreateUserTitle_useResolution}" />
+                        <p:outputLabel value="#{bundle.CreateUserLabel_useAccounting}" for="useAccounting" />
+                        <p:selectBooleanCheckbox id="useAccounting" value="#{userController.selected.useAccounting}" />
+                        <p:outputLabel value="#{bundle.CreateUserLabel_useImage}" for="useImage" />
+                        <p:inputText id="useImage" value="#{userController.selected.useImage}" title="#{bundle.CreateUserTitle_useImage}" />
+                        <p:outputLabel value="#{bundle.CreateUserLabel_useEmissionPoint}" for="useEmissionPoint" />
+                        <p:inputText id="useEmissionPoint" value="#{userController.selected.useEmissionPoint}" title="#{bundle.CreateUserTitle_useEmissionPoint}" />
+                        <p:outputLabel value="#{bundle.CreateUserLabel_useEnabled}" for="useEnabled" />
+                        <p:selectBooleanCheckbox id="useEnabled" value="#{userController.selected.useEnabled}" />
+                        <p:outputLabel value="#{bundle.CreateUserLabel_comCode}" for="comCode" />
+                        <p:selectOneMenu id="comCode" value="#{userController.selected.comCode}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_comCode}">
+                            <f:selectItems value="#{companyController.itemsAvailableSelectOne}"
+                                           var="comCodeItem"
+                                           itemValue="#{comCodeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateUserLabel_rolCode}" for="rolCode" />
+                        <p:selectOneMenu id="rolCode" value="#{userController.selected.rolCode}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_rolCode}">
+                            <f:selectItems value="#{rolController.itemsAvailableSelectOne}"
+                                           var="rolCodeItem"
+                                           itemValue="#{rolCodeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateUserLabel_emiTypCode}" for="emiTypCode" />
+                        <p:selectOneMenu id="emiTypCode" value="#{userController.selected.emiTypCode}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_emiTypCode}">
+                            <f:selectItems value="#{emissionTypeController.itemsAvailableSelectOne}"
+                                           var="emiTypCodeItem"
+                                           itemValue="#{emiTypCodeItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{userController.create}" value="#{bundle.Save}" update="display,:UserListForm:datalist,:growl" oncomplete="handleSubmit(args,'UserCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UserCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

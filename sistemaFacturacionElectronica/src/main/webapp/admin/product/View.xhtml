@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProductViewDlg" widgetVar="ProductViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewProductTitle}">
+            <h:form id="ProductViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{productController.selected != null}">
+                        <h:outputText value="#{bundle.ViewProductLabel_proCode}"/>
+                        <h:outputText value="#{productController.selected.proCode}" title="#{bundle.ViewProductTitle_proCode}"/>
+                        <h:outputText value="#{bundle.ViewProductLabel_proPrincipalCode}"/>
+                        <h:outputText value="#{productController.selected.proPrincipalCode}" title="#{bundle.ViewProductTitle_proPrincipalCode}"/>
+                        <h:outputText value="#{bundle.ViewProductLabel_proAuxCode}"/>
+                        <h:outputText value="#{productController.selected.proAuxCode}" title="#{bundle.ViewProductTitle_proAuxCode}"/>
+                        <h:outputText value="#{bundle.ViewProductLabel_proName}"/>
+                        <h:outputText value="#{productController.selected.proName}" title="#{bundle.ViewProductTitle_proName}"/>
+                        <h:outputText value="#{bundle.ViewProductLabel_proValue}"/>
+                        <h:outputText value="#{productController.selected.proValue}" title="#{bundle.ViewProductTitle_proValue}"/>
+                        <h:outputText value="#{bundle.ViewProductLabel_proAttribute1}"/>
+                        <h:outputText value="#{productController.selected.proAttribute1}" title="#{bundle.ViewProductTitle_proAttribute1}"/>
+                        <h:outputText value="#{bundle.ViewProductLabel_proAttribute2}"/>
+                        <h:outputText value="#{productController.selected.proAttribute2}" title="#{bundle.ViewProductTitle_proAttribute2}"/>
+                        <h:outputText value="#{bundle.ViewProductLabel_proAttribute3}"/>
+                        <h:outputText value="#{productController.selected.proAttribute3}" title="#{bundle.ViewProductTitle_proAttribute3}"/>
+                        <h:outputText value="#{bundle.ViewProductLabel_proAttributeDesc1}"/>
+                        <h:outputText value="#{productController.selected.proAttributeDesc1}" title="#{bundle.ViewProductTitle_proAttributeDesc1}"/>
+                        <h:outputText value="#{bundle.ViewProductLabel_proAttributeDesc2}"/>
+                        <h:outputText value="#{productController.selected.proAttributeDesc2}" title="#{bundle.ViewProductTitle_proAttributeDesc2}"/>
+                        <h:outputText value="#{bundle.ViewProductLabel_proAttributeDesc3}"/>
+                        <h:outputText value="#{productController.selected.proAttributeDesc3}" title="#{bundle.ViewProductTitle_proAttributeDesc3}"/>
+                        <h:outputText value="#{bundle.ViewProductLabel_proEnabled}"/>
+                        <p:selectBooleanCheckbox value="#{productController.selected.proEnabled}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewProductLabel_proTypCode}"/>
+                        <h:outputText value="#{productController.selected.proTypCode}" title="#{bundle.ViewProductTitle_proTypCode}"/>
+                        <h:outputText value="#{bundle.ViewProductLabel_iceCode}"/>
+                        <h:outputText value="#{productController.selected.iceCode}" title="#{bundle.ViewProductTitle_iceCode}"/>
+                        <h:outputText value="#{bundle.ViewProductLabel_ivaCode}"/>
+                        <h:outputText value="#{productController.selected.ivaCode}" title="#{bundle.ViewProductTitle_ivaCode}"/>
+                        <h:outputText value="#{bundle.ViewProductLabel_irbCode}"/>
+                        <h:outputText value="#{productController.selected.irbCode}" title="#{bundle.ViewProductTitle_irbCode}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ProductViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

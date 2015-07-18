@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="IvaEditDlg" widgetVar="IvaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditIvaTitle}">
+            <h:form id="IvaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ivaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditIvaLabel_ivaCode}" for="ivaCode" />
+                        <p:inputText id="ivaCode" value="#{ivaController.selected.ivaCode}" title="#{bundle.EditIvaTitle_ivaCode}" required="true" requiredMessage="#{bundle.EditIvaRequiredMessage_ivaCode}"/>
+                        <p:outputLabel value="#{bundle.EditIvaLabel_ivaValue}" for="ivaValue" />
+                        <p:inputText id="ivaValue" value="#{ivaController.selected.ivaValue}" title="#{bundle.EditIvaTitle_ivaValue}" required="true" requiredMessage="#{bundle.EditIvaRequiredMessage_ivaValue}"/>
+                        <p:outputLabel value="#{bundle.EditIvaLabel_ivaEnabled}" for="ivaEnabled" />
+                        <p:selectBooleanCheckbox id="ivaEnabled" value="#{ivaController.selected.ivaEnabled}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{ivaController.update}" value="#{bundle.Save}" update="display,:IvaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'IvaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="IvaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

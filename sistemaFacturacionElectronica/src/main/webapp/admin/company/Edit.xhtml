@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CompanyEditDlg" widgetVar="CompanyEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCompanyTitle}">
+            <h:form id="CompanyEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{companyController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditCompanyLabel_comCode}" for="comCode" />
+                        <p:inputText id="comCode" value="#{companyController.selected.comCode}" title="#{bundle.EditCompanyTitle_comCode}" required="true" requiredMessage="#{bundle.EditCompanyRequiredMessage_comCode}"/>
+                        <p:outputLabel value="#{bundle.EditCompanyLabel_comDescription}" for="comDescription" />
+                        <p:inputText id="comDescription" value="#{companyController.selected.comDescription}" title="#{bundle.EditCompanyTitle_comDescription}" required="true" requiredMessage="#{bundle.EditCompanyRequiredMessage_comDescription}"/>
+                        <p:outputLabel value="#{bundle.EditCompanyLabel_comEnabled}" for="comEnabled" />
+                        <p:selectBooleanCheckbox id="comEnabled" value="#{companyController.selected.comEnabled}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{companyController.update}" value="#{bundle.Save}" update="display,:CompanyListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CompanyEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CompanyEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

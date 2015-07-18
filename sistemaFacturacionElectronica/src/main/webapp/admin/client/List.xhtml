@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListClientTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="ClientListForm">
+                <p:dataTable id="datalist" value="#{clientController.items}" var="item"
+                             paginator="true"
+                             rowKey="#{item.cliCode}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             rowIndexVar="row"
+                             >
+
+                    <f:facet name="header">         
+                        <h:panelGrid columns="2" styleClass="borderLess">
+                            <h:outputLabel value="Lista de Client" style="float:left;" />
+                            <p:commandButton id="createButton2" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{clientController.prepareCreate}" update=":ClientCreateForm" oncomplete="PF('ClientCreateDialog').show()"  style="float:right;" />
+                        </h:panelGrid>  
+                    </f:facet>
+
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListClientTitle_cliCode}"/>
+                        </f:facet>
+                        #{row+1}
+                    </p:column>
+                    <p:column filterBy="#{item.cliFirstName}" sortBy="#{item.cliFirstName}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListClientTitle_cliFirstName}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cliFirstName}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.cliLastName}" sortBy="#{item.cliLastName}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListClientTitle_cliLastName}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cliLastName}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.cliSocialReason}" sortBy="#{item.cliSocialReason}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListClientTitle_cliSocialReason}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cliSocialReason}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.cliId}" sortBy="#{item.cliId}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListClientTitle_cliId}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cliId}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.cliAddr}" sortBy="#{item.cliAddr}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListClientTitle_cliAddr}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cliAddr}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.cliPhone}" sortBy="#{item.cliPhone}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListClientTitle_cliPhone}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cliPhone}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.cliExt}" sortBy="#{item.cliExt}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListClientTitle_cliExt}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cliExt}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.cliCellPhone}" sortBy="#{item.cliCellPhone}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListClientTitle_cliCellPhone}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cliCellPhone}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.cliEmail}" sortBy="#{item.cliEmail}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListClientTitle_cliEmail}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cliEmail}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.cliEnabled}" sortBy="#{item.cliEnabled}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListClientTitle_cliEnabled}"/>
+                        </f:facet>
+                        <p:selectBooleanCheckbox value="#{item.cliEnabled}" disabled="true"/>
+                    </p:column>
+                    <p:column filterBy="#{item.cliTypCode}" sortBy="#{item.cliTypCode}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListClientTitle_cliTypCode}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cliTypCode}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.ideCode}" sortBy="#{item.ideCode}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListClientTitle_ideCode}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.ideCode}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Accion"/>
+                        </f:facet>
+                        <h:panelGrid columns="3" cellpadding="1" styleClass="actions">
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ClientEditForm" oncomplete="PF('ClientEditDialog').show()" >
+                                <f:setPropertyActionListener value="#{item}" target="#{clientController.selected}" />
+                            </p:commandButton>
+                        </h:panelGrid>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{clientController.prepareCreate}" update=":ClientCreateForm" oncomplete="PF('ClientCreateDialog').show()"/>
+                    </f:facet>
+                </p:dataTable>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

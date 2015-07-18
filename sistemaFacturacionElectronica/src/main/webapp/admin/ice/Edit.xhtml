@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="IceEditDlg" widgetVar="IceEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditIceTitle}">
+            <h:form id="IceEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{iceController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditIceLabel_iceCode}" for="iceCode" />
+                        <p:inputText id="iceCode" value="#{iceController.selected.iceCode}" title="#{bundle.EditIceTitle_iceCode}" required="true" requiredMessage="#{bundle.EditIceRequiredMessage_iceCode}"/>
+                        <p:outputLabel value="#{bundle.EditIceLabel_iceDescription}" for="iceDescription" />
+                        <p:inputText id="iceDescription" value="#{iceController.selected.iceDescription}" title="#{bundle.EditIceTitle_iceDescription}" required="true" requiredMessage="#{bundle.EditIceRequiredMessage_iceDescription}"/>
+                        <p:outputLabel value="#{bundle.EditIceLabel_iceValue}" for="iceValue" />
+                        <p:inputText id="iceValue" value="#{iceController.selected.iceValue}" title="#{bundle.EditIceTitle_iceValue}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{iceController.update}" value="#{bundle.Save}" update="display,:IceListForm:datalist,:growl" oncomplete="handleSubmit(args, 'IceEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="IceEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

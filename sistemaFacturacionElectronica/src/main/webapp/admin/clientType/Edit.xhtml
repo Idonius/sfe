@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ClientTypeEditDlg" widgetVar="ClientTypeEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditClientTypeTitle}">
+            <h:form id="ClientTypeEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{clientTypeController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditClientTypeLabel_cliTypCode}" for="cliTypCode" />
+                        <p:inputText id="cliTypCode" value="#{clientTypeController.selected.cliTypCode}" title="#{bundle.EditClientTypeTitle_cliTypCode}" required="true" requiredMessage="#{bundle.EditClientTypeRequiredMessage_cliTypCode}"/>
+                        <p:outputLabel value="#{bundle.EditClientTypeLabel_cliTypDescription}" for="cliTypDescription" />
+                        <p:inputText id="cliTypDescription" value="#{clientTypeController.selected.cliTypDescription}" title="#{bundle.EditClientTypeTitle_cliTypDescription}" required="true" requiredMessage="#{bundle.EditClientTypeRequiredMessage_cliTypDescription}"/>
+                        <p:outputLabel value="#{bundle.EditClientTypeLabel_cliTypEnabled}" for="cliTypEnabled" />
+                        <p:selectBooleanCheckbox id="cliTypEnabled" value="#{clientTypeController.selected.cliTypEnabled}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{clientTypeController.update}" value="#{bundle.Save}" update="display,:ClientTypeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ClientTypeEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ClientTypeEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

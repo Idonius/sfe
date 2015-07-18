@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListUserTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="UserListForm">
+                <p:dataTable id="datalist" value="#{userController.items}" var="item"
+                             paginator="true"
+                             rowKey="#{item.useCode}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             >
+
+                    <f:facet name="header">         
+                        <h:panelGrid columns="2" styleClass="borderLess">
+                            <h:outputLabel value="Lista de User" style="float:left;" />
+                            <p:commandButton id="createButton2" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{userController.prepareCreate}" update=":UserCreateForm" oncomplete="PF('UserCreateDialog').show()"  style="float:right;" />
+                        </h:panelGrid>  
+                    </f:facet>
+
+
+                    <p:column filterBy="#{item.useCode}" sortBy="#{item.useCode}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUserTitle_useCode}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.useCode}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.useName}" sortBy="#{item.useName}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUserTitle_useName}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.useName}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.usePassword}" sortBy="#{item.usePassword}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUserTitle_usePassword}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.usePassword}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.useRuc}" sortBy="#{item.useRuc}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUserTitle_useRuc}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.useRuc}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.useFirstName}" sortBy="#{item.useFirstName}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUserTitle_useFirstName}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.useFirstName}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.useLastName}" sortBy="#{item.useLastName}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUserTitle_useLastName}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.useLastName}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.useComName}" sortBy="#{item.useComName}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUserTitle_useComName}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.useComName}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.usePrincipalAddr}" sortBy="#{item.usePrincipalAddr}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUserTitle_usePrincipalAddr}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.usePrincipalAddr}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.useLocalAddr}" sortBy="#{item.useLocalAddr}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUserTitle_useLocalAddr}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.useLocalAddr}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.useLocalCode}" sortBy="#{item.useLocalCode}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUserTitle_useLocalCode}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.useLocalCode}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.useResolution}" sortBy="#{item.useResolution}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUserTitle_useResolution}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.useResolution}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.useAccounting}" sortBy="#{item.useAccounting}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUserTitle_useAccounting}"/>
+                        </f:facet>
+                        <p:selectBooleanCheckbox value="#{item.useAccounting}" disabled="true"/>
+                    </p:column>
+                    <p:column filterBy="#{item.useImage}" sortBy="#{item.useImage}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUserTitle_useImage}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.useImage}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.useEmissionPoint}" sortBy="#{item.useEmissionPoint}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUserTitle_useEmissionPoint}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.useEmissionPoint}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.useEnabled}" sortBy="#{item.useEnabled}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUserTitle_useEnabled}"/>
+                        </f:facet>
+                        <p:selectBooleanCheckbox value="#{item.useEnabled}" disabled="true"/>
+                    </p:column>
+                    <p:column filterBy="#{item.comCode}" sortBy="#{item.comCode}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUserTitle_comCode}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.comCode}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.rolCode}" sortBy="#{item.rolCode}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUserTitle_rolCode}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.rolCode}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.emiTypCode}" sortBy="#{item.emiTypCode}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListUserTitle_emiTypCode}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.emiTypCode}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Accion"/>
+                        </f:facet>
+                        <h:panelGrid columns="3" cellpadding="1" styleClass="actions">
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":UserEditForm" oncomplete="PF('UserEditDialog').show()" >
+                                <f:setPropertyActionListener value="#{item}" target="#{userController.selected}" />
+                            </p:commandButton>
+                        </h:panelGrid>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{userController.prepareCreate}" update=":UserCreateForm" oncomplete="PF('UserCreateDialog').show()"/>
+                    </f:facet>
+                </p:dataTable>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

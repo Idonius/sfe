@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ClientViewDlg" widgetVar="ClientViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewClientTitle}">
+            <h:form id="ClientViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{clientController.selected != null}">
+                        <h:outputText value="#{bundle.ViewClientLabel_cliCode}"/>
+                        <h:outputText value="#{clientController.selected.cliCode}" title="#{bundle.ViewClientTitle_cliCode}"/>
+                        <h:outputText value="#{bundle.ViewClientLabel_cliFirstName}"/>
+                        <h:outputText value="#{clientController.selected.cliFirstName}" title="#{bundle.ViewClientTitle_cliFirstName}"/>
+                        <h:outputText value="#{bundle.ViewClientLabel_cliLastName}"/>
+                        <h:outputText value="#{clientController.selected.cliLastName}" title="#{bundle.ViewClientTitle_cliLastName}"/>
+                        <h:outputText value="#{bundle.ViewClientLabel_cliSocialReason}"/>
+                        <h:outputText value="#{clientController.selected.cliSocialReason}" title="#{bundle.ViewClientTitle_cliSocialReason}"/>
+                        <h:outputText value="#{bundle.ViewClientLabel_cliId}"/>
+                        <h:outputText value="#{clientController.selected.cliId}" title="#{bundle.ViewClientTitle_cliId}"/>
+                        <h:outputText value="#{bundle.ViewClientLabel_cliAddr}"/>
+                        <h:outputText value="#{clientController.selected.cliAddr}" title="#{bundle.ViewClientTitle_cliAddr}"/>
+                        <h:outputText value="#{bundle.ViewClientLabel_cliPhone}"/>
+                        <h:outputText value="#{clientController.selected.cliPhone}" title="#{bundle.ViewClientTitle_cliPhone}"/>
+                        <h:outputText value="#{bundle.ViewClientLabel_cliExt}"/>
+                        <h:outputText value="#{clientController.selected.cliExt}" title="#{bundle.ViewClientTitle_cliExt}"/>
+                        <h:outputText value="#{bundle.ViewClientLabel_cliCellPhone}"/>
+                        <h:outputText value="#{clientController.selected.cliCellPhone}" title="#{bundle.ViewClientTitle_cliCellPhone}"/>
+                        <h:outputText value="#{bundle.ViewClientLabel_cliEmail}"/>
+                        <h:outputText value="#{clientController.selected.cliEmail}" title="#{bundle.ViewClientTitle_cliEmail}"/>
+                        <h:outputText value="#{bundle.ViewClientLabel_cliEnabled}"/>
+                        <p:selectBooleanCheckbox value="#{clientController.selected.cliEnabled}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewClientLabel_cliTypCode}"/>
+                        <h:outputText value="#{clientController.selected.cliTypCode}" title="#{bundle.ViewClientTitle_cliTypCode}"/>
+                        <h:outputText value="#{bundle.ViewClientLabel_ideCode}"/>
+                        <h:outputText value="#{clientController.selected.ideCode}" title="#{bundle.ViewClientTitle_ideCode}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ClientViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
