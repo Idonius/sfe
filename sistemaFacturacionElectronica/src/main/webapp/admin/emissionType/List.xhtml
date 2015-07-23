@@ -31,7 +31,7 @@
                     </f:facet>
 
 
-                    <p:column>
+                    <p:column style="text-align:center;">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListEmissionTypeTitle_emiTypCode}"/>
                         </f:facet>
@@ -43,14 +43,14 @@
                         </f:facet>
                         <h:outputText value="#{item.emiTypDescription}"/>
                     </p:column>
-                    <p:column filterBy="#{item.emiTypeEnabled}" sortBy="#{item.emiTypeEnabled}" filterMatchMode="contains">
+                    <p:column style="text-align:center;" sortBy="#{item.emiTypeEnabled}">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListEmissionTypeTitle_emiTypeEnabled}"/>
                         </f:facet>
                         <p:selectBooleanCheckbox value="#{item.emiTypeEnabled}" disabled="true"/>
                     </p:column>
 
-                    <p:column>
+                    <p:column style="text-align:center;">
                         <f:facet name="header">
                             <h:outputText value="Accion"/>
                         </f:facet>

@@ -31,7 +31,7 @@
                     </f:facet>
 
 
-                    <p:column>
+                    <p:column style="text-align:center;">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListProductTypeTitle_proTypCode}"/>
                         </f:facet>
@@ -43,14 +43,14 @@
                         </f:facet>
                         <h:outputText value="#{item.proTypDesription}"/>
                     </p:column>
-                    <p:column filterBy="#{item.proTypEnabled}" sortBy="#{item.proTypEnabled}" filterMatchMode="contains">
+                    <p:column style="text-align:center;" sortBy="#{item.proTypEnabled}">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListProductTypeTitle_proTypEnabled}"/>
                         </f:facet>
                         <p:selectBooleanCheckbox value="#{item.proTypEnabled}" disabled="true"/>
                     </p:column>
 
-                    <p:column>
+                    <p:column style="text-align:center;">
                         <f:facet name="header">
                             <h:outputText value="Accion"/>
                         </f:facet>

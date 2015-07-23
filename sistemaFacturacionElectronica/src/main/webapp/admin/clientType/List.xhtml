@@ -31,7 +31,7 @@
                     </f:facet>
 
 
-                    <p:column>
+                    <p:column style="text-align:center;">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListClientTypeTitle_cliTypCode}"/>
                         </f:facet>
@@ -43,13 +43,13 @@
                         </f:facet>
                         <h:outputText value="#{item.cliTypDescription}"/>
                     </p:column>
-                    <p:column filterBy="#{item.cliTypEnabled}" sortBy="#{item.cliTypEnabled}" filterMatchMode="contains">
+                    <p:column style="text-align:center;" sortBy="#{item.cliTypEnabled}">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListClientTypeTitle_cliTypEnabled}"/>
                         </f:facet>
                         <p:selectBooleanCheckbox value="#{item.cliTypEnabled}" disabled="true"/>
                     </p:column>
-                    <p:column>
+                    <p:column style="text-align:center;">
                         <f:facet name="header">
                             <h:outputText value="Accion"/>
                         </f:facet>

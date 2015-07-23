@@ -31,13 +31,13 @@
                     </f:facet>
 
 
-                    <p:column>
+                    <p:column style="text-align:center;">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListClientTitle_cliCode}"/>
                         </f:facet>
                         #{row+1}
                     </p:column>
-                    <p:column filterBy="#{item.cliFirstName}" sortBy="#{item.cliFirstName}" filterMatchMode="contains">
+                    <p:column filterBy="#{item.cliFirstName} #{item.cliLastName}" sortBy="#{item.cliLastName}" filterMatchMode="contains">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListClientTitle_cliFirstName}"/>
                         </f:facet>
@@ -65,15 +65,15 @@
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListClientTitle_cliTypCode}"/>
                         </f:facet>
-                        <h:outputText value="#{item.cliTypCode}"/>
+                        <h:outputText value="#{item.cliTypCode.cliTypDescription}"/>
                     </p:column>
-                    <p:column filterBy="#{item.cliEnabled}" sortBy="#{item.cliEnabled}" filterMatchMode="contains">
+                    <p:column style="text-align:center;" sortBy="#{item.cliEnabled}" >
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListClientTitle_cliEnabled}"/>
                         </f:facet>
                         <p:selectBooleanCheckbox value="#{item.cliEnabled}" disabled="true"/>
                     </p:column>
-                    <p:column>
+                    <p:column style="text-align:center;">
                         <f:facet name="header">
                             <h:outputText value="Accion"/>
                         </f:facet>

@@ -31,7 +31,7 @@
                     </f:facet>
 
 
-                    <p:column>
+                    <p:column style="text-align:center;">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListCompanyTitle_comCode}"/>
                         </f:facet>
@@ -43,14 +43,14 @@
                         </f:facet>
                         <h:outputText value="#{item.comDescription}"/>
                     </p:column>
-                    <p:column filterBy="#{item.comEnabled}" sortBy="#{item.comEnabled}" filterMatchMode="contains">
+                    <p:column style="text-align:center;" sortBy="#{item.comEnabled}">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListCompanyTitle_comEnabled}"/>
                         </f:facet>
                         <p:selectBooleanCheckbox value="#{item.comEnabled}" disabled="true"/>
                     </p:column>
 
-                    <p:column>
+                    <p:column style="text-align:center;">
                         <f:facet name="header">
                             <h:outputText value="Accion"/>
                         </f:facet>

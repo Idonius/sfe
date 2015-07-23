@@ -31,7 +31,7 @@
                     </f:facet>
 
 
-                    <p:column>
+                    <p:column style="text-align:center;">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListUserTitle_useCode}"/>
                         </f:facet>
@@ -59,22 +59,22 @@
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListUserTitle_comCode}"/>
                         </f:facet>
-                        <h:outputText value="#{item.comCode}"/>
+                        <h:outputText value="#{item.comCode.comDescription}"/>
                     </p:column>
                     <p:column filterBy="#{item.rolCode}" sortBy="#{item.rolCode}" filterMatchMode="contains">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListUserTitle_rolCode}"/>
                         </f:facet>
-                        <h:outputText value="#{item.rolCode}"/>
+                        <h:outputText value="#{item.rolCode.rolDescription}"/>
                     </p:column>
-                    <p:column filterBy="#{item.useEnabled}" sortBy="#{item.useEnabled}" filterMatchMode="contains">
+                    <p:column style="text-align:center;" sortBy="#{item.useEnabled}" >
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListUserTitle_useEnabled}"/>
                         </f:facet>
                         <p:selectBooleanCheckbox value="#{item.useEnabled}" disabled="true"/>
                     </p:column>
 
-                    <p:column>
+                    <p:column style="text-align:center;">
                         <f:facet name="header">
                             <h:outputText value="Accion"/>
                         </f:facet>

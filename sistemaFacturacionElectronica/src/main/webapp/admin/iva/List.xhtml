@@ -31,7 +31,7 @@
                     </f:facet>
 
 
-                    <p:column>
+                    <p:column style="text-align:center;">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListIvaTitle_ivaCode}"/>
                         </f:facet>
@@ -43,14 +43,14 @@
                         </f:facet>
                         <h:outputText value="#{item.ivaValue}"/>
                     </p:column>
-                    <p:column filterBy="#{item.ivaEnabled}" sortBy="#{item.ivaEnabled}" filterMatchMode="contains">
+                    <p:column style="text-align:center;" sortBy="#{item.ivaEnabled}">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListIvaTitle_ivaEnabled}"/>
                         </f:facet>
                         <p:selectBooleanCheckbox value="#{item.ivaEnabled}" disabled="true"/>
                     </p:column>
 
-                    <p:column>
+                    <p:column style="text-align:center;">
                         <f:facet name="header">
                             <h:outputText value="Accion"/>
                         </f:facet>

@@ -31,7 +31,7 @@
                     </f:facet>
 
 
-                    <p:column>
+                    <p:column style="text-align:center;">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListProductTitle_proCode}"/>
                         </f:facet>
@@ -59,7 +59,7 @@
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListProductTitle_proTypCode}"/>
                         </f:facet>
-                        <h:outputText value="#{item.proTypCode}"/>
+                        <h:outputText value="#{item.proTypCode.proTypDesription}"/>
                     </p:column>
                     <p:column filterBy="#{item.proValue}" sortBy="#{item.proValue}" filterMatchMode="contains">
                         <f:facet name="header">
@@ -67,13 +67,13 @@
                         </f:facet>
                         <h:outputText value="#{item.proValue}"/>
                     </p:column>
-                    <p:column filterBy="#{item.proEnabled}" sortBy="#{item.proEnabled}" filterMatchMode="contains">
+                    <p:column style="text-align:center;" sortBy="#{item.proEnabled}">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListProductTitle_proEnabled}"/>
                         </f:facet>
                         <p:selectBooleanCheckbox value="#{item.proEnabled}" disabled="true"/>
                     </p:column>
-                    <p:column>
+                    <p:column style="text-align:center;">
                         <f:facet name="header">
                             <h:outputText value="Accion"/>
                         </f:facet>
