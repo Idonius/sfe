@@ -14,8 +14,16 @@
                     <p:panelGrid columns="2" rendered="#{userController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateUserLabel_useName}" for="useName" />
                         <p:inputText id="useName" value="#{userController.selected.useName}" title="#{bundle.CreateUserTitle_useName}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_useName}"/>
+                        
                         <p:outputLabel value="#{bundle.CreateUserLabel_usePassword}" for="usePassword" />
                         <p:inputText id="usePassword" value="#{userController.selected.usePassword}" title="#{bundle.CreateUserTitle_usePassword}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_usePassword}"/>
+                        
+                        <h:outputLabel for="pwd1" value="Contraseña : *" />
+				        <p:password id="pwd1" value="#{userController.selected.usePassword}" match="pwd2" label="Password 1" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_usePassword}" />
+				 
+				        <h:outputLabel for="pwd2" value="Repetir contraseña: *" />
+				        <p:password id="pwd2" value="#{userController.selected.usePassword}" label="Password 2" required="true"  requiredMessage="#{bundle.CreateUserRequiredMessage_usePassword}"/>
+                        
                         <p:outputLabel value="#{bundle.CreateUserLabel_useRuc}" for="useRuc" />
                         <p:inputText id="useRuc" value="#{userController.selected.useRuc}" title="#{bundle.CreateUserTitle_useRuc}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_useRuc}"/>
                         <p:outputLabel value="#{bundle.CreateUserLabel_useFirstName}" for="useFirstName" />

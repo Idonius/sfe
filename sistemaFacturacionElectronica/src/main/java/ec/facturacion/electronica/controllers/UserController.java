@@ -26,6 +26,7 @@ import ec.facturacion.electronica.controllers.util.JsfUtil;
 import ec.facturacion.electronica.controllers.util.JsfUtil.PersistAction;
 import ec.facturacion.electronica.entities.User;
 import ec.facturacion.electronica.services.UserFacade;
+import ec.facturacion.electronica.util.Encrypt;
 
 @ManagedBean(name = "userController")
 @SessionScoped
@@ -118,6 +119,7 @@ public class UserController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction != PersistAction.DELETE) {
+                	selected.setUsePassword(Encrypt.sha512(selected.getUsePassword()));
                     getFacade().edit(selected);
                 } else {
                     getFacade().remove(selected);

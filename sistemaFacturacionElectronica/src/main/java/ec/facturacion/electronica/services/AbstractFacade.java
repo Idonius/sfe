@@ -6,7 +6,10 @@
 package ec.facturacion.electronica.services;
 
 import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -14,6 +17,9 @@ import javax.persistence.EntityManager;
  */
 public abstract class AbstractFacade<T> {
     private Class<T> entityClass;
+    
+    @PersistenceContext
+	private EntityManager entityManager;
 
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
@@ -59,5 +65,24 @@ public abstract class AbstractFacade<T> {
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
+    
+    public List<T> findByParameters(String query, Object... args)
+			throws Exception {
+		try {
+			final Query q = this.entityManager.createQuery(query);
+
+			if (args != null) {
+				int position = 1;
+				for (Object obj : args) {
+					q.setParameter(position++, obj);
+				}
+			}
+			@SuppressWarnings("unchecked")
+			final List<T> result = q.getResultList();
+			return result;
+		} catch (final Exception e) {
+			throw new Exception(e);
+		}
+	}
     
 }

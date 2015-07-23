@@ -3,12 +3,51 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:head>
         <title><ui:insert name="title">Default Title</ui:insert></title>
         <h:outputStylesheet library="css" name="jsfcrud.css"/>
         <h:outputScript library="js" name="jsfcrud.js"/>
+        <h:outputStylesheet library="css" name="clock.css"/>
+		<h:outputScript library="js" name="http://code.jquery.com/jquery-1.6.4.min.js"/>
+		
+        <script type="text/javascript">
+        $(document).ready(function() {
+        // Create two variable with the names of the months and days in an array
+        var monthNames = [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septtiembre", "Octubre", "Noviembre", "Diciembre" ]; 
+        var dayNames= ["Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado"];
+
+        // Create a newDate() object
+        var newDate = new Date();
+        // Extract the current date from Date object
+        newDate.setDate(newDate.getDate());
+        // Output the day, date, month and year   
+        $('#Date').html(dayNames[newDate.getDay()] + " " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
+
+        setInterval( function() {
+                // Create a newDate() object and extract the seconds of the current time on the visitor's
+                var seconds = new Date().getSeconds();
+                // Add a leading zero to seconds value
+                $("#sec").html(( seconds &lt; 10 ? "0" : "" ) + seconds);
+                },1000);
+
+        setInterval( function() {
+                // Create a newDate() object and extract the minutes of the current time on the visitor's
+                var minutes = new Date().getMinutes();
+                // Add a leading zero to the minutes value
+                $("#min").html(( minutes &lt; 10 ? "0" : "" ) + minutes);
+            },1000);
+
+        setInterval( function() {
+                // Create a newDate() object and extract the hours of the current time on the visitor's
+                var hours = new Date().getHours();
+                // Add a leading zero to the hours value
+                $("#hours").html(( hours &lt; 10 ? "0" : "" ) + hours);
+            }, 1000);	
+        });
+        </script>
     </h:head>
 
     <h:body>
@@ -16,7 +55,7 @@
         <p:growl id="growl" life="3000" />
 
         <p:layout fullPage="true">
-            <p:layoutUnit position="north" size="65" header="#{bundle.AppName}">
+            <p:layoutUnit position="north"  header="#{bundle.AppName}">
                 <h:form id="menuForm">
                     <p:menubar>
                         <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
@@ -34,12 +73,36 @@
                             <p:menuitem value="Rol" outcome="/admin/rol/List.xhtml" />
                             <p:menuitem value="User" outcome="/admin/user/List.xhtml" />
                         </p:submenu>
+                        <f:facet name="options">
+				            <p:menuButton value="#{loginManager.active.useFirstName} #{loginManager.active.useLastName}">
+	        					<p:menuitem value="Cerrar Sesión" action="#{loginManager.cerrarSesion()}" update=":growl" icon="ui-icon-close"/>
+	        				</p:menuButton>
+				        </f:facet>
                     </p:menubar>
                 </h:form>
             </p:layoutUnit>
 
-            <p:layoutUnit position="south" size="60">
-                <ui:insert name="footer"/>
+            <p:layoutUnit position="south">
+            	<div style="width: 33%; float: left;">
+                	<p:graphicImage id="content" value="#{loginManager.active.useImage}" width="100px" height="100px"/>
+                </div>
+                <div align="center" style="width: 33%; float: left; padding-top:40px;">
+                	Todos los derechos Reservados
+                </div>
+                <div align="right" style="width: 33%; float: left; padding-top:40px;">
+                    <div style="width: 67%; float: left;" align="center">
+                        <div class="clock">
+                        <div id="Date"></div>
+                        <ul class="ulclock">
+                             <li id="hours"></li>
+                             <li id="point">:</li>
+                             <li id="min"></li>
+                             <li id="point">:</li>
+                             <li id="sec"></li>
+                         </ul>
+                        </div>
+                    </div>
+                </div>
             </p:layoutUnit>
 
             <p:layoutUnit position="center">
@@ -47,7 +110,7 @@
             </p:layoutUnit>
 
         </p:layout>
-
+		<p:watermark value="Buscar..." for="@(th .ui-column-filter)"/>
     </h:body>
 
 </html>

@@ -16,8 +16,13 @@
                         <p:inputText id="useCode" value="#{userController.selected.useCode}" title="#{bundle.EditUserTitle_useCode}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_useCode}" disabled="true"/>
                         <p:outputLabel value="#{bundle.EditUserLabel_useName}" for="useName" />
                         <p:inputText id="useName" value="#{userController.selected.useName}" title="#{bundle.EditUserTitle_useName}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_useName}"/>
-                        <p:outputLabel value="#{bundle.EditUserLabel_usePassword}" for="usePassword" />
-                        <p:inputText id="usePassword" value="#{userController.selected.usePassword}" title="#{bundle.EditUserTitle_usePassword}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_usePassword}"/>
+                        
+                        <h:outputLabel for="pwd1" value="Contraseña : *" />
+				        <p:password id="pwd1" value="#{userController.selected.usePassword}" match="pwd2" label="Password 1" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_usePassword}" />
+				 
+				        <h:outputLabel for="pwd2" value="Repetir contraseña: *" />
+				        <p:password id="pwd2" value="#{userController.selected.usePassword}" label="Password 2" required="true"  requiredMessage="#{bundle.EditUserRequiredMessage_usePassword}"/>
+                        
                         <p:outputLabel value="#{bundle.EditUserLabel_useRuc}" for="useRuc" />
                         <p:inputText id="useRuc" value="#{userController.selected.useRuc}" title="#{bundle.EditUserTitle_useRuc}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_useRuc}"/>
                         <p:outputLabel value="#{bundle.EditUserLabel_useFirstName}" for="useFirstName" />

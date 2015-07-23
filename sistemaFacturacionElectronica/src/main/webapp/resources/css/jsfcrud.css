@@ -15,6 +15,105 @@
 .ui-button {
     margin-top: 10px !important;
 }
+
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	margin:0;
+}
+
+.header {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 18px;
+}
+
+.bottom {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	text-align: center;
+	vertical-align: middle;
+	color: #8E969D;
+}
+
+.actions td {
+	border: 0px none !important;
+	padding: 2px !important;
+}
+
+.panel {
+	width: auto;
+	height: auto;
+	float: left;
+	margin-top: 10px;
+	margin-left: 15px;
+}
+
+.label {
+	font-weight: bold;
+	font-size: 11px;
+}
+
+.small {
+	font-size: 11px;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.ui-datatable th, .ui-datatable tfoot td {
+    padding: 4px 4px !important;
+}
+.ui-datatable .ui-datatable-data td, .ui-datatable .ui-datatable-data-empty td {
+    padding: 1px 10px !important;
+}
+
+.ui-blockui{
+	background-color: black;
+	background-image: none;
+	opacity: 0.1;
+}
+
+ul.ui-menu-child{
+     white-space: nowrap;
+     width: 400px;
+ }
+
+.ui-dialog .ui-dialog-title{
+	width:100% !important;
+	}
+
+/**
+* Estilo Texto Negro 11
+*/
+.blackTextB11{
+	font-weight: bold;
+	font-size: 11px;
+}
+
+.bordeNegro{
+	border: 1px solid #FFFFFF;	
+}
+
+.alignTopPanelGrid{
+	vertical-align:top;	
+}
+
+.panelgridSB tr, .panelgridSB td {
+	border:0 !important;
+}
+
 .borderLess, table.borderLess tr td {
 	border-style: hidden !important;		
+}
+
+.pie{
+	background:url('../resources/images/fondo_cierre.jpg') repeat-x; text-align:center; color:#FFF; padding:8px;
+}
+
+.encabezado{
+	background:url('../resources/images/fnd_encabezado_sistema.jpg') repeat-x top; height: 70px; width:100%; padding-top: 10px; padding-bottom: 10px;
+}
+.login{
+	background-image:url('../resources/images/fondos_puntos.jpg') ;
 }
