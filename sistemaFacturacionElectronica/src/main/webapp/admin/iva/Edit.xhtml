@@ -13,14 +13,15 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ivaController.selected != null}">
                         <p:outputLabel value="#{bundle.EditIvaLabel_ivaCode}" for="ivaCode" />
-                        <p:inputText id="ivaCode" value="#{ivaController.selected.ivaCode}" title="#{bundle.EditIvaTitle_ivaCode}" required="true" requiredMessage="#{bundle.EditIvaRequiredMessage_ivaCode}"/>
+                        <p:inputText id="ivaCode" value="#{ivaController.selected.ivaCode}" title="#{bundle.EditIvaTitle_ivaCode}" required="true" requiredMessage="#{bundle.EditIvaRequiredMessage_ivaCode}" disabled="true"/>
                         <p:outputLabel value="#{bundle.EditIvaLabel_ivaValue}" for="ivaValue" />
                         <p:inputText id="ivaValue" value="#{ivaController.selected.ivaValue}" title="#{bundle.EditIvaTitle_ivaValue}" required="true" requiredMessage="#{bundle.EditIvaRequiredMessage_ivaValue}"/>
                         <p:outputLabel value="#{bundle.EditIvaLabel_ivaEnabled}" for="ivaEnabled" />
                         <p:selectBooleanCheckbox id="ivaEnabled" value="#{ivaController.selected.ivaEnabled}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{ivaController.update}" value="#{bundle.Save}" update="display,:IvaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'IvaEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="IvaEditDialog.hide()"/>
+                    <div align="center">
+                   		<p:commandButton actionListener="#{ivaController.update}" value="#{bundle.Save}" update="display,:IvaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'IvaEditDialog');"/>
+                   	</div>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

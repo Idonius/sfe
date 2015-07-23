@@ -12,8 +12,6 @@
             <h:form id="UserCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{userController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateUserLabel_useCode}" for="useCode" />
-                        <p:inputText id="useCode" value="#{userController.selected.useCode}" title="#{bundle.CreateUserTitle_useCode}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_useCode}"/>
                         <p:outputLabel value="#{bundle.CreateUserLabel_useName}" for="useName" />
                         <p:inputText id="useName" value="#{userController.selected.useName}" title="#{bundle.CreateUserTitle_useName}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_useName}"/>
                         <p:outputLabel value="#{bundle.CreateUserLabel_usePassword}" for="usePassword" />
@@ -40,8 +38,12 @@
                         <p:inputText id="useImage" value="#{userController.selected.useImage}" title="#{bundle.CreateUserTitle_useImage}" />
                         <p:outputLabel value="#{bundle.CreateUserLabel_useEmissionPoint}" for="useEmissionPoint" />
                         <p:inputText id="useEmissionPoint" value="#{userController.selected.useEmissionPoint}" title="#{bundle.CreateUserTitle_useEmissionPoint}" />
-                        <p:outputLabel value="#{bundle.CreateUserLabel_useEnabled}" for="useEnabled" />
-                        <p:selectBooleanCheckbox id="useEnabled" value="#{userController.selected.useEnabled}" />
+                   		<p:outputLabel value="#{bundle.CreateUserLabel_emiTypCode}" for="emiTypCode" />
+                        <p:selectOneMenu id="emiTypCode" value="#{userController.selected.emiTypCode}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_emiTypCode}">
+                            <f:selectItems value="#{emissionTypeController.itemsAvailableSelectOne}"
+                                           var="emiTypCodeItem"
+                                           itemValue="#{emiTypCodeItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateUserLabel_comCode}" for="comCode" />
                         <p:selectOneMenu id="comCode" value="#{userController.selected.comCode}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_comCode}">
                             <f:selectItems value="#{companyController.itemsAvailableSelectOne}"
@@ -54,15 +56,12 @@
                                            var="rolCodeItem"
                                            itemValue="#{rolCodeItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateUserLabel_emiTypCode}" for="emiTypCode" />
-                        <p:selectOneMenu id="emiTypCode" value="#{userController.selected.emiTypCode}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_emiTypCode}">
-                            <f:selectItems value="#{emissionTypeController.itemsAvailableSelectOne}"
-                                           var="emiTypCodeItem"
-                                           itemValue="#{emiTypCodeItem}"/>
-                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateUserLabel_useEnabled}" for="useEnabled" />
+                        <p:selectBooleanCheckbox id="useEnabled" value="#{userController.selected.useEnabled}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{userController.create}" value="#{bundle.Save}" update="display,:UserListForm:datalist,:growl" oncomplete="handleSubmit(args,'UserCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="UserCreateDialog.hide()"/>
+                    <div align="center">
+                    	<p:commandButton actionListener="#{userController.create}" value="#{bundle.Save}" update="display,:UserListForm:datalist,:growl" oncomplete="handleSubmit(args,'UserCreateDialog');"/>
+                    </div>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

@@ -12,15 +12,14 @@
             <h:form id="IvaCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ivaController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateIvaLabel_ivaCode}" for="ivaCode" />
-                        <p:inputText id="ivaCode" value="#{ivaController.selected.ivaCode}" title="#{bundle.CreateIvaTitle_ivaCode}" required="true" requiredMessage="#{bundle.CreateIvaRequiredMessage_ivaCode}"/>
                         <p:outputLabel value="#{bundle.CreateIvaLabel_ivaValue}" for="ivaValue" />
                         <p:inputText id="ivaValue" value="#{ivaController.selected.ivaValue}" title="#{bundle.CreateIvaTitle_ivaValue}" required="true" requiredMessage="#{bundle.CreateIvaRequiredMessage_ivaValue}"/>
                         <p:outputLabel value="#{bundle.CreateIvaLabel_ivaEnabled}" for="ivaEnabled" />
                         <p:selectBooleanCheckbox id="ivaEnabled" value="#{ivaController.selected.ivaEnabled}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{ivaController.create}" value="#{bundle.Save}" update="display,:IvaListForm:datalist,:growl" oncomplete="handleSubmit(args,'IvaCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="IvaCreateDialog.hide()"/>
+                   	<div align="center">
+                    	<p:commandButton actionListener="#{ivaController.create}" value="#{bundle.Save}" update="display,:IvaListForm:datalist,:growl" oncomplete="handleSubmit(args,'IvaCreateDialog');"/>
+                    </div>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

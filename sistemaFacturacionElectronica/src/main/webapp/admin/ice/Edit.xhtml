@@ -13,14 +13,15 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{iceController.selected != null}">
                         <p:outputLabel value="#{bundle.EditIceLabel_iceCode}" for="iceCode" />
-                        <p:inputText id="iceCode" value="#{iceController.selected.iceCode}" title="#{bundle.EditIceTitle_iceCode}" required="true" requiredMessage="#{bundle.EditIceRequiredMessage_iceCode}"/>
+                        <p:inputText id="iceCode" value="#{iceController.selected.iceCode}" title="#{bundle.EditIceTitle_iceCode}" required="true" requiredMessage="#{bundle.EditIceRequiredMessage_iceCode}" disabled="true"/>
                         <p:outputLabel value="#{bundle.EditIceLabel_iceDescription}" for="iceDescription" />
                         <p:inputText id="iceDescription" value="#{iceController.selected.iceDescription}" title="#{bundle.EditIceTitle_iceDescription}" required="true" requiredMessage="#{bundle.EditIceRequiredMessage_iceDescription}"/>
                         <p:outputLabel value="#{bundle.EditIceLabel_iceValue}" for="iceValue" />
                         <p:inputText id="iceValue" value="#{iceController.selected.iceValue}" title="#{bundle.EditIceTitle_iceValue}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{iceController.update}" value="#{bundle.Save}" update="display,:IceListForm:datalist,:growl" oncomplete="handleSubmit(args, 'IceEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="IceEditDialog.hide()"/>
+                    <div align="center">
+                    	<p:commandButton actionListener="#{iceController.update}" value="#{bundle.Save}" update="display,:IceListForm:datalist,:growl" oncomplete="handleSubmit(args, 'IceEditDialog');"/>
+                    </div>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

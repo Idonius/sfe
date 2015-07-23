@@ -20,6 +20,7 @@
                              rowKey="#{item.emiTypCode}"
                              rows="10"
                              rowsPerPageTemplate="10,20,30,40,50"
+                             rowIndexVar="row"
                              >
 
                     <f:facet name="header">         
@@ -30,11 +31,11 @@
                     </f:facet>
 
 
-                    <p:column filterBy="#{item.emiTypCode}" sortBy="#{item.emiTypCode}" filterMatchMode="contains">
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListEmissionTypeTitle_emiTypCode}"/>
                         </f:facet>
-                        <h:outputText value="#{item.emiTypCode}"/>
+                        #{row+1}
                     </p:column>
                     <p:column filterBy="#{item.emiTypDescription}" sortBy="#{item.emiTypDescription}" filterMatchMode="contains">
                         <f:facet name="header">

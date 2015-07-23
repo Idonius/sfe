@@ -20,6 +20,7 @@
                              rowKey="#{item.iceCode}"
                              rows="10"
                              rowsPerPageTemplate="10,20,30,40,50"
+                             rowIndexVar="row"
                              >
 
                     <f:facet name="header">         
@@ -30,11 +31,11 @@
                     </f:facet>
 
 
-                    <p:column filterBy="#{item.iceCode}" sortBy="#{item.iceCode}" filterMatchMode="contains">
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListIceTitle_iceCode}"/>
                         </f:facet>
-                        <h:outputText value="#{item.iceCode}"/>
+                        #{row+1}
                     </p:column>
                     <p:column filterBy="#{item.iceDescription}" sortBy="#{item.iceDescription}" filterMatchMode="contains">
                         <f:facet name="header">

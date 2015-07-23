@@ -13,7 +13,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{userController.selected != null}">
                         <p:outputLabel value="#{bundle.EditUserLabel_useCode}" for="useCode" />
-                        <p:inputText id="useCode" value="#{userController.selected.useCode}" title="#{bundle.EditUserTitle_useCode}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_useCode}"/>
+                        <p:inputText id="useCode" value="#{userController.selected.useCode}" title="#{bundle.EditUserTitle_useCode}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_useCode}" disabled="true"/>
                         <p:outputLabel value="#{bundle.EditUserLabel_useName}" for="useName" />
                         <p:inputText id="useName" value="#{userController.selected.useName}" title="#{bundle.EditUserTitle_useName}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_useName}"/>
                         <p:outputLabel value="#{bundle.EditUserLabel_usePassword}" for="usePassword" />
@@ -40,8 +40,13 @@
                         <p:inputText id="useImage" value="#{userController.selected.useImage}" title="#{bundle.EditUserTitle_useImage}" />
                         <p:outputLabel value="#{bundle.EditUserLabel_useEmissionPoint}" for="useEmissionPoint" />
                         <p:inputText id="useEmissionPoint" value="#{userController.selected.useEmissionPoint}" title="#{bundle.EditUserTitle_useEmissionPoint}" />
-                        <p:outputLabel value="#{bundle.EditUserLabel_useEnabled}" for="useEnabled" />
-                        <p:selectBooleanCheckbox id="useEnabled" value="#{userController.selected.useEnabled}" />
+                        <p:outputLabel value="#{bundle.EditUserLabel_emiTypCode}" for="emiTypCode" />
+                        <p:selectOneMenu id="emiTypCode" value="#{userController.selected.emiTypCode}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_emiTypCode}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{emissionTypeController.itemsAvailableSelectOne}"
+                                           var="emiTypCodeItem"
+                                           itemValue="#{emiTypCodeItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditUserLabel_comCode}" for="comCode" />
                         <p:selectOneMenu id="comCode" value="#{userController.selected.comCode}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_comCode}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -56,16 +61,12 @@
                                            var="rolCodeItem"
                                            itemValue="#{rolCodeItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditUserLabel_emiTypCode}" for="emiTypCode" />
-                        <p:selectOneMenu id="emiTypCode" value="#{userController.selected.emiTypCode}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_emiTypCode}">
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{emissionTypeController.itemsAvailableSelectOne}"
-                                           var="emiTypCodeItem"
-                                           itemValue="#{emiTypCodeItem}"/>
-                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditUserLabel_useEnabled}" for="useEnabled" />
+                        <p:selectBooleanCheckbox id="useEnabled" value="#{userController.selected.useEnabled}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{userController.update}" value="#{bundle.Save}" update="display,:UserListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UserEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="UserEditDialog.hide()"/>
+                    <div align="center">
+                    	<p:commandButton actionListener="#{userController.update}" value="#{bundle.Save}" update="display,:UserListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UserEditDialog');"/>
+                    </div>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

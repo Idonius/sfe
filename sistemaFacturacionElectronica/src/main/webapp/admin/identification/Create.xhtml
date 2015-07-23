@@ -12,15 +12,14 @@
             <h:form id="IdentificationCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{identificationController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateIdentificationLabel_ideCode}" for="ideCode" />
-                        <p:inputText id="ideCode" value="#{identificationController.selected.ideCode}" title="#{bundle.CreateIdentificationTitle_ideCode}" required="true" requiredMessage="#{bundle.CreateIdentificationRequiredMessage_ideCode}"/>
                         <p:outputLabel value="#{bundle.CreateIdentificationLabel_ideDescription}" for="ideDescription" />
                         <p:inputText id="ideDescription" value="#{identificationController.selected.ideDescription}" title="#{bundle.CreateIdentificationTitle_ideDescription}" required="true" requiredMessage="#{bundle.CreateIdentificationRequiredMessage_ideDescription}"/>
                         <p:outputLabel value="#{bundle.CreateIdentificationLabel_ideEnabled}" for="ideEnabled" />
                         <p:selectBooleanCheckbox id="ideEnabled" value="#{identificationController.selected.ideEnabled}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{identificationController.create}" value="#{bundle.Save}" update="display,:IdentificationListForm:datalist,:growl" oncomplete="handleSubmit(args,'IdentificationCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="IdentificationCreateDialog.hide()"/>
+                    <div align="center">
+                    	<p:commandButton actionListener="#{identificationController.create}" value="#{bundle.Save}" update="display,:IdentificationListForm:datalist,:growl" oncomplete="handleSubmit(args,'IdentificationCreateDialog');"/>
+                    </div>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

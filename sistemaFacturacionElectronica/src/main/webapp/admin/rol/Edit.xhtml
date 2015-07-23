@@ -13,14 +13,15 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{rolController.selected != null}">
                         <p:outputLabel value="#{bundle.EditRolLabel_rolCode}" for="rolCode" />
-                        <p:inputText id="rolCode" value="#{rolController.selected.rolCode}" title="#{bundle.EditRolTitle_rolCode}" required="true" requiredMessage="#{bundle.EditRolRequiredMessage_rolCode}"/>
+                        <p:inputText id="rolCode" value="#{rolController.selected.rolCode}" title="#{bundle.EditRolTitle_rolCode}" required="true" requiredMessage="#{bundle.EditRolRequiredMessage_rolCode}" disabled="true"/>
                         <p:outputLabel value="#{bundle.EditRolLabel_rolDescription}" for="rolDescription" />
                         <p:inputText id="rolDescription" value="#{rolController.selected.rolDescription}" title="#{bundle.EditRolTitle_rolDescription}" required="true" requiredMessage="#{bundle.EditRolRequiredMessage_rolDescription}"/>
                         <p:outputLabel value="#{bundle.EditRolLabel_rolEnabled}" for="rolEnabled" />
                         <p:selectBooleanCheckbox id="rolEnabled" value="#{rolController.selected.rolEnabled}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{rolController.update}" value="#{bundle.Save}" update="display,:RolListForm:datalist,:growl" oncomplete="handleSubmit(args, 'RolEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="RolEditDialog.hide()"/>
+                    <div align="center">
+                    	<p:commandButton actionListener="#{rolController.update}" value="#{bundle.Save}" update="display,:RolListForm:datalist,:growl" oncomplete="handleSubmit(args, 'RolEditDialog');"/>
+                    </div>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

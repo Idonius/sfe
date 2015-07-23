@@ -13,14 +13,15 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{identificationController.selected != null}">
                         <p:outputLabel value="#{bundle.EditIdentificationLabel_ideCode}" for="ideCode" />
-                        <p:inputText id="ideCode" value="#{identificationController.selected.ideCode}" title="#{bundle.EditIdentificationTitle_ideCode}" required="true" requiredMessage="#{bundle.EditIdentificationRequiredMessage_ideCode}"/>
+                        <p:inputText id="ideCode" value="#{identificationController.selected.ideCode}" title="#{bundle.EditIdentificationTitle_ideCode}" required="true" requiredMessage="#{bundle.EditIdentificationRequiredMessage_ideCode}" disabled="true"/>
                         <p:outputLabel value="#{bundle.EditIdentificationLabel_ideDescription}" for="ideDescription" />
                         <p:inputText id="ideDescription" value="#{identificationController.selected.ideDescription}" title="#{bundle.EditIdentificationTitle_ideDescription}" required="true" requiredMessage="#{bundle.EditIdentificationRequiredMessage_ideDescription}"/>
                         <p:outputLabel value="#{bundle.EditIdentificationLabel_ideEnabled}" for="ideEnabled" />
                         <p:selectBooleanCheckbox id="ideEnabled" value="#{identificationController.selected.ideEnabled}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{identificationController.update}" value="#{bundle.Save}" update="display,:IdentificationListForm:datalist,:growl" oncomplete="handleSubmit(args, 'IdentificationEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="IdentificationEditDialog.hide()"/>
+                    <div align="center">
+                    	<p:commandButton actionListener="#{identificationController.update}" value="#{bundle.Save}" update="display,:IdentificationListForm:datalist,:growl" oncomplete="handleSubmit(args, 'IdentificationEditDialog');"/>
+                    </div>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

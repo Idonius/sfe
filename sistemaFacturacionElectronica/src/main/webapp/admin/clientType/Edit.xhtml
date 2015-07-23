@@ -13,14 +13,15 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{clientTypeController.selected != null}">
                         <p:outputLabel value="#{bundle.EditClientTypeLabel_cliTypCode}" for="cliTypCode" />
-                        <p:inputText id="cliTypCode" value="#{clientTypeController.selected.cliTypCode}" title="#{bundle.EditClientTypeTitle_cliTypCode}" required="true" requiredMessage="#{bundle.EditClientTypeRequiredMessage_cliTypCode}"/>
+                        <p:inputText id="cliTypCode" value="#{clientTypeController.selected.cliTypCode}" title="#{bundle.EditClientTypeTitle_cliTypCode}" required="true" requiredMessage="#{bundle.EditClientTypeRequiredMessage_cliTypCode}" disabled="true"/>
                         <p:outputLabel value="#{bundle.EditClientTypeLabel_cliTypDescription}" for="cliTypDescription" />
                         <p:inputText id="cliTypDescription" value="#{clientTypeController.selected.cliTypDescription}" title="#{bundle.EditClientTypeTitle_cliTypDescription}" required="true" requiredMessage="#{bundle.EditClientTypeRequiredMessage_cliTypDescription}"/>
                         <p:outputLabel value="#{bundle.EditClientTypeLabel_cliTypEnabled}" for="cliTypEnabled" />
                         <p:selectBooleanCheckbox id="cliTypEnabled" value="#{clientTypeController.selected.cliTypEnabled}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{clientTypeController.update}" value="#{bundle.Save}" update="display,:ClientTypeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ClientTypeEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="ClientTypeEditDialog.hide()"/>
+                    <div align="center">
+                    	<p:commandButton actionListener="#{clientTypeController.update}" value="#{bundle.Save}" update="display,:ClientTypeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ClientTypeEditDialog');"/>
+                    </div>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

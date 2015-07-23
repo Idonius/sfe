@@ -20,6 +20,7 @@
                              rowKey="#{item.rolCode}"
                              rows="10"
                              rowsPerPageTemplate="10,20,30,40,50"
+                             rowIndexVar="row"
                              >
 
                     <f:facet name="header">         
@@ -30,11 +31,11 @@
                     </f:facet>
 
 
-                    <p:column filterBy="#{item.rolCode}" sortBy="#{item.rolCode}" filterMatchMode="contains">
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListRolTitle_rolCode}"/>
                         </f:facet>
-                        <h:outputText value="#{item.rolCode}"/>
+                        #{row+1}
                     </p:column>
                     <p:column filterBy="#{item.rolDescription}" sortBy="#{item.rolDescription}" filterMatchMode="contains">
                         <f:facet name="header">

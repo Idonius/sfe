@@ -20,6 +20,7 @@
                              rowKey="#{item.proTypCode}"
                              rows="10"
                              rowsPerPageTemplate="10,20,30,40,50"
+                             rowIndexVar="row"
                              >
 
                     <f:facet name="header">         
@@ -30,11 +31,11 @@
                     </f:facet>
 
 
-                    <p:column filterBy="#{item.proTypCode}" sortBy="#{item.proTypCode}" filterMatchMode="contains">
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListProductTypeTitle_proTypCode}"/>
                         </f:facet>
-                        <h:outputText value="#{item.proTypCode}"/>
+                        #{row+1}
                     </p:column>
                     <p:column filterBy="#{item.proTypDesription}" sortBy="#{item.proTypDesription}" filterMatchMode="contains">
                         <f:facet name="header">

@@ -12,15 +12,14 @@
             <h:form id="ProductTypeCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{productTypeController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateProductTypeLabel_proTypCode}" for="proTypCode" />
-                        <p:inputText id="proTypCode" value="#{productTypeController.selected.proTypCode}" title="#{bundle.CreateProductTypeTitle_proTypCode}" required="true" requiredMessage="#{bundle.CreateProductTypeRequiredMessage_proTypCode}"/>
                         <p:outputLabel value="#{bundle.CreateProductTypeLabel_proTypDesription}" for="proTypDesription" />
                         <p:inputText id="proTypDesription" value="#{productTypeController.selected.proTypDesription}" title="#{bundle.CreateProductTypeTitle_proTypDesription}" required="true" requiredMessage="#{bundle.CreateProductTypeRequiredMessage_proTypDesription}"/>
                         <p:outputLabel value="#{bundle.CreateProductTypeLabel_proTypEnabled}" for="proTypEnabled" />
                         <p:selectBooleanCheckbox id="proTypEnabled" value="#{productTypeController.selected.proTypEnabled}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{productTypeController.create}" value="#{bundle.Save}" update="display,:ProductTypeListForm:datalist,:growl" oncomplete="handleSubmit(args,'ProductTypeCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="ProductTypeCreateDialog.hide()"/>
+                    <div align="center">
+                    	<p:commandButton actionListener="#{productTypeController.create}" value="#{bundle.Save}" update="display,:ProductTypeListForm:datalist,:growl" oncomplete="handleSubmit(args,'ProductTypeCreateDialog');"/>
+                    </div>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

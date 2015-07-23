@@ -12,14 +12,18 @@
             <h:form id="ClientCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{clientController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateClientLabel_cliCode}" for="cliCode" />
-                        <p:inputText id="cliCode" value="#{clientController.selected.cliCode}" title="#{bundle.CreateClientTitle_cliCode}" required="true" requiredMessage="#{bundle.CreateClientRequiredMessage_cliCode}"/>
                         <p:outputLabel value="#{bundle.CreateClientLabel_cliFirstName}" for="cliFirstName" />
                         <p:inputText id="cliFirstName" value="#{clientController.selected.cliFirstName}" title="#{bundle.CreateClientTitle_cliFirstName}" required="true" requiredMessage="#{bundle.CreateClientRequiredMessage_cliFirstName}"/>
                         <p:outputLabel value="#{bundle.CreateClientLabel_cliLastName}" for="cliLastName" />
                         <p:inputText id="cliLastName" value="#{clientController.selected.cliLastName}" title="#{bundle.CreateClientTitle_cliLastName}" required="true" requiredMessage="#{bundle.CreateClientRequiredMessage_cliLastName}"/>
                         <p:outputLabel value="#{bundle.CreateClientLabel_cliSocialReason}" for="cliSocialReason" />
                         <p:inputText id="cliSocialReason" value="#{clientController.selected.cliSocialReason}" title="#{bundle.CreateClientTitle_cliSocialReason}" />
+                        <p:outputLabel value="#{bundle.CreateClientLabel_ideCode}" for="ideCode" />
+                        <p:selectOneMenu id="ideCode" value="#{clientController.selected.ideCode}" required="true" requiredMessage="#{bundle.EditClientRequiredMessage_ideCode}">
+                            <f:selectItems value="#{identificationController.itemsAvailableSelectOne}"
+                                           var="ideCodeItem"
+                                           itemValue="#{ideCodeItem}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateClientLabel_cliId}" for="cliId" />
                         <p:inputText id="cliId" value="#{clientController.selected.cliId}" title="#{bundle.CreateClientTitle_cliId}" required="true" requiredMessage="#{bundle.CreateClientRequiredMessage_cliId}"/>
                         <p:outputLabel value="#{bundle.CreateClientLabel_cliAddr}" for="cliAddr" />
@@ -32,20 +36,16 @@
                         <p:inputText id="cliCellPhone" value="#{clientController.selected.cliCellPhone}" title="#{bundle.CreateClientTitle_cliCellPhone}" />
                         <p:outputLabel value="#{bundle.CreateClientLabel_cliEmail}" for="cliEmail" />
                         <p:inputText id="cliEmail" value="#{clientController.selected.cliEmail}" title="#{bundle.CreateClientTitle_cliEmail}" required="true" requiredMessage="#{bundle.CreateClientRequiredMessage_cliEmail}"/>
-                        <p:outputLabel value="#{bundle.CreateClientLabel_cliEnabled}" for="cliEnabled" />
-                        <p:selectBooleanCheckbox id="cliEnabled" value="#{clientController.selected.cliEnabled}" />
                         <p:outputLabel value="#{bundle.CreateClientLabel_cliTypCode}" for="cliTypCode" />
                         <p:selectOneMenu id="cliTypCode" value="#{clientController.selected.cliTypCode}" required="true" requiredMessage="#{bundle.EditClientRequiredMessage_cliTypCode}">
                             <f:selectItems value="#{clientTypeController.itemsAvailableSelectOne}"
                                            var="cliTypCodeItem"
                                            itemValue="#{cliTypCodeItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateClientLabel_ideCode}" for="ideCode" />
-                        <p:selectOneMenu id="ideCode" value="#{clientController.selected.ideCode}" required="true" requiredMessage="#{bundle.EditClientRequiredMessage_ideCode}">
-                            <f:selectItems value="#{identificationController.itemsAvailableSelectOne}"
-                                           var="ideCodeItem"
-                                           itemValue="#{ideCodeItem}"/>
-                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateClientLabel_cliEnabled}" for="cliEnabled" />
+                        <p:selectBooleanCheckbox id="cliEnabled" value="#{clientController.selected.cliEnabled}" />
+                        
+                        
                     </p:panelGrid>
                     <p:commandButton actionListener="#{clientController.create}" value="#{bundle.Save}" update="display,:ClientListForm:datalist,:growl" oncomplete="handleSubmit(args,'ClientCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ClientCreateDialog.hide()"/>

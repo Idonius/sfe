@@ -13,7 +13,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{productController.selected != null}">
                         <p:outputLabel value="#{bundle.EditProductLabel_proCode}" for="proCode" />
-                        <p:inputText id="proCode" value="#{productController.selected.proCode}" title="#{bundle.EditProductTitle_proCode}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_proCode}"/>
+                        <p:inputText id="proCode" value="#{productController.selected.proCode}" title="#{bundle.EditProductTitle_proCode}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_proCode}" disabled="true"/>
                         <p:outputLabel value="#{bundle.EditProductLabel_proPrincipalCode}" for="proPrincipalCode" />
                         <p:inputText id="proPrincipalCode" value="#{productController.selected.proPrincipalCode}" title="#{bundle.EditProductTitle_proPrincipalCode}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_proPrincipalCode}"/>
                         <p:outputLabel value="#{bundle.EditProductLabel_proAuxCode}" for="proAuxCode" />
@@ -34,8 +34,6 @@
                         <p:inputText id="proAttributeDesc2" value="#{productController.selected.proAttributeDesc2}" title="#{bundle.EditProductTitle_proAttributeDesc2}" />
                         <p:outputLabel value="#{bundle.EditProductLabel_proAttributeDesc3}" for="proAttributeDesc3" />
                         <p:inputText id="proAttributeDesc3" value="#{productController.selected.proAttributeDesc3}" title="#{bundle.EditProductTitle_proAttributeDesc3}" />
-                        <p:outputLabel value="#{bundle.EditProductLabel_proEnabled}" for="proEnabled" />
-                        <p:selectBooleanCheckbox id="proEnabled" value="#{productController.selected.proEnabled}" />
                         <p:outputLabel value="#{bundle.EditProductLabel_proTypCode}" for="proTypCode" />
                         <p:selectOneMenu id="proTypCode" value="#{productController.selected.proTypCode}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_proTypCode}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -64,9 +62,12 @@
                                            var="irbCodeItem"
                                            itemValue="#{irbCodeItem}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditProductLabel_proEnabled}" for="proEnabled" />
+                        <p:selectBooleanCheckbox id="proEnabled" value="#{productController.selected.proEnabled}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{productController.update}" value="#{bundle.Save}" update="display,:ProductListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProductEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="ProductEditDialog.hide()"/>
+                    <div align="center">
+                    	<p:commandButton actionListener="#{productController.update}" value="#{bundle.Save}" update="display,:ProductListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProductEditDialog');"/>
+                    </div>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

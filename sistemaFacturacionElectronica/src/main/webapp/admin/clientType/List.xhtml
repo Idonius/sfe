@@ -20,6 +20,7 @@
                              rowKey="#{item.cliTypCode}"
                              rows="10"
                              rowsPerPageTemplate="10,20,30,40,50"
+                             rowIndexVar="row"
                              >
 
                     <f:facet name="header">         
@@ -30,11 +31,11 @@
                     </f:facet>
 
 
-                    <p:column filterBy="#{item.cliTypCode}" sortBy="#{item.cliTypCode}" filterMatchMode="contains">
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListClientTypeTitle_cliTypCode}"/>
                         </f:facet>
-                        <h:outputText value="#{item.cliTypCode}"/>
+                        #{row+1}
                     </p:column>
                     <p:column filterBy="#{item.cliTypDescription}" sortBy="#{item.cliTypDescription}" filterMatchMode="contains">
                         <f:facet name="header">
@@ -48,7 +49,6 @@
                         </f:facet>
                         <p:selectBooleanCheckbox value="#{item.cliTypEnabled}" disabled="true"/>
                     </p:column>
-
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Accion"/>

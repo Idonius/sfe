@@ -13,14 +13,15 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{companyController.selected != null}">
                         <p:outputLabel value="#{bundle.EditCompanyLabel_comCode}" for="comCode" />
-                        <p:inputText id="comCode" value="#{companyController.selected.comCode}" title="#{bundle.EditCompanyTitle_comCode}" required="true" requiredMessage="#{bundle.EditCompanyRequiredMessage_comCode}"/>
+                        <p:inputText id="comCode" value="#{companyController.selected.comCode}" title="#{bundle.EditCompanyTitle_comCode}" required="true" requiredMessage="#{bundle.EditCompanyRequiredMessage_comCode}" disabled="true"/>
                         <p:outputLabel value="#{bundle.EditCompanyLabel_comDescription}" for="comDescription" />
                         <p:inputText id="comDescription" value="#{companyController.selected.comDescription}" title="#{bundle.EditCompanyTitle_comDescription}" required="true" requiredMessage="#{bundle.EditCompanyRequiredMessage_comDescription}"/>
                         <p:outputLabel value="#{bundle.EditCompanyLabel_comEnabled}" for="comEnabled" />
                         <p:selectBooleanCheckbox id="comEnabled" value="#{companyController.selected.comEnabled}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{companyController.update}" value="#{bundle.Save}" update="display,:CompanyListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CompanyEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="CompanyEditDialog.hide()"/>
+                     <div align="center">
+                    	<p:commandButton actionListener="#{companyController.update}" value="#{bundle.Save}" update="display,:CompanyListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CompanyEditDialog');"/>
+                    </div>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

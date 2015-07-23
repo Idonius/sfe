@@ -13,14 +13,15 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{irbpnrController.selected != null}">
                         <p:outputLabel value="#{bundle.EditIrbpnrLabel_irbCode}" for="irbCode" />
-                        <p:inputText id="irbCode" value="#{irbpnrController.selected.irbCode}" title="#{bundle.EditIrbpnrTitle_irbCode}" required="true" requiredMessage="#{bundle.EditIrbpnrRequiredMessage_irbCode}"/>
+                        <p:inputText id="irbCode" value="#{irbpnrController.selected.irbCode}" title="#{bundle.EditIrbpnrTitle_irbCode}" required="true" requiredMessage="#{bundle.EditIrbpnrRequiredMessage_irbCode}" disabled="true"/>
                         <p:outputLabel value="#{bundle.EditIrbpnrLabel_irbDescription}" for="irbDescription" />
                         <p:inputText id="irbDescription" value="#{irbpnrController.selected.irbDescription}" title="#{bundle.EditIrbpnrTitle_irbDescription}" required="true" requiredMessage="#{bundle.EditIrbpnrRequiredMessage_irbDescription}"/>
                         <p:outputLabel value="#{bundle.EditIrbpnrLabel_irbValue}" for="irbValue" />
                         <p:inputText id="irbValue" value="#{irbpnrController.selected.irbValue}" title="#{bundle.EditIrbpnrTitle_irbValue}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{irbpnrController.update}" value="#{bundle.Save}" update="display,:IrbpnrListForm:datalist,:growl" oncomplete="handleSubmit(args, 'IrbpnrEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="IrbpnrEditDialog.hide()"/>
+                    <div align="center">
+                    	<p:commandButton actionListener="#{irbpnrController.update}" value="#{bundle.Save}" update="display,:IrbpnrListForm:datalist,:growl" oncomplete="handleSubmit(args, 'IrbpnrEditDialog');"/>
+                    </div>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

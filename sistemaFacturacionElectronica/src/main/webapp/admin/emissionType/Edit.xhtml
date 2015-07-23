@@ -13,14 +13,15 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{emissionTypeController.selected != null}">
                         <p:outputLabel value="#{bundle.EditEmissionTypeLabel_emiTypCode}" for="emiTypCode" />
-                        <p:inputText id="emiTypCode" value="#{emissionTypeController.selected.emiTypCode}" title="#{bundle.EditEmissionTypeTitle_emiTypCode}" required="true" requiredMessage="#{bundle.EditEmissionTypeRequiredMessage_emiTypCode}"/>
+                        <p:inputText id="emiTypCode" value="#{emissionTypeController.selected.emiTypCode}" title="#{bundle.EditEmissionTypeTitle_emiTypCode}" required="true" requiredMessage="#{bundle.EditEmissionTypeRequiredMessage_emiTypCode}" disabled="true"/>
                         <p:outputLabel value="#{bundle.EditEmissionTypeLabel_emiTypDescription}" for="emiTypDescription" />
                         <p:inputText id="emiTypDescription" value="#{emissionTypeController.selected.emiTypDescription}" title="#{bundle.EditEmissionTypeTitle_emiTypDescription}" required="true" requiredMessage="#{bundle.EditEmissionTypeRequiredMessage_emiTypDescription}"/>
                         <p:outputLabel value="#{bundle.EditEmissionTypeLabel_emiTypeEnabled}" for="emiTypeEnabled" />
                         <p:selectBooleanCheckbox id="emiTypeEnabled" value="#{emissionTypeController.selected.emiTypeEnabled}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{emissionTypeController.update}" value="#{bundle.Save}" update="display,:EmissionTypeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EmissionTypeEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="EmissionTypeEditDialog.hide()"/>
+                    <div align="center"> 
+                    	<p:commandButton actionListener="#{emissionTypeController.update}" value="#{bundle.Save}" update="display,:EmissionTypeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EmissionTypeEditDialog');"/>
+                    </div>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

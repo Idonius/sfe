@@ -12,15 +12,14 @@
             <h:form id="ClientTypeCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{clientTypeController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateClientTypeLabel_cliTypCode}" for="cliTypCode" />
-                        <p:inputText id="cliTypCode" value="#{clientTypeController.selected.cliTypCode}" title="#{bundle.CreateClientTypeTitle_cliTypCode}" required="true" requiredMessage="#{bundle.CreateClientTypeRequiredMessage_cliTypCode}"/>
                         <p:outputLabel value="#{bundle.CreateClientTypeLabel_cliTypDescription}" for="cliTypDescription" />
                         <p:inputText id="cliTypDescription" value="#{clientTypeController.selected.cliTypDescription}" title="#{bundle.CreateClientTypeTitle_cliTypDescription}" required="true" requiredMessage="#{bundle.CreateClientTypeRequiredMessage_cliTypDescription}"/>
                         <p:outputLabel value="#{bundle.CreateClientTypeLabel_cliTypEnabled}" for="cliTypEnabled" />
                         <p:selectBooleanCheckbox id="cliTypEnabled" value="#{clientTypeController.selected.cliTypEnabled}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{clientTypeController.create}" value="#{bundle.Save}" update="display,:ClientTypeListForm:datalist,:growl" oncomplete="handleSubmit(args,'ClientTypeCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="ClientTypeCreateDialog.hide()"/>
+                    <div align="center">
+                    	<p:commandButton actionListener="#{clientTypeController.create}" value="#{bundle.Save}" update="display,:ClientTypeListForm:datalist,:growl" oncomplete="handleSubmit(args,'ClientTypeCreateDialog');"/>
+                    </div>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

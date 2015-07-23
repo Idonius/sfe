@@ -12,15 +12,14 @@
             <h:form id="CompanyCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{companyController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateCompanyLabel_comCode}" for="comCode" />
-                        <p:inputText id="comCode" value="#{companyController.selected.comCode}" title="#{bundle.CreateCompanyTitle_comCode}" required="true" requiredMessage="#{bundle.CreateCompanyRequiredMessage_comCode}"/>
                         <p:outputLabel value="#{bundle.CreateCompanyLabel_comDescription}" for="comDescription" />
                         <p:inputText id="comDescription" value="#{companyController.selected.comDescription}" title="#{bundle.CreateCompanyTitle_comDescription}" required="true" requiredMessage="#{bundle.CreateCompanyRequiredMessage_comDescription}"/>
                         <p:outputLabel value="#{bundle.CreateCompanyLabel_comEnabled}" for="comEnabled" />
                         <p:selectBooleanCheckbox id="comEnabled" value="#{companyController.selected.comEnabled}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{companyController.create}" value="#{bundle.Save}" update="display,:CompanyListForm:datalist,:growl" oncomplete="handleSubmit(args,'CompanyCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="CompanyCreateDialog.hide()"/>
+                    <div align="center">
+                    	<p:commandButton actionListener="#{companyController.create}" value="#{bundle.Save}" update="display,:CompanyListForm:datalist,:growl" oncomplete="handleSubmit(args,'CompanyCreateDialog');"/>
+                    </div>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

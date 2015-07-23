@@ -41,19 +41,7 @@
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListClientTitle_cliFirstName}"/>
                         </f:facet>
-                        <h:outputText value="#{item.cliFirstName}"/>
-                    </p:column>
-                    <p:column filterBy="#{item.cliLastName}" sortBy="#{item.cliLastName}" filterMatchMode="contains">
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListClientTitle_cliLastName}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.cliLastName}"/>
-                    </p:column>
-                    <p:column filterBy="#{item.cliSocialReason}" sortBy="#{item.cliSocialReason}" filterMatchMode="contains">
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListClientTitle_cliSocialReason}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.cliSocialReason}"/>
+                        <h:outputText value="#{item.cliFirstName} #{item.cliLastName}"/>
                     </p:column>
                     <p:column filterBy="#{item.cliId}" sortBy="#{item.cliId}" filterMatchMode="contains">
                         <f:facet name="header">
@@ -61,29 +49,11 @@
                         </f:facet>
                         <h:outputText value="#{item.cliId}"/>
                     </p:column>
-                    <p:column filterBy="#{item.cliAddr}" sortBy="#{item.cliAddr}" filterMatchMode="contains">
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListClientTitle_cliAddr}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.cliAddr}"/>
-                    </p:column>
                     <p:column filterBy="#{item.cliPhone}" sortBy="#{item.cliPhone}" filterMatchMode="contains">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListClientTitle_cliPhone}"/>
                         </f:facet>
                         <h:outputText value="#{item.cliPhone}"/>
-                    </p:column>
-                    <p:column filterBy="#{item.cliExt}" sortBy="#{item.cliExt}" filterMatchMode="contains">
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListClientTitle_cliExt}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.cliExt}"/>
-                    </p:column>
-                    <p:column filterBy="#{item.cliCellPhone}" sortBy="#{item.cliCellPhone}" filterMatchMode="contains">
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListClientTitle_cliCellPhone}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.cliCellPhone}"/>
                     </p:column>
                     <p:column filterBy="#{item.cliEmail}" sortBy="#{item.cliEmail}" filterMatchMode="contains">
                         <f:facet name="header">
@@ -91,25 +61,18 @@
                         </f:facet>
                         <h:outputText value="#{item.cliEmail}"/>
                     </p:column>
-                    <p:column filterBy="#{item.cliEnabled}" sortBy="#{item.cliEnabled}" filterMatchMode="contains">
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListClientTitle_cliEnabled}"/>
-                        </f:facet>
-                        <p:selectBooleanCheckbox value="#{item.cliEnabled}" disabled="true"/>
-                    </p:column>
                     <p:column filterBy="#{item.cliTypCode}" sortBy="#{item.cliTypCode}" filterMatchMode="contains">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListClientTitle_cliTypCode}"/>
                         </f:facet>
                         <h:outputText value="#{item.cliTypCode}"/>
                     </p:column>
-                    <p:column filterBy="#{item.ideCode}" sortBy="#{item.ideCode}" filterMatchMode="contains">
+                    <p:column filterBy="#{item.cliEnabled}" sortBy="#{item.cliEnabled}" filterMatchMode="contains">
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListClientTitle_ideCode}"/>
+                            <h:outputText value="#{bundle.ListClientTitle_cliEnabled}"/>
                         </f:facet>
-                        <h:outputText value="#{item.ideCode}"/>
+                        <p:selectBooleanCheckbox value="#{item.cliEnabled}" disabled="true"/>
                     </p:column>
-
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Accion"/>

@@ -12,15 +12,14 @@
             <h:form id="RolCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{rolController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateRolLabel_rolCode}" for="rolCode" />
-                        <p:inputText id="rolCode" value="#{rolController.selected.rolCode}" title="#{bundle.CreateRolTitle_rolCode}" required="true" requiredMessage="#{bundle.CreateRolRequiredMessage_rolCode}"/>
                         <p:outputLabel value="#{bundle.CreateRolLabel_rolDescription}" for="rolDescription" />
                         <p:inputText id="rolDescription" value="#{rolController.selected.rolDescription}" title="#{bundle.CreateRolTitle_rolDescription}" required="true" requiredMessage="#{bundle.CreateRolRequiredMessage_rolDescription}"/>
                         <p:outputLabel value="#{bundle.CreateRolLabel_rolEnabled}" for="rolEnabled" />
                         <p:selectBooleanCheckbox id="rolEnabled" value="#{rolController.selected.rolEnabled}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{rolController.create}" value="#{bundle.Save}" update="display,:RolListForm:datalist,:growl" oncomplete="handleSubmit(args,'RolCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="RolCreateDialog.hide()"/>
+                    <div align="center">
+                    	<p:commandButton actionListener="#{rolController.create}" value="#{bundle.Save}" update="display,:RolListForm:datalist,:growl" oncomplete="handleSubmit(args,'RolCreateDialog');"/>
+                    </div>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

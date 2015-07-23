@@ -20,6 +20,7 @@
                              rowKey="#{item.proCode}"
                              rows="10"
                              rowsPerPageTemplate="10,20,30,40,50"
+                             rowIndexVar="row"
                              >
 
                     <f:facet name="header">         
@@ -30,11 +31,11 @@
                     </f:facet>
 
 
-                    <p:column filterBy="#{item.proCode}" sortBy="#{item.proCode}" filterMatchMode="contains">
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListProductTitle_proCode}"/>
                         </f:facet>
-                        <h:outputText value="#{item.proCode}"/>
+                        #{row+1}
                     </p:column>
                     <p:column filterBy="#{item.proPrincipalCode}" sortBy="#{item.proPrincipalCode}" filterMatchMode="contains">
                         <f:facet name="header">
@@ -54,47 +55,17 @@
                         </f:facet>
                         <h:outputText value="#{item.proName}"/>
                     </p:column>
+                    <p:column filterBy="#{item.proTypCode}" sortBy="#{item.proTypCode}" filterMatchMode="contains">
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListProductTitle_proTypCode}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.proTypCode}"/>
+                    </p:column>
                     <p:column filterBy="#{item.proValue}" sortBy="#{item.proValue}" filterMatchMode="contains">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListProductTitle_proValue}"/>
                         </f:facet>
                         <h:outputText value="#{item.proValue}"/>
-                    </p:column>
-                    <p:column filterBy="#{item.proAttribute1}" sortBy="#{item.proAttribute1}" filterMatchMode="contains">
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListProductTitle_proAttribute1}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.proAttribute1}"/>
-                    </p:column>
-                    <p:column filterBy="#{item.proAttribute2}" sortBy="#{item.proAttribute2}" filterMatchMode="contains">
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListProductTitle_proAttribute2}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.proAttribute2}"/>
-                    </p:column>
-                    <p:column filterBy="#{item.proAttribute3}" sortBy="#{item.proAttribute3}" filterMatchMode="contains">
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListProductTitle_proAttribute3}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.proAttribute3}"/>
-                    </p:column>
-                    <p:column filterBy="#{item.proAttributeDesc1}" sortBy="#{item.proAttributeDesc1}" filterMatchMode="contains">
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListProductTitle_proAttributeDesc1}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.proAttributeDesc1}"/>
-                    </p:column>
-                    <p:column filterBy="#{item.proAttributeDesc2}" sortBy="#{item.proAttributeDesc2}" filterMatchMode="contains">
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListProductTitle_proAttributeDesc2}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.proAttributeDesc2}"/>
-                    </p:column>
-                    <p:column filterBy="#{item.proAttributeDesc3}" sortBy="#{item.proAttributeDesc3}" filterMatchMode="contains">
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListProductTitle_proAttributeDesc3}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.proAttributeDesc3}"/>
                     </p:column>
                     <p:column filterBy="#{item.proEnabled}" sortBy="#{item.proEnabled}" filterMatchMode="contains">
                         <f:facet name="header">
@@ -102,31 +73,6 @@
                         </f:facet>
                         <p:selectBooleanCheckbox value="#{item.proEnabled}" disabled="true"/>
                     </p:column>
-                    <p:column filterBy="#{item.proTypCode}" sortBy="#{item.proTypCode}" filterMatchMode="contains">
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListProductTitle_proTypCode}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.proTypCode}"/>
-                    </p:column>
-                    <p:column filterBy="#{item.iceCode}" sortBy="#{item.iceCode}" filterMatchMode="contains">
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListProductTitle_iceCode}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.iceCode}"/>
-                    </p:column>
-                    <p:column filterBy="#{item.ivaCode}" sortBy="#{item.ivaCode}" filterMatchMode="contains">
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListProductTitle_ivaCode}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.ivaCode}"/>
-                    </p:column>
-                    <p:column filterBy="#{item.irbCode}" sortBy="#{item.irbCode}" filterMatchMode="contains">
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListProductTitle_irbCode}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.irbCode}"/>
-                    </p:column>
-
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Accion"/>
