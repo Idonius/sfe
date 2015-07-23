@@ -120,7 +120,7 @@ public class Ice implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.facturacion.electronica.entities.Ice[ iceCode=" + iceCode + " ]";
+        return this.iceDescription;
     }
     
 }

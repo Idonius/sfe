@@ -119,7 +119,7 @@ public class EmissionType implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.facturacion.electronica.entities.EmissionType[ emiTypCode=" + emiTypCode + " ]";
+        return this.emiTypDescription;
     }
     
 }

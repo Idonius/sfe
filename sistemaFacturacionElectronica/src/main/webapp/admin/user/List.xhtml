@@ -92,6 +92,11 @@
 
             <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>
+            <p:dialog id="verDlg" widgetVar="verDialog" modal="true" appendTo="@(body)" resizable="false"  header="Editor">
+	            <h:form id="verForm">
+	                	<p:graphicImage id="content" value="#{userController.selected.useImage}" width="100px" height="100px"/>
+	            </h:form>
+        	</p:dialog>	
         </ui:define>
     </ui:composition>
 

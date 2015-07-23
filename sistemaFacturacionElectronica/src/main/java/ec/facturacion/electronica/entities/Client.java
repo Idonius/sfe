@@ -249,7 +249,7 @@ public class Client implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.facturacion.electronica.entities.Client[ cliCode=" + cliCode + " ]";
+        return this.cliFirstName + " " + this.cliLastName;
     }
     
 }

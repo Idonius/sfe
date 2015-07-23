@@ -1,23 +1,31 @@
 package ec.facturacion.electronica.controllers;
 
-import ec.facturacion.electronica.entities.User;
-import ec.facturacion.electronica.controllers.util.JsfUtil;
-import ec.facturacion.electronica.controllers.util.JsfUtil.PersistAction;
-import ec.facturacion.electronica.services.UserFacade;
-
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+
+import org.primefaces.event.FileUploadEvent;
+
+import ec.facturacion.electronica.controllers.util.JsfUtil;
+import ec.facturacion.electronica.controllers.util.JsfUtil.PersistAction;
+import ec.facturacion.electronica.entities.User;
+import ec.facturacion.electronica.services.UserFacade;
 
 @ManagedBean(name = "userController")
 @SessionScoped
@@ -47,6 +55,30 @@ public class UserController implements Serializable {
 
     private UserFacade getFacade() {
         return ejbFacade;
+    }
+    
+    public void handleFileUpload(FileUploadEvent event) {
+    	try{
+    		String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
+            String name = event.getFile().getFileName();
+            
+            File file = new File(path + "/resources/images/user/" + name);
+            InputStream is = event.getFile().getInputstream();
+            OutputStream out = new FileOutputStream(file);
+            byte buf[] = new byte[1024];
+            int len;
+            while ((len = is.read(buf)) > 0)
+                out.write(buf, 0, len);
+            is.close();
+            out.close();
+            selected.setUseImage("/resources/images/user/" + name);
+            FacesMessage message = new FacesMessage("La imagen ", event.getFile().getFileName() + " fue guardada correctamente.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+    	}catch(Exception ex){
+    		selected.setUseImage("");
+    		Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+    	}
     }
 
     public User prepareCreate() {

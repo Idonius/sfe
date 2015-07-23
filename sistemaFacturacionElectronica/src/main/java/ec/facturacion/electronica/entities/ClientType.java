@@ -119,7 +119,7 @@ public class ClientType implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.facturacion.electronica.entities.ClientType[ cliTypCode=" + cliTypCode + " ]";
+        return this.cliTypDescription;
     }
     
 }

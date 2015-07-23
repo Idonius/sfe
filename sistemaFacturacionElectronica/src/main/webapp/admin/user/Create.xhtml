@@ -8,7 +8,7 @@
 
     <ui:composition>
 
-        <p:dialog id="UserCreateDlg" widgetVar="UserCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUserTitle}">
+        <p:dialog id="UserCreateDlg" widgetVar="UserCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUserTitle}" height="500" width="500">
             <h:form id="UserCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{userController.selected != null}">
@@ -34,8 +34,8 @@
                         <p:inputText id="useResolution" value="#{userController.selected.useResolution}" title="#{bundle.CreateUserTitle_useResolution}" />
                         <p:outputLabel value="#{bundle.CreateUserLabel_useAccounting}" for="useAccounting" />
                         <p:selectBooleanCheckbox id="useAccounting" value="#{userController.selected.useAccounting}" />
-                        <p:outputLabel value="#{bundle.CreateUserLabel_useImage}" for="useImage" />
-                        <p:inputText id="useImage" value="#{userController.selected.useImage}" title="#{bundle.CreateUserTitle_useImage}" />
+                        <p:outputLabel value="#{bundle.CreateUserLabel_useImage}"  />
+                        <p:fileUpload id="userImg" fileUploadListener="#{userController.handleFileUpload}" mode="advanced" dragDropSupport="true" update=":growl" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
                         <p:outputLabel value="#{bundle.CreateUserLabel_useEmissionPoint}" for="useEmissionPoint" />
                         <p:inputText id="useEmissionPoint" value="#{userController.selected.useEmissionPoint}" title="#{bundle.CreateUserTitle_useEmissionPoint}" />
                    		<p:outputLabel value="#{bundle.CreateUserLabel_emiTypCode}" for="emiTypCode" />

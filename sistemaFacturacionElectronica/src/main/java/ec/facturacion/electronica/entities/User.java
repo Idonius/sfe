@@ -310,7 +310,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.facturacion.electronica.entities.User[ useCode=" + useCode + " ]";
+        return this.useFirstName + " " + this.useLastName;
     }
     
 }

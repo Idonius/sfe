@@ -119,7 +119,7 @@ public class Company implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.facturacion.electronica.entities.Company[ comCode=" + comCode + " ]";
+        return this.comDescription;
     }
     
 }

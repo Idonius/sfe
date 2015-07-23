@@ -120,7 +120,7 @@ public class Irbpnr implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.facturacion.electronica.entities.Irbpnr[ irbCode=" + irbCode + " ]";
+        return this.irbDescription;
     }
     
 }

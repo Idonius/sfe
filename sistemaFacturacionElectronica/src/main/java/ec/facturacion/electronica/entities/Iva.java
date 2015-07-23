@@ -117,7 +117,7 @@ public class Iva implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.facturacion.electronica.entities.Iva[ ivaCode=" + ivaCode + " ]";
+        return ""+this.ivaValue;
     }
     
 }

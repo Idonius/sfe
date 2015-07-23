@@ -119,7 +119,7 @@ public class Rol implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.facturacion.electronica.entities.Rol[ rolCode=" + rolCode + " ]";
+        return this.rolDescription;
     }
     
 }

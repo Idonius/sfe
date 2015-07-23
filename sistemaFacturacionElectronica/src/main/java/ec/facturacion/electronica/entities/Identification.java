@@ -119,7 +119,7 @@ public class Identification implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.facturacion.electronica.entities.Identification[ ideCode=" + ideCode + " ]";
+        return this.ideDescription;
     }
     
 }

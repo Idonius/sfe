@@ -119,7 +119,7 @@ public class ProductType implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.facturacion.electronica.entities.ProductType[ proTypCode=" + proTypCode + " ]";
+        return this.proTypDesription;
     }
     
 }

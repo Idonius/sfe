@@ -278,7 +278,7 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.facturacion.electronica.entities.Product[ proCode=" + proCode + " ]";
+        return this.proName;
     }
     
 }
