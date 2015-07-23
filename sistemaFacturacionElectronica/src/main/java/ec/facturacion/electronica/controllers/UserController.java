@@ -144,11 +144,11 @@ public class UserController implements Serializable {
     }
 
     public List<User> getItemsAvailableSelectMany() {
-        return getFacade().findAll();
+        return getFacade().findByEnabled(new Boolean(true));
     }
 
     public List<User> getItemsAvailableSelectOne() {
-        return getFacade().findAll();
+        return getFacade().findByEnabled(new Boolean(true));
     }
 
     @FacesConverter(forClass = User.class)

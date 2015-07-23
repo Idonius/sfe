@@ -110,11 +110,11 @@ public class RolController implements Serializable {
     }
 
     public List<Rol> getItemsAvailableSelectMany() {
-        return getFacade().findAll();
+        return getFacade().findByEnabled(new Boolean(true));
     }
 
     public List<Rol> getItemsAvailableSelectOne() {
-        return getFacade().findAll();
+        return getFacade().findByEnabled(new Boolean(true));
     }
 
     @FacesConverter(forClass = Rol.class)

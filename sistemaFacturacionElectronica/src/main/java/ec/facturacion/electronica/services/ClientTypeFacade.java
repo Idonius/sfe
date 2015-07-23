@@ -5,7 +5,11 @@
  */
 package ec.facturacion.electronica.services;
 
+import ec.facturacion.electronica.entities.Client;
 import ec.facturacion.electronica.entities.ClientType;
+
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,5 +31,13 @@ public class ClientTypeFacade extends AbstractFacade<ClientType> {
     public ClientTypeFacade() {
         super(ClientType.class);
     }
+    
+    public List<ClientType> findByEnabled(Boolean enabled){
+		try {
+			return findByParameters("from ClientType u where u.cliTypEnabled  = ?1", enabled);
+		} catch (Exception e) {
+			return null;
+		}
+	}
     
 }

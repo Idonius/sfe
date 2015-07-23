@@ -5,7 +5,11 @@
  */
 package ec.facturacion.electronica.services;
 
+import ec.facturacion.electronica.entities.Identification;
 import ec.facturacion.electronica.entities.Irbpnr;
+
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

@@ -5,7 +5,11 @@
  */
 package ec.facturacion.electronica.services;
 
+import ec.facturacion.electronica.entities.Identification;
 import ec.facturacion.electronica.entities.Iva;
+
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,5 +31,13 @@ public class IvaFacade extends AbstractFacade<Iva> {
     public IvaFacade() {
         super(Iva.class);
     }
+    
+    public List<Iva> findByEnabled(Boolean enabled){
+		try {
+			return findByParameters("from Iva u where u.ivaEnabled = ?1", enabled);
+		} catch (Exception e) {
+			return null;
+		}
+	}
     
 }

@@ -5,7 +5,11 @@
  */
 package ec.facturacion.electronica.services;
 
+import ec.facturacion.electronica.entities.Company;
 import ec.facturacion.electronica.entities.EmissionType;
+
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,5 +31,13 @@ public class EmissionTypeFacade extends AbstractFacade<EmissionType> {
     public EmissionTypeFacade() {
         super(EmissionType.class);
     }
+    
+    public List<EmissionType> findByEnabled(Boolean enabled){
+		try {
+			return findByParameters("from EmissionType u where u.emiTypeEnabled  = ?1", enabled);
+		} catch (Exception e) {
+			return null;
+		}
+	}
     
 }

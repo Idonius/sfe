@@ -110,11 +110,11 @@ public class IdentificationController implements Serializable {
     }
 
     public List<Identification> getItemsAvailableSelectMany() {
-        return getFacade().findAll();
+        return getFacade().findByEnabled(new Boolean(true));
     }
 
     public List<Identification> getItemsAvailableSelectOne() {
-        return getFacade().findAll();
+        return getFacade().findByEnabled(new Boolean(true));
     }
 
     @FacesConverter(forClass = Identification.class)

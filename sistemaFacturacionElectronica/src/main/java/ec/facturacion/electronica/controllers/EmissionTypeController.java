@@ -110,11 +110,11 @@ public class EmissionTypeController implements Serializable {
     }
 
     public List<EmissionType> getItemsAvailableSelectMany() {
-        return getFacade().findAll();
+        return getFacade().findByEnabled(new Boolean(true));
     }
 
     public List<EmissionType> getItemsAvailableSelectOne() {
-        return getFacade().findAll();
+        return getFacade().findByEnabled(new Boolean(true));
     }
 
     @FacesConverter(forClass = EmissionType.class)

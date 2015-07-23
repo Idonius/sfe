@@ -110,11 +110,11 @@ public class ClientTypeController implements Serializable {
     }
 
     public List<ClientType> getItemsAvailableSelectMany() {
-        return getFacade().findAll();
+        return getFacade().findByEnabled(new Boolean(true));
     }
 
     public List<ClientType> getItemsAvailableSelectOne() {
-        return getFacade().findAll();
+        return getFacade().findByEnabled(new Boolean(true));
     }
 
     @FacesConverter(forClass = ClientType.class)

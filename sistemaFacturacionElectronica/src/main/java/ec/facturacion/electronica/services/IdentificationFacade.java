@@ -5,7 +5,11 @@
  */
 package ec.facturacion.electronica.services;
 
+import ec.facturacion.electronica.entities.EmissionType;
 import ec.facturacion.electronica.entities.Identification;
+
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,5 +31,13 @@ public class IdentificationFacade extends AbstractFacade<Identification> {
     public IdentificationFacade() {
         super(Identification.class);
     }
+    
+    public List<Identification> findByEnabled(Boolean enabled){
+		try {
+			return findByParameters("from Identification u where u.ideEnabled  = ?1", enabled);
+		} catch (Exception e) {
+			return null;
+		}
+	}
     
 }

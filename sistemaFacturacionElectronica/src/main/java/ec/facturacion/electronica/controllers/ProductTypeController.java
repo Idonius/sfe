@@ -110,11 +110,11 @@ public class ProductTypeController implements Serializable {
     }
 
     public List<ProductType> getItemsAvailableSelectMany() {
-        return getFacade().findAll();
+        return getFacade().findByEnabled(new Boolean(true));
     }
 
     public List<ProductType> getItemsAvailableSelectOne() {
-        return getFacade().findAll();
+        return getFacade().findByEnabled(new Boolean(true));
     }
 
     @FacesConverter(forClass = ProductType.class)

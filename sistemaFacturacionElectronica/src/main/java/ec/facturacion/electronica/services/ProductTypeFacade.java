@@ -5,7 +5,11 @@
  */
 package ec.facturacion.electronica.services;
 
+import ec.facturacion.electronica.entities.Product;
 import ec.facturacion.electronica.entities.ProductType;
+
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,4 +32,11 @@ public class ProductTypeFacade extends AbstractFacade<ProductType> {
         super(ProductType.class);
     }
     
+    public List<ProductType> findByEnabled(Boolean enabled){
+		try {
+			return findByParameters("from ProductType u where u.proTypEnabled= ?1", enabled);
+		} catch (Exception e) {
+			return null;
+		}
+	}
 }

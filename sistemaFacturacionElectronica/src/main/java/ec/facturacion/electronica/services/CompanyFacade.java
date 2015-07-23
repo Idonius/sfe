@@ -5,7 +5,11 @@
  */
 package ec.facturacion.electronica.services;
 
+import ec.facturacion.electronica.entities.ClientType;
 import ec.facturacion.electronica.entities.Company;
+
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,4 +32,11 @@ public class CompanyFacade extends AbstractFacade<Company> {
         super(Company.class);
     }
     
+    public List<Company> findByEnabled(Boolean enabled){
+		try {
+			return findByParameters("from Company u where u.comEnabled  = ?1", enabled);
+		} catch (Exception e) {
+			return null;
+		}
+	}
 }
