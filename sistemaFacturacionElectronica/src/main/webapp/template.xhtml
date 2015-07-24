@@ -55,21 +55,31 @@
         <p:growl id="growl" life="3000" />
 
         <p:layout fullPage="true">
-            <p:layoutUnit position="north"  header="#{bundle.AppName}">
+            <p:layoutUnit position="north">
+            	<div align="center">
+	                <div style="background-image: url(#{facesContext.externalContext.requestContextPath}/resources/images/layer/background.png); width: 100%; height: 173px;">
+	            		<div style="float:left; padding-top: 37px;">
+	            			<img src="#{facesContext.externalContext.requestContextPath}/resources/images/layer/logo.png" alt="" />
+	            		</div>
+	            		<div style="float:right; padding-top: 20px; padding-right: 80px;">
+	            			<img src="#{facesContext.externalContext.requestContextPath}/resources/images/layer/app_name.png" alt="" />
+	            		</div>
+	            	</div>
+            	</div>
                 <h:form id="menuForm">
                     <p:menubar>
                         <p:menuitem value="#{bundle.Home}" outcome="/admin/index" icon="ui-icon-home"/>
                         <p:submenu label="#{bundle.Maintenance}">
                         	<p:submenu label="Parametros">
-                        		<p:menuitem value="Identification" outcome="/admin/identification/List.xhtml" />
-                        		<p:menuitem value="EmissionType" outcome="/admin/emissionType/List.xhtml" />
-                            	<p:menuitem value="ProductType" outcome="/admin/productType/List.xhtml" />
-                            	<p:menuitem value="ClientType" outcome="/admin/clientType/List.xhtml" />
+                        		<p:menuitem value="Tipo Identificación" outcome="/admin/identification/List.xhtml" />
+                        		<p:menuitem value="Tipo Emisión" outcome="/admin/emissionType/List.xhtml" />
+                            	<p:menuitem value="Tipo Producto" outcome="/admin/productType/List.xhtml" />
+                            	<p:menuitem value="Tipo Cliente" outcome="/admin/clientType/List.xhtml" />
                         	</p:submenu>
                         	<p:submenu label="Usuario">
                         		<p:menuitem value="Rol" outcome="/admin/rol/List.xhtml" />
-                        		<p:menuitem value="Company" outcome="/admin/company/List.xhtml" />
-                            	<p:menuitem value="User" outcome="/admin/user/List.xhtml" />
+                        		<p:menuitem value="Compañia" outcome="/admin/company/List.xhtml" />
+                            	<p:menuitem value="Usuario" outcome="/admin/user/List.xhtml" />
                         	</p:submenu>
                         	<p:submenu label="Impuestos">
                         		<p:menuitem value="Ice" outcome="/admin/ice/List.xhtml" />
@@ -77,8 +87,8 @@
 	                            <p:menuitem value="Iva" outcome="/admin/iva/List.xhtml" />
                         	</p:submenu>
                         </p:submenu>
-                        <p:menuitem value="Product" outcome="/admin/product/List.xhtml" />
-                        <p:menuitem value="Client" outcome="/admin/client/List.xhtml" />
+                        <p:menuitem value="Productos" outcome="/admin/product/List.xhtml" />
+                        <p:menuitem value="Clientes" outcome="/admin/client/List.xhtml" />
                         <f:facet name="options">
 				            <p:menuButton value="#{loginManager.active.useFirstName} #{loginManager.active.useLastName}">
 	        					<p:menuitem value="Cerrar Sesión" action="#{loginManager.cerrarSesion()}" update=":growl" icon="ui-icon-close"/>

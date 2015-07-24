@@ -17,29 +17,45 @@
         <p:growl id="growl" life="3000" />
 
         <p:layout fullPage="true">
-            <p:layoutUnit position="north" >
-                Header
+            <p:layoutUnit position="north">
+            	<div align="center">
+	                <div style="background-image: url(#{facesContext.externalContext.requestContextPath}/resources/images/layer/background.png); width: 100%; height: 173px;">
+	            		<div style="float:left; padding-top: 37px;">
+	            			<img src="#{facesContext.externalContext.requestContextPath}/resources/images/layer/logo.png" alt="" />
+	            		</div>
+	            		<div style="float:right; padding-top: 20px; padding-right: 80px;">
+	            			<img src="#{facesContext.externalContext.requestContextPath}/resources/images/layer/app_name.png" alt="" />
+	            		</div>
+	            	</div>
+            	</div>
             </p:layoutUnit>
 
             <p:layoutUnit position="center">
-	            <h2>Inicio de sesión</h2>
-	                <hr />
-	                <h:form id="frmLogin">
-	                    <p:growl id="mensageGeneral" showDetail="true" sticky="false" />
-	                    <h:panelGrid columns="2">
-	                        <p:outputLabel value="Usuario" for="usuarioTxt"/>
-	                        <p:inputText id="usuarioTxt" size="40" value="#{loginManager.usuario}"/>
-	                        <p:outputLabel value="Contraseña" for="txtContrasenia"/>
-	                        <p:password id="txtContrasenia" size="40" value="#{loginManager.contrasenia}"/>
-	                        <h:panelGroup></h:panelGroup>
-	                        <p:commandButton value="Ingresar" ajax="false" action="#{loginManager.login()}"/>
-	                    </h:panelGrid>
-	                </h:form>
+            	<div align="center">
+	                <div align="center" style="background-image: url(#{facesContext.externalContext.requestContextPath}/resources/images/layer/background_login.png); width: 100%; height: 500px;">
+			            <div style="background-image: url(#{facesContext.externalContext.requestContextPath}/resources/images/layer/login.png); width: 375px;" >
+			           		<div style="padding-top: 178px; padding-left:5px; height: 175px;">
+				                <h:form id="frmLogin" onkeypress="if (event.keyCode == 13) { document.getElementById('frmLogin:save').click(); return false; }">
+				                    <p:growl id="mensageGeneral" showDetail="true" sticky="false" />
+				                    <p:panelGrid columns="2" styleClass="noBorder transparentBackground">
+				                        <p:outputLabel value="Usuario" for="usuarioTxt"/>
+				                        <p:inputText id="usuarioTxt" size="40" value="#{loginManager.usuario}" style="width:120px;" />
+					                    <p:spacer height="7px;"></p:spacer>
+					                    <p:spacer height="7px;"></p:spacer>
+				                        <p:outputLabel value="Contraseña" for="txtContrasenia"/>
+				                        <p:password id="txtContrasenia" size="40" value="#{loginManager.contrasenia}" style="width:120px;"/>
+				                    </p:panelGrid>
+				                    <br></br>
+				                    <br></br>
+				                    <h:commandLink id="save" action="#{loginManager.login()}" > 
+		                                <h:graphicImage value="/resources/images/layer/botton.png" alt="login" />
+		                            </h:commandLink>
+				                </h:form>
+			                </div>
+				         </div>
+		           	</div>
+		       	</div>
                 <ui:insert name="body"/>
-            </p:layoutUnit>
-            
-            <p:layoutUnit position="east" >
-               	imagen
             </p:layoutUnit>
             
             <p:layoutUnit position="south" >

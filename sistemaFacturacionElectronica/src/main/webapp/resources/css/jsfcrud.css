@@ -114,6 +114,9 @@ ul.ui-menu-child{
 .encabezado{
 	background:url('../resources/images/fnd_encabezado_sistema.jpg') repeat-x top; height: 70px; width:100%; padding-top: 10px; padding-bottom: 10px;
 }
-.login{
-	background-image:url('../resources/images/fondos_puntos.jpg') ;
-}
+
+.noBorder tr,
+.noBorder td { border: 0 !important; }
+
+.transparentBackground tr,
+.transparentBackground td { background: transparent !important; }
