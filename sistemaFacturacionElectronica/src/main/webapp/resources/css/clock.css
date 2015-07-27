@@ -21,7 +21,7 @@ and open the template in the editor.
 }
 
 .container {
-    width: 350px;
+    width: 100px;
     margin: 0 auto;
     overflow: hidden;
 }

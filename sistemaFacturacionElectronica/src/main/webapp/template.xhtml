@@ -66,6 +66,8 @@
 	            		</div>
 	            	</div>
             	</div>
+            	<div style="height: 5px;">
+            	</div>
                 <h:form id="menuForm">
                     <p:menubar>
                         <p:menuitem value="#{bundle.Home}" outcome="/admin/index" icon="ui-icon-home"/>
@@ -89,6 +91,7 @@
                         </p:submenu>
                         <p:menuitem value="Productos" outcome="/admin/product/List.xhtml" />
                         <p:menuitem value="Clientes" outcome="/admin/client/List.xhtml" />
+                        <p:menuitem value="Facturar" outcome="/bill/bill.xhtml" />
                         <f:facet name="options">
 				            <p:menuButton value="#{loginManager.active.useFirstName} #{loginManager.active.useLastName}">
 	        					<p:menuitem value="Cerrar Sesión" action="#{loginManager.cerrarSesion()}" update=":growl" icon="ui-icon-close"/>
@@ -100,12 +103,12 @@
 
             <p:layoutUnit position="south">
             	<div style="width: 33%; float: left;">
-                	<p:graphicImage id="content" value="#{loginManager.active.useImage}" width="100px" height="100px"/>
+                	<p:graphicImage id="content" value="#{loginManager.active.useImage}" width="50px" height="50px" style="border-radius:50%" />
                 </div>
-                <div align="center" style="width: 33%; float: left; padding-top:40px;">
+                <div align="center" style="width: 33%; float: left; ">
                 	Todos los derechos Reservados
                 </div>
-                <div align="right" style="width: 33%; float: left; padding-top:35px; ">
+                <div align="right" style="width: 33%; float: left; ">
                         <div class="clock">
                         <div id="Date"></div>
                         <ul class="ulclock">
