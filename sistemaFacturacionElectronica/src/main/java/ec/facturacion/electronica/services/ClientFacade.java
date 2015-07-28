@@ -39,4 +39,12 @@ public class ClientFacade extends AbstractFacade<Client> {
 			return null;
 		}
 	}
+    
+    public Client findById(String id){
+		try {
+			return findByParameters("from Client u where u.cliEnabled = ?1 and u.cliId = ?2", true, id).get(0);
+		}catch (Exception e) {
+			return null;
+		}
+	}
 }
