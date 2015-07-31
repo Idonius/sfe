@@ -47,6 +47,7 @@ public class BillerController implements Serializable {
 	private User active;
 	private List<Product> lstSelectedProducts = new ArrayList<Product>();
 	private List<BillDetail> lstBillDetail = new ArrayList<BillDetail>();
+	private Float total  = 0F;
 
 	public BillerController() {
 	}
@@ -62,6 +63,7 @@ public class BillerController implements Serializable {
 		lstProducts = new ArrayList<Product>();
 		lstSelectedProducts = new ArrayList<Product>();
 		lstBillDetail = new ArrayList<BillDetail>();
+		total = 0F;
 	}
 	
 	public void update(){
@@ -131,6 +133,10 @@ public class BillerController implements Serializable {
         Object newValue = event.getNewValue();
         
         lstBillDetail.get(event.getRowIndex()).setTotal(lstBillDetail.get(event.getRowIndex()).getProCode().getProValue() * (Float) newValue);
+        total = 0F;
+        for(BillDetail bill: lstBillDetail){
+        	total += bill.getTotal();
+        }
          
         if(newValue != null && !newValue.equals(oldValue)) {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
@@ -226,6 +232,14 @@ public class BillerController implements Serializable {
 
 	public void setLstBillDetail(List<BillDetail> lstBillDetail) {
 		this.lstBillDetail = lstBillDetail;
+	}
+
+	public Float getTotal() {
+		return total;
+	}
+
+	public void setTotal(Float total) {
+		this.total = total;
 	}
 	
 	

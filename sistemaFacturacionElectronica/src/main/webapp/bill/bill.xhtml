@@ -74,6 +74,7 @@
 		                </p:panelGrid>
 	                </p:fieldset>
 	                <p:fieldset legend="Detalle" toggleable="true" toggleSpeed="500">
+	                	<p:remoteCommand name="onCellEdit" update="billForm:billDetailLst, :growl" />
 	                	<p:dataTable id="billDetailLst" value="#{billerController.lstBillDetail}" var="item"
 		                             rowKey="#{item.proCode.proCode}"
 		                             rowIndexVar="row"
@@ -88,7 +89,7 @@
 		                        </h:panelGrid>  
 		                    </f:facet>
 		
-							<p:ajax event="cellEdit" listener="#{billerController.onCellEdit}"  update="billDetailLst"/>
+							<p:ajax event="cellEdit" listener="#{billerController.onCellEdit}" oncomplete="onCellEdit()" />
 		
 		                    <p:column headerText="Cantidad">
 				              	<p:cellEditor>
@@ -123,7 +124,7 @@
 		                    <p:columnGroup type="footer">
 					            <p:row>
 					                <p:column colspan="4" style="text-align:right" footerText="Total:" />
-					                <p:column footerText="123" />
+					                <p:column footerText="#{billerController.total}" />
 					            </p:row>
 					        </p:columnGroup>
 		                </p:dataTable>
