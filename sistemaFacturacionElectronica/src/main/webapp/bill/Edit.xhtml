@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ClientEditDlg" widgetVar="ClientEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditClientTitle}">
+            <h:form id="ClientEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{billerController.client != null}">
+                        <p:outputLabel value="#{bundle.EditClientLabel_cliFirstName}" for="cliFirstName" />
+                        <p:inputText id="cliFirstName" value="#{billerController.client.cliFirstName}" title="#{bundle.EditClientTitle_cliFirstName}" required="true" requiredMessage="#{bundle.EditClientRequiredMessage_cliFirstName}"/>
+                        <p:outputLabel value="#{bundle.EditClientLabel_cliLastName}" for="cliLastName" />
+                        <p:inputText id="cliLastName" value="#{billerController.client.cliLastName}" title="#{bundle.EditClientTitle_cliLastName}" required="true" requiredMessage="#{bundle.EditClientRequiredMessage_cliLastName}"/>
+                        <p:outputLabel value="#{bundle.EditClientLabel_cliSocialReason}" for="cliSocialReason" />
+                        <p:inputText id="cliSocialReason" value="#{billerController.client.cliSocialReason}" title="#{bundle.EditClientTitle_cliSocialReason}" />
+                        <p:outputLabel value="#{bundle.EditClientLabel_ideCode}" for="ideCode" />
+                        <p:selectOneMenu id="ideCode" value="#{billerController.client.ideCode}" required="true" requiredMessage="#{bundle.EditClientRequiredMessage_ideCode}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{identificationController.itemsAvailableSelectOne}"
+                                           var="ideCodeItem"
+                                           itemValue="#{ideCodeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditClientLabel_cliId}" for="cliId" />
+                        <p:inputText id="cliId" value="#{billerController.client.cliId}" title="#{bundle.EditClientTitle_cliId}" required="true" requiredMessage="#{bundle.EditClientRequiredMessage_cliId}"/>
+                        <p:outputLabel value="#{bundle.EditClientLabel_cliAddr}" for="cliAddr" />
+                        <p:inputTextarea rows="4" cols="30" id="cliAddr" value="#{billerController.client.cliAddr}" title="#{bundle.EditClientTitle_cliAddr}" />
+                        <p:outputLabel value="#{bundle.EditClientLabel_cliPhone}" for="cliPhone" />
+                        <p:inputText id="cliPhone" value="#{billerController.client.cliPhone}" title="#{bundle.EditClientTitle_cliPhone}" />
+                        <p:outputLabel value="#{bundle.EditClientLabel_cliExt}" for="cliExt" />
+                        <p:inputText id="cliExt" value="#{billerController.client.cliExt}" title="#{bundle.EditClientTitle_cliExt}" />
+                        <p:outputLabel value="#{bundle.EditClientLabel_cliCellPhone}" for="cliCellPhone" />
+                        <p:inputText id="cliCellPhone" value="#{billerController.client.cliCellPhone}" title="#{bundle.EditClientTitle_cliCellPhone}" />
+                        <p:outputLabel value="#{bundle.EditClientLabel_cliEmail}" for="cliEmail" />
+                        <p:inputText id="cliEmail" value="#{billerController.client.cliEmail}" title="#{bundle.EditClientTitle_cliEmail}" required="true" requiredMessage="#{bundle.EditClientRequiredMessage_cliEmail}"/>
+                        <p:outputLabel value="#{bundle.EditClientLabel_cliTypCode}" for="cliTypCode" />
+                        <p:selectOneMenu id="cliTypCode" value="#{billerController.client.cliTypCode}" required="true" requiredMessage="#{bundle.EditClientRequiredMessage_cliTypCode}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{clientTypeController.itemsAvailableSelectOne}"
+                                           var="cliTypCodeItem"
+                                           itemValue="#{cliTypCodeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditClientLabel_cliEnabled}" for="cliEnabled" />
+                        <p:selectBooleanCheckbox id="cliEnabled" value="#{billerController.client.cliEnabled}" />
+                    </p:panelGrid>
+                    <div align="center">
+                    	<p:commandButton actionListener="#{billerController.update}" value="#{bundle.Save}" update="display, :billForm:info, :growl"/>
+                    </div>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

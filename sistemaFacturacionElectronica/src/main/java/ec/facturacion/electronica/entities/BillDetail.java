@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -46,7 +47,8 @@ public class BillDetail implements Serializable {
     @JoinColumn(name = "PRO_CODE", referencedColumnName = "PRO_CODE")
     @ManyToOne(optional = false)
     private Product proCode;
-
+    private transient Float total;
+    
     public BillDetail() {
     }
 
@@ -86,7 +88,16 @@ public class BillDetail implements Serializable {
         this.proCode = proCode;
     }
 
-    @Override
+    @Transient
+    public Float getTotal() {
+		return total;
+	}
+
+	public void setTotal(Float total) {
+		this.total = total;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (bilDetCode != null ? bilDetCode.hashCode() : 0);

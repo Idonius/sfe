@@ -94,14 +94,17 @@ public class Product implements Serializable {
     @ManyToOne(optional = false)
     private ProductType proTypCode;
     @JoinColumn(name = "ICE_CODE", referencedColumnName = "ICE_CODE")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private Ice iceCode;
     @JoinColumn(name = "IVA_CODE", referencedColumnName = "IVA_CODE")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private Iva ivaCode;
     @JoinColumn(name = "IRB_CODE", referencedColumnName = "IRB_CODE")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private Irbpnr irbCode;
+    @JoinColumn(name = "COM_CODE", referencedColumnName = "COM_CODE")
+    @ManyToOne(optional = false)
+    private Company company;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "proCode")
     private List<BillDetail> billDetailList;
 
@@ -255,8 +258,18 @@ public class Product implements Serializable {
     public void setBillDetailList(List<BillDetail> billDetailList) {
         this.billDetailList = billDetailList;
     }
+    
+    
 
-    @Override
+    public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (proCode != null ? proCode.hashCode() : 0);

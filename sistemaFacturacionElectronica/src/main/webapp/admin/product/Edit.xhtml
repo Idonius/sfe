@@ -42,22 +42,22 @@
                                            itemValue="#{proTypCodeItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditProductLabel_iceCode}" for="iceCode" />
-                        <p:selectOneMenu id="iceCode" value="#{productController.selected.iceCode}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_iceCode}">
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                        <p:selectOneMenu id="iceCode" value="#{productController.selected.iceCode}" >
+                            <f:selectItem itemLabel="0"/>
                             <f:selectItems value="#{iceController.itemsAvailableSelectOne}"
                                            var="iceCodeItem"
                                            itemValue="#{iceCodeItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditProductLabel_ivaCode}" for="ivaCode" />
-                        <p:selectOneMenu id="ivaCode" value="#{productController.selected.ivaCode}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_ivaCode}">
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                        <p:selectOneMenu id="ivaCode" value="#{productController.selected.ivaCode}" >
+                            <f:selectItem itemLabel="0"/>
                             <f:selectItems value="#{ivaController.itemsAvailableSelectOne}"
                                            var="ivaCodeItem"
                                            itemValue="#{ivaCodeItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditProductLabel_irbCode}" for="irbCode" />
-                        <p:selectOneMenu id="irbCode" value="#{productController.selected.irbCode}" required="true" requiredMessage="#{bundle.EditProductRequiredMessage_irbCode}">
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                        <p:selectOneMenu id="irbCode" value="#{productController.selected.irbCode}" >
+                            <f:selectItem itemLabel="0"/>
                             <f:selectItems value="#{irbpnrController.itemsAvailableSelectOne}"
                                            var="irbCodeItem"
                                            itemValue="#{irbCodeItem}"/>
@@ -66,7 +66,7 @@
                         <p:selectBooleanCheckbox id="proEnabled" value="#{productController.selected.proEnabled}" />
                     </p:panelGrid>
                     <div align="center">
-                    	<p:commandButton actionListener="#{productController.update}" value="#{bundle.Save}" update="display,:ProductListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProductEditDialog');"/>
+                    	<p:commandButton actionListener="#{productController.update(loginManager.active)}" value="#{bundle.Save}" update="display,:ProductListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProductEditDialog');"/>
                     </div>
                 </h:panelGroup>
             </h:form>

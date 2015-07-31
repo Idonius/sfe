@@ -1,6 +1,7 @@
 package ec.facturacion.electronica.controllers;
 
 import ec.facturacion.electronica.entities.Product;
+import ec.facturacion.electronica.entities.User;
 import ec.facturacion.electronica.controllers.util.JsfUtil;
 import ec.facturacion.electronica.controllers.util.JsfUtil.PersistAction;
 import ec.facturacion.electronica.services.ProductFacade;
@@ -27,6 +28,7 @@ public class ProductController implements Serializable {
     private ec.facturacion.electronica.services.ProductFacade ejbFacade;
     private List<Product> items = null;
     private Product selected;
+    private User active = null;
 
     public ProductController() {
     }
@@ -55,14 +57,16 @@ public class ProductController implements Serializable {
         return selected;
     }
 
-    public void create() {
+    public void create(User user) {
+    	active = user;
         persist(PersistAction.CREATE, ResourceBundle.getBundle("ec.facturacion.electronica.util.Bundle").getString("ProductCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public void update() {
+    public void update(User user) {
+    	active = user;
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("ec.facturacion.electronica.util.Bundle").getString("ProductUpdated"));
     }
 
@@ -86,6 +90,7 @@ public class ProductController implements Serializable {
             setEmbeddableKeys();
             try {
                 if (persistAction != PersistAction.DELETE) {
+                	selected.setCompany(active.getComCode());
                     getFacade().edit(selected);
                 } else {
                     getFacade().remove(selected);
@@ -117,7 +122,15 @@ public class ProductController implements Serializable {
         return getFacade().findByEnabled(new Boolean(true));
     }
 
-    @FacesConverter(forClass = Product.class)
+    public User getActive() {
+		return active;
+	}
+
+	public void setActive(User active) {
+		this.active = active;
+	}
+
+	@FacesConverter(forClass = Product.class)
     public static class ProductControllerConverter implements Converter {
 
         @Override
