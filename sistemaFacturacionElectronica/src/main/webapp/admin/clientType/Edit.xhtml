@@ -20,7 +20,7 @@
                         <p:selectBooleanCheckbox id="cliTypEnabled" value="#{clientTypeController.selected.cliTypEnabled}" />
                     </p:panelGrid>
                     <div align="center">
-                    	<p:commandButton actionListener="#{clientTypeController.update}" value="#{bundle.Save}" update="display,:ClientTypeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ClientTypeEditDialog');"/>
+                    	<p:commandButton actionListener="#{clientTypeController.update}" value="#{bundle.Save}" icon="fa fa-save fa-lg"  update="display,:ClientTypeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ClientTypeEditDialog');"/>
                     </div>
                 </h:panelGroup>
             </h:form>

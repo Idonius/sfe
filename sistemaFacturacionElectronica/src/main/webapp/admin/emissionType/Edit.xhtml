@@ -20,7 +20,7 @@
                         <p:selectBooleanCheckbox id="emiTypeEnabled" value="#{emissionTypeController.selected.emiTypeEnabled}" />
                     </p:panelGrid>
                     <div align="center"> 
-                    	<p:commandButton actionListener="#{emissionTypeController.update}" value="#{bundle.Save}" update="display,:EmissionTypeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EmissionTypeEditDialog');"/>
+                    	<p:commandButton actionListener="#{emissionTypeController.update}" value="#{bundle.Save}" icon="fa fa-save fa-lg"  update="display,:EmissionTypeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EmissionTypeEditDialog');"/>
                     </div>
                 </h:panelGroup>
             </h:form>

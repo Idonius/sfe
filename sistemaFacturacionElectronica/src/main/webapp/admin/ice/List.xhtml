@@ -26,7 +26,7 @@
                     <f:facet name="header">         
                         <h:panelGrid columns="2" styleClass="borderLess">
                             <h:outputLabel value="Lista de Ice" style="float:left;" />
-                            <p:commandButton id="createButton2" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{iceController.prepareCreate}" update=":IceCreateForm" oncomplete="PF('IceCreateDialog').show()"  style="float:right;" />
+                            <p:commandButton id="createButton2" icon="fa fa-plus fa-lg"   value="#{bundle.Create}" actionListener="#{iceController.prepareCreate}" update=":IceCreateForm" oncomplete="PF('IceCreateDialog').show()"  style="float:right;" />
                         </h:panelGrid>  
                     </f:facet>
 
@@ -55,13 +55,13 @@
                             <h:outputText value="Accion"/>
                         </f:facet>
                         <h:panelGrid columns="3" cellpadding="1" styleClass="actions">
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":IceEditForm" oncomplete="PF('IceEditDialog').show()" >
+                            <p:commandButton id="editButton"   icon="fa fa-pencil fa-lg" value="#{bundle.Edit}" update=":IceEditForm" oncomplete="PF('IceEditDialog').show()" >
                                 <f:setPropertyActionListener value="#{item}" target="#{iceController.selected}" />
                             </p:commandButton>
                         </h:panelGrid>
                     </p:column>
                     <f:facet name="footer">
-                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{iceController.prepareCreate}" update=":IceCreateForm" oncomplete="PF('IceCreateDialog').show()"/>
+                        <p:commandButton id="createButton" icon="fa fa-plus fa-lg"   value="#{bundle.Create}" actionListener="#{iceController.prepareCreate}" update=":IceCreateForm" oncomplete="PF('IceCreateDialog').show()"/>
                     </f:facet>
                 </p:dataTable>
             </h:form>

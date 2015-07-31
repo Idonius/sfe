@@ -50,7 +50,7 @@
 		                		<p:inputText id="save" value="#{billerController.idClient}" style="width:100px;">
 		     		           		<p:ajax event="blur" listener="#{billerController.findClient}" update=":ClientEditForm:display" /> 
 						      	</p:inputText> 
-						      	<p:commandButton actionListener="#{billerController.findClient}" id="edit" update=":ClientEditForm:display" icon="ui-icon-search" title="Icon Only"  />
+						      	<p:commandButton actionListener="#{billerController.findClient}" id="edit" update=":ClientEditForm:display" icon="fa fa-search" title="Icon Only"  />
 		                	</p:panelGrid>
 		                	<p:panelGrid columns="1" styleClass="noBorder transparentBackground" rendered="#{billerController.bill.cliCode != null}">
 		                		<p:panelGrid columns="4" styleClass="noBorder transparentBackground"  style="width:100%;" rendered="#{billerController.bill.cliCode != null}">
@@ -69,7 +69,7 @@
         						<p:calendar id="mask" value="#{billerController.bill.bilDate}" pattern="dd-MM-yyyy" mask="true" locale="es"/>
 		                	</p:panelGrid>
 		                	<p:panelGrid columns="1" styleClass="noBorder transparentBackground" rendered="#{billerController.bill.cliCode != null}" style="width:20%;" >
-						      	<p:commandButton actionListener="#{billerController.editClient}" value="Editar Cliente" id="find" update=":ClientEditForm:display" icon="ui-icon-pencil"/>
+						      	<p:commandButton actionListener="#{billerController.editClient}" value="Editar Cliente" id="find" update=":ClientEditForm:display" icon="fa fa-pencil fa-lg"/>
 		                	</p:panelGrid>
 		                </p:panelGrid>
 	                </p:fieldset>
@@ -85,7 +85,7 @@
 		
 		                    <f:facet name="header">         
 		                        <h:panelGrid columns="2" styleClass="borderLess">
-		                            <p:commandButton id="addProducts" icon="ui-icon-plus"   value="Añadir Productos" actionListener="#{billerController.openProductSearch()}" update=":productForm:searchBox, :productForm:productList"  style="float:left;" />
+		                            <p:commandButton id="addProducts" icon="fa fa-cart-plus fa-lg"   value="Añadir Productos" actionListener="#{billerController.openProductSearch()}" update=":productForm:searchBox, :productForm:productList"  style="float:left;" />
 		                        </h:panelGrid>  
 		                    </f:facet>
 		
@@ -162,7 +162,7 @@
 					            <h:outputText value="#{pro.proValue}" />
 					        </p:column>
 					        <f:facet name="footer">
-					            <p:commandButton process="productList" update=":billForm:billDetailLst" icon="ui-icon-plus" value="Añadir" action="#{billerController.addProduct}" />
+					            <p:commandButton process="productList" update=":billForm:billDetailLst" icon="fa fa-plus fa-lg" value="Añadir" action="#{billerController.addProduct}" />
 					        </f:facet>
 					    </p:dataTable>
 	                </p:panel>

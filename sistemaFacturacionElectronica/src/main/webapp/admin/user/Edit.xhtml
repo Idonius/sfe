@@ -72,7 +72,7 @@
                         <p:selectBooleanCheckbox id="useEnabled" value="#{userController.selected.useEnabled}" />
                     </p:panelGrid>
                     <div align="center">
-                    	<p:commandButton actionListener="#{userController.update}" value="#{bundle.Save}" update="display,:UserListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UserEditDialog');"/>
+                    	<p:commandButton actionListener="#{userController.update}" value="#{bundle.Save}" icon="fa fa-save fa-lg"  update="display,:UserListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UserEditDialog');"/>
                     </div>
                 </h:panelGroup>
             </h:form>

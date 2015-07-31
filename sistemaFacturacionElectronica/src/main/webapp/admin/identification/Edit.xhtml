@@ -20,7 +20,7 @@
                         <p:selectBooleanCheckbox id="ideEnabled" value="#{identificationController.selected.ideEnabled}" />
                     </p:panelGrid>
                     <div align="center">
-                    	<p:commandButton actionListener="#{identificationController.update}" value="#{bundle.Save}" update="display,:IdentificationListForm:datalist,:growl" oncomplete="handleSubmit(args, 'IdentificationEditDialog');"/>
+                    	<p:commandButton actionListener="#{identificationController.update}" value="#{bundle.Save}" icon="fa fa-save fa-lg"  update="display,:IdentificationListForm:datalist,:growl" oncomplete="handleSubmit(args, 'IdentificationEditDialog');"/>
                     </div>
                 </h:panelGroup>
             </h:form>

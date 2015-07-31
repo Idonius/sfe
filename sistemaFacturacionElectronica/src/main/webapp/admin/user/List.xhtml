@@ -26,7 +26,7 @@
                     <f:facet name="header">         
                         <h:panelGrid columns="2" styleClass="borderLess">
                             <h:outputLabel value="Lista de User" style="float:left;" />
-                            <p:commandButton id="createButton2" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{userController.prepareCreate}" update=":UserCreateForm" oncomplete="PF('UserCreateDialog').show()"  style="float:right;" />
+                            <p:commandButton id="createButton2" icon="fa fa-plus fa-lg"   value="#{bundle.Create}" actionListener="#{userController.prepareCreate}" update=":UserCreateForm" oncomplete="PF('UserCreateDialog').show()"  style="float:right;" />
                         </h:panelGrid>  
                     </f:facet>
 
@@ -79,13 +79,13 @@
                             <h:outputText value="Accion"/>
                         </f:facet>
                         <h:panelGrid columns="3" cellpadding="1" styleClass="actions">
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":UserEditForm" oncomplete="PF('UserEditDialog').show()" >
+                            <p:commandButton id="editButton"   icon="fa fa-pencil fa-lg" value="#{bundle.Edit}" update=":UserEditForm" oncomplete="PF('UserEditDialog').show()" >
                                 <f:setPropertyActionListener value="#{item}" target="#{userController.selected}" />
                             </p:commandButton>
                         </h:panelGrid>
                     </p:column>
                     <f:facet name="footer">
-                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{userController.prepareCreate}" update=":UserCreateForm" oncomplete="PF('UserCreateDialog').show()"/>
+                        <p:commandButton id="createButton" icon="fa fa-plus fa-lg"   value="#{bundle.Create}" actionListener="#{userController.prepareCreate}" update=":UserCreateForm" oncomplete="PF('UserCreateDialog').show()"/>
                     </f:facet>
                 </p:dataTable>
             </h:form>

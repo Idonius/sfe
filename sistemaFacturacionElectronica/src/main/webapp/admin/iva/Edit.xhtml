@@ -20,7 +20,7 @@
                         <p:selectBooleanCheckbox id="ivaEnabled" value="#{ivaController.selected.ivaEnabled}" />
                     </p:panelGrid>
                     <div align="center">
-                   		<p:commandButton actionListener="#{ivaController.update}" value="#{bundle.Save}" update="display,:IvaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'IvaEditDialog');"/>
+                   		<p:commandButton actionListener="#{ivaController.update}" value="#{bundle.Save}" icon="fa fa-save fa-lg"  update="display,:IvaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'IvaEditDialog');"/>
                    	</div>
                 </h:panelGroup>
             </h:form>

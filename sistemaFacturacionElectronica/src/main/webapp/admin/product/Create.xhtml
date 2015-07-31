@@ -63,7 +63,7 @@
                         <p:selectBooleanCheckbox id="proEnabled" value="#{productController.selected.proEnabled}" />
                     </p:panelGrid>
                     <div align="center">
-                    	<p:commandButton actionListener="#{productController.create(loginManager.active)}" value="#{bundle.Save}" update="display,:ProductListForm:datalist,:growl" oncomplete="handleSubmit(args,'ProductCreateDialog');"/>
+                    	<p:commandButton actionListener="#{productController.create(loginManager.active)}" value="#{bundle.Save}" icon="fa fa-save fa-lg"  update="display,:ProductListForm:datalist,:growl" oncomplete="handleSubmit(args,'ProductCreateDialog');"/>
                     </div>
                 </h:panelGroup>
             </h:form>

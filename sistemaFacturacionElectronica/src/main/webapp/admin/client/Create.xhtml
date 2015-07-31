@@ -47,7 +47,7 @@
                         
                         
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{clientController.create}" value="#{bundle.Save}" update="display,:ClientListForm:datalist,:growl" oncomplete="handleSubmit(args,'ClientCreateDialog');"/>
+                    <p:commandButton actionListener="#{clientController.create}" value="#{bundle.Save}" icon="fa fa-save fa-lg"  update="display,:ClientListForm:datalist,:growl" oncomplete="handleSubmit(args,'ClientCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ClientCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

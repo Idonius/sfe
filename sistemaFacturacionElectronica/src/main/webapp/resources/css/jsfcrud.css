@@ -121,4 +121,11 @@ ul.ui-menu-child{
 .transparentBackground tr,
 .transparentBackground td { background: transparent !important; }
 
+.ui-icon.fa {
+     text-indent:0px;
+     background-image:none;
+}
 
+.fa {
+    color: #4297d7;
+}

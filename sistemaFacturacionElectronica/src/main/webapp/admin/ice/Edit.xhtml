@@ -20,7 +20,7 @@
                         <p:inputText id="iceValue" value="#{iceController.selected.iceValue}" title="#{bundle.EditIceTitle_iceValue}" />
                     </p:panelGrid>
                     <div align="center">
-                    	<p:commandButton actionListener="#{iceController.update}" value="#{bundle.Save}" update="display,:IceListForm:datalist,:growl" oncomplete="handleSubmit(args, 'IceEditDialog');"/>
+                    	<p:commandButton actionListener="#{iceController.update}" value="#{bundle.Save}" icon="fa fa-save fa-lg"  update="display,:IceListForm:datalist,:growl" oncomplete="handleSubmit(args, 'IceEditDialog');"/>
                     </div>
                 </h:panelGroup>
             </h:form>

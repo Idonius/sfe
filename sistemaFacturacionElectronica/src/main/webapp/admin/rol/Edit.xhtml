@@ -20,7 +20,7 @@
                         <p:selectBooleanCheckbox id="rolEnabled" value="#{rolController.selected.rolEnabled}" />
                     </p:panelGrid>
                     <div align="center">
-                    	<p:commandButton actionListener="#{rolController.update}" value="#{bundle.Save}" update="display,:RolListForm:datalist,:growl" oncomplete="handleSubmit(args, 'RolEditDialog');"/>
+                    	<p:commandButton actionListener="#{rolController.update}" value="#{bundle.Save}" icon="fa fa-save fa-lg"  update="display,:RolListForm:datalist,:growl" oncomplete="handleSubmit(args, 'RolEditDialog');"/>
                     </div>
                 </h:panelGroup>
             </h:form>

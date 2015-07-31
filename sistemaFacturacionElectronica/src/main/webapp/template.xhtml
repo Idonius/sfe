@@ -12,6 +12,8 @@
         <h:outputScript library="js" name="jsfcrud.js"/>
         <h:outputStylesheet library="css" name="clock.css"/>
 		<h:outputScript library="js" name="http://code.jquery.com/jquery-1.6.4.min.js"/>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
+		
 		
         <script type="text/javascript">
         $(document).ready(function() {
@@ -70,31 +72,31 @@
             	</div>
                 <h:form id="menuForm">
                     <p:menubar>
-                        <p:menuitem value="#{bundle.Home}" outcome="/admin/index" icon="ui-icon-home"/>
-                        <p:submenu label="#{bundle.Maintenance}">
-                        	<p:submenu label="Parametros">
+                        <p:menuitem value="#{bundle.Home}" outcome="/admin/index" icon="fa fa-home fa-lg"/>
+                        <p:submenu label="#{bundle.Maintenance}" icon="fa fa-gears fa-lg">
+                        	<p:submenu label="Parametros" icon="fa fa-map-pin fa-lg">
                         		<p:menuitem value="Tipo Identificación" outcome="/admin/identification/List.xhtml" />
                         		<p:menuitem value="Tipo Emisión" outcome="/admin/emissionType/List.xhtml" />
                             	<p:menuitem value="Tipo Producto" outcome="/admin/productType/List.xhtml" />
                             	<p:menuitem value="Tipo Cliente" outcome="/admin/clientType/List.xhtml" />
                         	</p:submenu>
-                        	<p:submenu label="Usuario">
+                        	<p:submenu label="Usuario" icon="fa fa-user fa-lg">
                         		<p:menuitem value="Rol" outcome="/admin/rol/List.xhtml" />
                         		<p:menuitem value="Compañia" outcome="/admin/company/List.xhtml" />
                             	<p:menuitem value="Usuario" outcome="/admin/user/List.xhtml" />
                         	</p:submenu>
-                        	<p:submenu label="Impuestos">
+                        	<p:submenu label="Impuestos" icon="fa fa-money fa-lg">
                         		<p:menuitem value="Ice" outcome="/admin/ice/List.xhtml" />
 	                            <p:menuitem value="Irbpnr" outcome="/admin/irbpnr/List.xhtml" />
 	                            <p:menuitem value="Iva" outcome="/admin/iva/List.xhtml" />
                         	</p:submenu>
                         </p:submenu>
-                        <p:menuitem value="Productos" outcome="/admin/product/List.xhtml" />
-                        <p:menuitem value="Clientes" outcome="/admin/client/List.xhtml" />
-                        <p:menuitem value="Facturar" outcome="/bill/bill.xhtml" />
+                        <p:menuitem value="Productos" outcome="/admin/product/List.xhtml" icon="fa fa-shopping-cart fa-lg"/>
+                        <p:menuitem value="Clientes" outcome="/admin/client/List.xhtml" icon="fa fa-users fa-lg"/>
+                        <p:menuitem value="Facturar" outcome="/bill/bill.xhtml" icon="fa fa-file-text fa-lg" />
                         <f:facet name="options">
 				            <p:menuButton value="#{loginManager.active.useFirstName} #{loginManager.active.useLastName}">
-	        					<p:menuitem value="Cerrar Sesión" action="#{loginManager.cerrarSesion()}" update=":growl" icon="ui-icon-close"/>
+	        					<p:menuitem value="Cerrar Sesión" action="#{loginManager.cerrarSesion()}" update=":growl" icon="fa fa-power-off fa-lg"/>
 	        				</p:menuButton>
 				        </f:facet>
                     </p:menubar>

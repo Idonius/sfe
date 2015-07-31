@@ -20,7 +20,7 @@
                         <p:selectBooleanCheckbox id="proTypEnabled" value="#{productTypeController.selected.proTypEnabled}" />
                     </p:panelGrid>
                     <div align="center">
-                    	<p:commandButton actionListener="#{productTypeController.update}" value="#{bundle.Save}" update="display,:ProductTypeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProductTypeEditDialog');"/>
+                    	<p:commandButton actionListener="#{productTypeController.update}" value="#{bundle.Save}" icon="fa fa-save fa-lg"  update="display,:ProductTypeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProductTypeEditDialog');"/>
                     </div>
                 </h:panelGroup>
             </h:form>

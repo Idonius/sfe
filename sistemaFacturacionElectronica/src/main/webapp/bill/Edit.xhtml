@@ -48,7 +48,7 @@
                         <p:selectBooleanCheckbox id="cliEnabled" value="#{billerController.client.cliEnabled}" />
                     </p:panelGrid>
                     <div align="center">
-                    	<p:commandButton actionListener="#{billerController.update}" value="#{bundle.Save}" update="display, :billForm:info, :growl"/>
+                    	<p:commandButton actionListener="#{billerController.update}" value="#{bundle.Save}" icon="fa fa-save fa-lg"  update="display, :billForm:info, :growl"/>
                     </div>
                 </h:panelGroup>
             </h:form>

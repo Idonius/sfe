@@ -20,7 +20,7 @@
                         <p:inputText id="irbValue" value="#{irbpnrController.selected.irbValue}" title="#{bundle.EditIrbpnrTitle_irbValue}" />
                     </p:panelGrid>
                     <div align="center">
-                    	<p:commandButton actionListener="#{irbpnrController.update}" value="#{bundle.Save}" update="display,:IrbpnrListForm:datalist,:growl" oncomplete="handleSubmit(args, 'IrbpnrEditDialog');"/>
+                    	<p:commandButton actionListener="#{irbpnrController.update}" value="#{bundle.Save}" icon="fa fa-save fa-lg"  update="display,:IrbpnrListForm:datalist,:growl" oncomplete="handleSubmit(args, 'IrbpnrEditDialog');"/>
                     </div>
                 </h:panelGroup>
             </h:form>

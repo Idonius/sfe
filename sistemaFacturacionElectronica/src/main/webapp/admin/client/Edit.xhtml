@@ -50,7 +50,7 @@
                         <p:selectBooleanCheckbox id="cliEnabled" value="#{clientController.selected.cliEnabled}" />
                     </p:panelGrid>
                     <div align="center">
-                    	<p:commandButton actionListener="#{clientController.update}" value="#{bundle.Save}" update="display,:ClientListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ClientEditDialog');"/>
+                    	<p:commandButton actionListener="#{clientController.update}" value="#{bundle.Save}" icon="fa fa-save fa-lg"  update="display,:ClientListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ClientEditDialog');"/>
                     </div>
                 </h:panelGroup>
             </h:form>

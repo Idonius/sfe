@@ -10,6 +10,7 @@
         <title><ui:insert name="title">Default Title</ui:insert></title>
         <h:outputStylesheet library="css" name="jsfcrud.css"/>
         <h:outputScript library="js" name="jsfcrud.js"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
     </h:head>
 
     <h:body>
@@ -21,7 +22,7 @@
                 <ui:insert name="body"/>
                 <h:form id="dock">
                 	<p:dock position="bottom">
-					    <p:menuitem value="Home" icon="/resources/demo/images/dock/home.png" action="/admin/index?faces-redirect=true"/>
+					    <p:menuitem value="Home"  action="/admin/index?faces-redirect=true"/>
 					</p:dock>	
                 </h:form>
             </p:layoutUnit>

@@ -20,7 +20,7 @@
                         <p:selectBooleanCheckbox id="comEnabled" value="#{companyController.selected.comEnabled}" />
                     </p:panelGrid>
                      <div align="center">
-                    	<p:commandButton actionListener="#{companyController.update}" value="#{bundle.Save}" update="display,:CompanyListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CompanyEditDialog');"/>
+                    	<p:commandButton actionListener="#{companyController.update}" value="#{bundle.Save}" icon="fa fa-save fa-lg"  update="display,:CompanyListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CompanyEditDialog');"/>
                     </div>
                 </h:panelGroup>
             </h:form>
