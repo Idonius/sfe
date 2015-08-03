@@ -6,10 +6,9 @@
 package ec.facturacion.electronica.services;
 
 import ec.facturacion.electronica.entities.Bill;
-import ec.facturacion.electronica.entities.Client;
+import ec.facturacion.electronica.entities.BillDetail;
 import ec.facturacion.electronica.entities.Identification;
 import ec.facturacion.electronica.entities.Iva;
-import ec.facturacion.electronica.entities.User;
 
 import java.util.List;
 
@@ -22,7 +21,7 @@ import javax.persistence.PersistenceContext;
  * @author JairoCamilo
  */
 @Stateless
-public class BillFacade extends AbstractFacade<Bill> {
+public class BillDetailFacade extends AbstractFacade<BillDetail> {
     @PersistenceContext(unitName = "primary")
     private EntityManager em;
 
@@ -31,15 +30,8 @@ public class BillFacade extends AbstractFacade<Bill> {
         return em;
     }
 
-    public BillFacade() {
-        super(Bill.class);
+    public BillDetailFacade() {
+        super(BillDetail.class);
     }
     
-    public int findByCompany(User user){
-		try {
-			return findByParameters("from Bill b where b.useCode.comCode.comCode = ?1", user.getComCode().getComCode()).size();
-		} catch (Exception e) {
-			return -1;
-		}
-	}
 }

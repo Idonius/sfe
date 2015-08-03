@@ -20,6 +20,7 @@ import ec.facturacion.electronica.entities.BillDetail;
 import ec.facturacion.electronica.entities.Client;
 import ec.facturacion.electronica.entities.Product;
 import ec.facturacion.electronica.entities.User;
+import ec.facturacion.electronica.services.BillDetailFacade;
 import ec.facturacion.electronica.services.BillFacade;
 import ec.facturacion.electronica.services.ClientFacade;
 import ec.facturacion.electronica.services.ProductFacade;
@@ -38,6 +39,9 @@ public class BillerController implements Serializable {
 	private ClientFacade ejbClientFacade;
 	@EJB
 	private ProductFacade ejbProductFacade;
+	@EJB
+	private BillDetailFacade ejbDBillDetailFacace;
+	
 	private Bill bill = new Bill();
 	private Client client = new Client();
 	private String idClient = new String();
@@ -58,6 +62,7 @@ public class BillerController implements Serializable {
 		client = new Client();
 		idClient = "";
 		bill.setBilDate(new Date());
+		bill.setUseCode(active);
 		nombreProducto = "";
 		codigoProducto = "";
 		lstProducts = new ArrayList<Product>();
@@ -79,11 +84,30 @@ public class BillerController implements Serializable {
 		}catch (Exception ex){
 			JsfUtil.addErrorMessage(ex,"No pudo ser asignado el cliente");
 		}
+	}
+	
+	public void saveBill(){
+		if(lstBillDetail != null && !lstBillDetail.isEmpty()){
+			bill.setBilTotal(total);
+			bill.setBillNumber(active.getUseLocalCode()+"-"+active.getUseEmissionPoint()+"-"+ String.format("%06d", showBillNumber()));			
+			try {
+				ejbBillFacade.persist(bill);
+				for(BillDetail billDetail: lstBillDetail){
+					ejbDBillDetailFacace.persist(billDetail);
+				}
+				JsfUtil.addSuccessMessage("La Factura: " + bill.getBillNumber() + " fue guardada correctamente.");
+				init(bill.getUseCode());
+			} catch (Exception e) {
+				JsfUtil.addErrorMessage("La factura: " + bill.getBillNumber() + " no pudo ser guardada correctamente.");
+			}
+		}else{
+			JsfUtil.addSuccessMessage("Debe añadir un producto como minimo");
+		}
 		
 	}
 	
 	public int showBillNumber(){
-		return ejbBillFacade.count()+1;
+		return ejbBillFacade.findByCompany(active)+1;
 	}
 	
 	public void editClient(){
@@ -151,8 +175,14 @@ public class BillerController implements Serializable {
 					BillDetail billDetail = new BillDetail();
 					billDetail.setBilCode(bill);
 					billDetail.setProCode(prod);
+					billDetail.setBilDetCant(1F);
+					billDetail.setTotal(billDetail.getProCode().getProValue());
 					lstBillDetail.add(billDetail);
 				}
+				total = 0F;
+		        for(BillDetail bill: lstBillDetail){
+		        	total += bill.getTotal();
+		        }
 				RequestContext context = RequestContext.getCurrentInstance();
 				context.execute("PF('productDialog').hide();");
 			}

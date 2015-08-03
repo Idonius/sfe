@@ -56,6 +56,9 @@ public class Bill implements Serializable {
     @Size(max = 255)
     @Column(name = "BILL_GUIDE_REMISSION")
     private String billGuideRemission;
+    @Size(max = 255)
+    @Column(name = "BILL_NUMBER")
+    private String billNumber;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "BIL_DISCOUNT")
     private Float bilDiscount;
@@ -161,8 +164,16 @@ public class Bill implements Serializable {
     public void setBillDetailList(List<BillDetail> billDetailList) {
         this.billDetailList = billDetailList;
     }
+    
+    public String getBillNumber() {
+		return billNumber;
+	}
 
-    @Override
+	public void setBillNumber(String billNumber) {
+		this.billNumber = billNumber;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (bilCode != null ? bilCode.hashCode() : 0);

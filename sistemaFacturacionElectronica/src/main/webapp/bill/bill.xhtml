@@ -22,7 +22,7 @@
 	        <h:form id="billForm" onkeypress="if (event.keyCode == 13) { document.getElementById('billForm:find').click(); return false; }">
 	            <p:panel header="Factura">
 	            	<p:fieldset legend="Emisor" toggleable="true" toggleSpeed="500">
-		            	<p:panelGrid columns="3" styleClass="noBorder transparentBackground"  style="width:100%;" >
+		            	<p:panelGrid id="infoCompany" columns="3" styleClass="noBorder transparentBackground"  style="width:100%;" >
 		           			<p:panelGrid columns="1" styleClass="noBorder transparentBackground" style="text-align:center; width:100%;" >
 		           				<p:graphicImage value="#{loginManager.active.useImage}" width="70px" height="70px"></p:graphicImage>
 		                    </p:panelGrid>
@@ -73,7 +73,7 @@
 		                	</p:panelGrid>
 		                </p:panelGrid>
 	                </p:fieldset>
-	                <p:fieldset legend="Detalle" toggleable="true" toggleSpeed="500">
+	                <p:fieldset id="detalle" legend="Detalle" toggleable="true" toggleSpeed="500">
 	                	<p:remoteCommand name="onCellEdit" update="billForm:billDetailLst, :growl" />
 	                	<p:dataTable id="billDetailLst" value="#{billerController.lstBillDetail}" var="item"
 		                             rowKey="#{item.proCode.proCode}"
@@ -86,6 +86,7 @@
 		                    <f:facet name="header">         
 		                        <h:panelGrid columns="2" styleClass="borderLess">
 		                            <p:commandButton id="addProducts" icon="fa fa-cart-plus fa-lg"   value="Añadir Productos" actionListener="#{billerController.openProductSearch()}" update=":productForm:searchBox, :productForm:productList"  style="float:left;" />
+		                            <p:commandButton id="saveProducts" icon="fa fa-save fa-lg"   value="Guardar" actionListener="#{billerController.saveBill()}" update="billDetailLst, billForm:info, :growl, billForm:infoCompany"  style="float:right;" />
 		                        </h:panelGrid>  
 		                    </f:facet>
 		

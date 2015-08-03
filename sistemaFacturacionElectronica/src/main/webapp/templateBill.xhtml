@@ -22,7 +22,11 @@
                 <ui:insert name="body"/>
                 <h:form id="dock">
                 	<p:dock position="bottom">
-					    <p:menuitem value="Home"  action="/admin/index?faces-redirect=true"/>
+					    <p:menuitem value="Inicio" style="color:black;" icon="/resources/images/layer/home.png"  action="/admin/index?faces-redirect=true" />
+					    <p:menuitem value="Administracion" style="color:black;" icon="/resources/images/layer/admin.png"  action="/admin/user/List?faces-redirect=true"/>
+					    <p:menuitem value="Productos" style="color:black;" icon="/resources/images/layer/product.png"  action="/admin/product/List?faces-redirect=true"/>
+					    <p:menuitem value="Clientes" style="color:black;" icon="/resources/images/layer/client.png"  action="/admin/client/List?faces-redirect=true"/>
+					    <p:menuitem value="Facturas" style="color:black;" icon="/resources/images/layer/bill.png"  action="/bill/bill?faces-redirect=true"/>
 					</p:dock>	
                 </h:form>
             </p:layoutUnit>
