@@ -48,6 +48,8 @@ public class BillDetail implements Serializable {
     @ManyToOne(optional = false)
     private Product proCode;
     private transient Float total;
+    @Column(name = "BIL_DET_DISCOUNT")
+    private Float discount;
     
     public BillDetail() {
     }
@@ -95,6 +97,14 @@ public class BillDetail implements Serializable {
 
 	public void setTotal(Float total) {
 		this.total = total;
+	}
+
+	public Float getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Float discount) {
+		this.discount = discount;
 	}
 
 	@Override

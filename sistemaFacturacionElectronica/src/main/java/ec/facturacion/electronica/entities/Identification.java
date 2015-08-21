@@ -47,6 +47,9 @@ public class Identification implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "IDE_DESCRIPTION")
     private String ideDescription;
+    @Size(min = 1, max = 49)
+    @Column(name = "IDE_CODE_EXT")
+    private String ideCodeExt;
     @Column(name = "IDE_ENABLED")
     private Boolean ideEnabled;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ideCode")
@@ -97,7 +100,15 @@ public class Identification implements Serializable {
         this.clientList = clientList;
     }
 
-    @Override
+    public String getIdeCodeExt() {
+		return ideCodeExt;
+	}
+
+	public void setIdeCodeExt(String ideCodeExt) {
+		this.ideCodeExt = ideCodeExt;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (ideCode != null ? ideCode.hashCode() : 0);

@@ -1,7 +1,12 @@
 package ec.facturacion.electronica.controllers;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +16,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import org.jdom.Attribute;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.output.Format;
+import org.jdom.output.XMLOutputter;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.CellEditEvent;
 
@@ -52,6 +62,8 @@ public class BillerController implements Serializable {
 	private List<Product> lstSelectedProducts = new ArrayList<Product>();
 	private List<BillDetail> lstBillDetail = new ArrayList<BillDetail>();
 	private Float total  = 0F;
+	private Date dateNow;
+	private String claveAccceso;
 
 	public BillerController() {
 	}
@@ -69,6 +81,12 @@ public class BillerController implements Serializable {
 		lstSelectedProducts = new ArrayList<Product>();
 		lstBillDetail = new ArrayList<BillDetail>();
 		total = 0F;
+		DateFormat df = new SimpleDateFormat("ddMMyyyy");
+		Date today = Calendar.getInstance().getTime();        
+		String reportDate = df.format(today);
+
+		claveAccceso = reportDate+"01"+active.getUseRuc()+"1"+String.format("%03d", Integer.valueOf(active.getUseLocalCode()))+String.format("%03d", Integer.valueOf(active.getUseEmissionPoint()))+String.format("%09d", showBillNumber())+String.format("%08d", ejbBillFacade.count())+"1";
+		claveAccceso = claveAccceso + JsfUtil.obtenerSumaPorDigitos(JsfUtil.invertirCadena(claveAccceso));
 	}
 	
 	public void update(){
@@ -89,7 +107,9 @@ public class BillerController implements Serializable {
 	public void saveBill(){
 		if(lstBillDetail != null && !lstBillDetail.isEmpty()){
 			bill.setBilTotal(total);
-			bill.setBillNumber(active.getUseLocalCode()+"-"+active.getUseEmissionPoint()+"-"+ String.format("%06d", showBillNumber()));			
+			bill.setBillNumber(String.format("%09d", showBillNumber()));		
+			updateClaveAcceso();
+			bill.setAccessKey(claveAccceso);
 			try {
 				ejbBillFacade.persist(bill);
 				for(BillDetail billDetail: lstBillDetail){
@@ -191,7 +211,70 @@ public class BillerController implements Serializable {
 		}
 		
 	}
+	
+	public void updateClaveAcceso(){
+		DateFormat df = new SimpleDateFormat("ddMMyyyy");
+		Date today = bill.getBilDate();
+		String reportDate = df.format(today);
+		claveAccceso = "";
+		claveAccceso = reportDate+"01"+active.getUseRuc()+"1"+String.format("%03d", Integer.valueOf(active.getUseLocalCode()))+String.format("%03d", Integer.valueOf(active.getUseEmissionPoint()))+String.format("%09d", showBillNumber())+String.format("%08d", ejbBillFacade.count())+"1";
+		claveAccceso = claveAccceso + JsfUtil.obtenerSumaPorDigitos(JsfUtil.invertirCadena(claveAccceso));
+	}
 
+	public void generateXml(Bill bill){
+		try {
+			Element factura = new Element("factura");
+			factura.setAttribute(new Attribute("id", "comprobante"));
+			factura.setAttribute(new Attribute("version", "1.1.0"));
+			Document doc = new Document(factura);
+			doc.setRootElement(factura);
+
+			Element infoTributaria = new Element("infoTributaria");
+			infoTributaria.addContent(new Element("ambiente").setText("1"));
+			infoTributaria.addContent(new Element("tipoEmision").setText("1"));
+			infoTributaria.addContent(new Element("razonSocial").setText(bill.getUseCode().getUseFirstName()+ " "+bill.getUseCode().getUseLastName()));
+			infoTributaria.addContent(new Element("nombreComercial").setText(bill.getUseCode().getUseComName()));
+			infoTributaria.addContent(new Element("ruc").setText(bill.getUseCode().getUseRuc()));
+			infoTributaria.addContent(new Element("claveAcceso").setText(bill.getAccessKey()));
+			infoTributaria.addContent(new Element("codDoc").setText("01"));
+			infoTributaria.addContent(new Element("estab").setText(String.format("%03d", Integer.valueOf(bill.getUseCode().getUseEmissionPoint()))));
+			infoTributaria.addContent(new Element("ptoEmi").setText(String.format("%03d", Integer.valueOf(bill.getUseCode().getUseLocalCode()))));
+			infoTributaria.addContent(new Element("secuencial").setText(bill.getBillNumber()));
+			infoTributaria.addContent(new Element("dirMatriz").setText(bill.getUseCode().getUsePrincipalAddr()));
+			doc.getRootElement().addContent(infoTributaria);
+
+			Element infoFactura = new Element("infoFactura");
+			DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+			String reportDate = df.format(bill.getBilDate());
+			infoFactura.addContent(new Element("fechaEmision").setText(reportDate));
+			infoFactura.addContent(new Element("dirEstablecimiento").setText(bill.getUseCode().getUseLocalAddr()));
+			if(bill.getUseCode().getUseResolution() != null && !bill.getUseCode().getUseResolution().isEmpty()){
+				infoFactura.addContent(new Element("contribuyenteEspecial").setText(bill.getUseCode().getUseResolution()));
+			}
+			if(bill.getUseCode().getUseAccounting()){
+				infoFactura.addContent(new Element("obligadoContabilidad").setText("SI"));
+			}else{
+				infoFactura.addContent(new Element("obligadoContabilidad").setText("NO"));
+			}
+			infoFactura.addContent(new Element("tipoIdentificacionComprador").setText(bill.getCliCode().getIdeCode().getIdeCodeExt()));
+			infoFactura.addContent(new Element("razonSocialComprador").setText(bill.getCliCode().getCliSocialReason()));
+			infoFactura.addContent(new Element("identificacionComprador").setText(bill.getCliCode().getCliId()));
+			infoFactura.addContent(new Element("totalSinImpuestos").setText(bill.getBilTotal().toString()));
+			doc.getRootElement().addContent(infoFactura);
+
+			// new XMLOutputter().output(doc, System.out);
+			XMLOutputter xmlOutput = new XMLOutputter();
+
+			// display nice nice
+			xmlOutput.setFormat(Format.getPrettyFormat());
+			xmlOutput.output(doc, new FileWriter("//home//jairo//Documentos//file.xml"));
+
+			System.out.println("File Saved!");
+		  } catch (IOException io) {
+			System.out.println(io.getMessage());
+		  }
+	}
+	
 	public Bill getBill() {
 		return bill;
 	}
@@ -270,6 +353,23 @@ public class BillerController implements Serializable {
 
 	public void setTotal(Float total) {
 		this.total = total;
+	}
+
+	public Date getDateNow() {
+		dateNow = new Date();
+		return dateNow;
+	}
+
+	public void setDateNow(Date dateNow) {
+		this.dateNow = dateNow;
+	}
+
+	public String getClaveAccceso() {
+		return claveAccceso;
+	}
+
+	public void setClaveAccceso(String claveAccceso) {
+		this.claveAccceso = claveAccceso;
 	}
 	
 	

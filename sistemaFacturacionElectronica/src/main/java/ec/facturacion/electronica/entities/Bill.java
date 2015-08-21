@@ -76,6 +76,12 @@ public class Bill implements Serializable {
     private User useCode;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bilCode")
     private List<BillDetail> billDetailList;
+    @Size(max = 49)
+    @Column(name = "BILL_ACCESS_KEY")
+    private String accessKey;
+    @Size(max = 255)
+    @Column(name = "BILL_XML")
+    private String xml;
 
     public Bill() {
     }
@@ -197,5 +203,21 @@ public class Bill implements Serializable {
     public String toString() {
         return "ec.facturacion.electronica.entities.Bill[ bilCode=" + bilCode + " ]";
     }
+
+	public String getAccessKey() {
+		return accessKey;
+	}
+
+	public void setAccessKey(String accessKey) {
+		this.accessKey = accessKey;
+	}
+
+	public String getXml() {
+		return xml;
+	}
+
+	public void setXml(String xml) {
+		this.xml = xml;
+	}
     
 }

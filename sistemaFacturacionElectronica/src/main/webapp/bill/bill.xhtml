@@ -31,13 +31,14 @@
 		                        <p:separator />
 		                        <p:outputLabel value="#{loginManager.active.useFirstName} #{loginManager.active.useLastName}"/>
 		                    </p:panelGrid>
-		                    <p:panelGrid columns="1" styleClass="noBorder transparentBackground" style="text-align:center; width:100%;" >
+		                    <p:panelGrid id="numberBill" columns="1" styleClass="noBorder transparentBackground" style="text-align:center; width:100%;" >
 		                    	<p:panelGrid columns="1" styleClass="noBorder transparentBackground" style="text-align:center; width:100%;" >
 		                    		<h:outputText value="R.U.C #{loginManager.active.useRuc}" />
 		                    		<h:outputText value="FACTURA #{loginManager.active.useLocalCode}-#{loginManager.active.useEmissionPoint}" />
 		                    		<h:outputText value="#{billerController.showBillNumber()}" style="font-size: 20px; color:red;" >
-		                    			<f:convertNumber pattern="0000000"/>
+		                    			<f:convertNumber pattern="000000000"/>
 		                    		</h:outputText>
+		                    		<h:outputText value="Clave de Acceso: #{billerController.claveAccceso}" />
 		                    	</p:panelGrid>
 		                    </p:panelGrid>
 		                </p:panelGrid>
@@ -66,7 +67,9 @@
 		                	</p:panelGrid>
 		                	<p:panelGrid columns="2" styleClass="noBorder transparentBackground" style="width:10%;" >
 		                		<h:outputText value="Fecha:"  style="font-weight: bold;"/>
-        						<p:calendar id="mask" value="#{billerController.bill.bilDate}" pattern="dd-MM-yyyy" mask="true" locale="es"/>
+        						<p:calendar id="mask" value="#{billerController.bill.bilDate}" pattern="dd-MM-yyyy" mask="true" locale="es" maxdate="#{billerController.dateNow}">
+	        						<p:ajax event="dateSelect" listener="#{billerController.updateClaveAcceso}" update="numberBill" />
+						        </p:calendar>
 		                	</p:panelGrid>
 		                	<p:panelGrid columns="1" styleClass="noBorder transparentBackground" rendered="#{billerController.bill.cliCode != null}" style="width:20%;" >
 						      	<p:commandButton actionListener="#{billerController.editClient}" value="Editar Cliente" id="find" update=":ClientEditForm:display" icon="fa fa-pencil fa-lg"/>
