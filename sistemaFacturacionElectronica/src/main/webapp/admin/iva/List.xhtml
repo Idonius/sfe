@@ -37,11 +37,11 @@
                         </f:facet>
                         #{row+1}
                     </p:column>
-                    <p:column filterBy="#{item.ivaValue}" sortBy="#{item.ivaValue}" filterMatchMode="contains">
+                    <p:column filterBy="#{item.ivaDescription}" sortBy="#{item.ivaDescription}" filterMatchMode="contains">
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListIvaTitle_ivaValue}"/>
                         </f:facet>
-                        <h:outputText value="#{item.ivaValue}"/>
+                        <h:outputText value="#{item.ivaDescription}"/>
                     </p:column>
                     <p:column style="text-align:center;" sortBy="#{item.ivaEnabled}">
                         <f:facet name="header">

@@ -1,6 +1,8 @@
 package ec.facturacion.electronica.controllers.util;
 
+import java.math.BigDecimal;
 import java.util.List;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -92,6 +94,20 @@ public class JsfUtil {
             cantidadTotal += temporal;
         }
         cantidadTotal = 11 - cantidadTotal % 11;
+        switch (cantidadTotal) {
+        case 10:
+        	cantidadTotal = 1;
+        	break;
+        case 11:
+        	cantidadTotal = 0;
+        	break;
+        }
         return cantidadTotal;
+    }
+    
+    public static float round(float d, int decimalPlace) {
+        BigDecimal bd = new BigDecimal(Float.toString(d));
+        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
+        return bd.floatValue();
     }
 }

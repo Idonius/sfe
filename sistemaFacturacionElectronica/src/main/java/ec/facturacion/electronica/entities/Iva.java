@@ -45,6 +45,12 @@ public class Iva implements Serializable {
     @NotNull
     @Column(name = "IVA_VALUE")
     private float ivaValue;
+    @Column(name = "IVA_DESCRIPTION")
+    private String ivaDescription;
+    @Column(name = "IVA_CODE_INT")
+    private int ivaCodeInt;
+    @Column(name = "IVA_CODE_TYPE")
+    private int ivaCodeType;
     @Column(name = "IVA_ENABLED")
     private Boolean ivaEnabled;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ivaCode")
@@ -95,7 +101,31 @@ public class Iva implements Serializable {
         this.productList = productList;
     }
 
-    @Override
+    public String getIvaDescription() {
+		return ivaDescription;
+	}
+
+	public void setIvaDescription(String ivaDescription) {
+		this.ivaDescription = ivaDescription;
+	}
+
+	public int getIvaCodeInt() {
+		return ivaCodeInt;
+	}
+
+	public void setIvaCodeInt(int ivaCodeInt) {
+		this.ivaCodeInt = ivaCodeInt;
+	}
+
+	public int getIvaCodeType() {
+		return ivaCodeType;
+	}
+
+	public void setIvaCodeType(int ivaCodeType) {
+		this.ivaCodeType = ivaCodeType;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (ivaCode != null ? ivaCode.hashCode() : 0);

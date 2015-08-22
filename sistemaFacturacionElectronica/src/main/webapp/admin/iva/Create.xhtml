@@ -14,6 +14,8 @@
                     <p:panelGrid columns="2" rendered="#{ivaController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateIvaLabel_ivaValue}" for="ivaValue" />
                         <p:inputText id="ivaValue" value="#{ivaController.selected.ivaValue}" title="#{bundle.CreateIvaTitle_ivaValue}" required="true" requiredMessage="#{bundle.CreateIvaRequiredMessage_ivaValue}"/>
+                        <p:outputLabel value="Descripcion" for="ivaDesc" />
+                        <p:inputText id="ivaDesc" value="#{ivaController.selected.ivaDescription}" title="Descripcion" required="true" requiredMessage="El campo Descripcion es requerido"/>
                         <p:outputLabel value="#{bundle.CreateIvaLabel_ivaEnabled}" for="ivaEnabled" />
                         <p:selectBooleanCheckbox id="ivaEnabled" value="#{ivaController.selected.ivaEnabled}" />
                     </p:panelGrid>

@@ -82,6 +82,10 @@ public class Bill implements Serializable {
     @Size(max = 255)
     @Column(name = "BILL_XML")
     private String xml;
+    @Column(name = "BILL_IVA")
+    private Float bilIva;
+    @Column(name = "BILL_TOTAL_FINAL")
+    private Float bilTotalFinal;
 
     public Bill() {
     }
@@ -218,6 +222,22 @@ public class Bill implements Serializable {
 
 	public void setXml(String xml) {
 		this.xml = xml;
+	}
+
+	public Float getBilIva() {
+		return bilIva;
+	}
+
+	public void setBilIva(Float bilIva) {
+		this.bilIva = bilIva;
+	}
+
+	public Float getBilTotalFinal() {
+		return bilTotalFinal;
+	}
+
+	public void setBilTotalFinal(Float bilTotalFinal) {
+		this.bilTotalFinal = bilTotalFinal;
 	}
     
 }

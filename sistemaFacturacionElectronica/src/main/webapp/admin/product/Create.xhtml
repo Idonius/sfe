@@ -40,21 +40,20 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateProductLabel_iceCode}" for="iceCode" />
                         <p:selectOneMenu id="iceCode" value="#{productController.selected.iceCode}" >
-                        	<f:selectItem itemLabel="0"/>
+                        	<f:selectItem itemLabel="No aplica"/>
                             <f:selectItems value="#{iceController.itemsAvailableSelectOne}"
                                            var="iceCodeItem"
                                            itemValue="#{iceCodeItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateProductLabel_ivaCode}" for="ivaCode" />
                         <p:selectOneMenu id="ivaCode" value="#{productController.selected.ivaCode}" >
-                        	<f:selectItem itemLabel="0"/>
                             <f:selectItems value="#{ivaController.itemsAvailableSelectOne}"
                                            var="ivaCodeItem"
                                            itemValue="#{ivaCodeItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateProductLabel_irbCode}" for="irbCode" />
                         <p:selectOneMenu id="irbCode" value="#{productController.selected.irbCode}" >
-                        	<f:selectItem itemLabel="0"/>
+                        	<f:selectItem itemLabel="No aplica"/>
                             <f:selectItems value="#{irbpnrController.itemsAvailableSelectOne}"
                                            var="irbCodeItem"
                                            itemValue="#{irbCodeItem}"/>

@@ -16,6 +16,8 @@
                         <p:inputText id="ivaCode" value="#{ivaController.selected.ivaCode}" title="#{bundle.EditIvaTitle_ivaCode}" required="true" requiredMessage="#{bundle.EditIvaRequiredMessage_ivaCode}" disabled="true"/>
                         <p:outputLabel value="#{bundle.EditIvaLabel_ivaValue}" for="ivaValue" />
                         <p:inputText id="ivaValue" value="#{ivaController.selected.ivaValue}" title="#{bundle.EditIvaTitle_ivaValue}" required="true" requiredMessage="#{bundle.EditIvaRequiredMessage_ivaValue}"/>
+                        <p:outputLabel value="Descripcion" for="ivaDesc" />
+                        <p:inputText id="ivaDesc" value="#{ivaController.selected.ivaDescription}" title="Descripcion" required="true" requiredMessage="El campo Descripcion es requerido"/>
                         <p:outputLabel value="#{bundle.EditIvaLabel_ivaEnabled}" for="ivaEnabled" />
                         <p:selectBooleanCheckbox id="ivaEnabled" value="#{ivaController.selected.ivaEnabled}" />
                     </p:panelGrid>

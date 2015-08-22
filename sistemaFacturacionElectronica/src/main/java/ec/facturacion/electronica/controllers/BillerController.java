@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -64,8 +65,33 @@ public class BillerController implements Serializable {
 	private Float total  = 0F;
 	private Date dateNow;
 	private String claveAccceso;
+	DecimalFormat df = new DecimalFormat("#.##");
 
 	public BillerController() {
+	}
+	
+	public void createTip(){
+		if(bill.getBilTip()){
+			bill.setBilTipValue(JsfUtil.round((total*0.10F), 2));
+		}else{
+			bill.setBilTipValue(0F);
+		}
+		total = 0F;
+        bill.setBilDiscount(0F);
+        Float total12 = 0F;
+        for(BillDetail bill: lstBillDetail){
+        	total += bill.getTotal();
+        	this.bill.setBilDiscount(this.bill.getBilDiscount()+bill.getDiscount());
+        	if(bill.getProCode().getIvaCode().getIvaCodeType()==2){
+        		total12 += bill.getTotal();
+        	}
+        }
+        bill.setBilIva(JsfUtil.round(total12*0.12F, 2));
+        if(bill.getBilTip() != null && bill.getBilTip()){
+        	bill.setBilTotalFinal(JsfUtil.round(total+bill.getBilIva()+bill.getBilTipValue(), 2));
+        }else{
+        	bill.setBilTotalFinal(JsfUtil.round(total+bill.getBilIva(),2));
+        }
 	}
 	
 	public void init(User user){
@@ -115,6 +141,8 @@ public class BillerController implements Serializable {
 				for(BillDetail billDetail: lstBillDetail){
 					ejbDBillDetailFacace.persist(billDetail);
 				}
+				bill.setBillDetailList(lstBillDetail);
+				generateXml(bill);
 				JsfUtil.addSuccessMessage("La Factura: " + bill.getBillNumber() + " fue guardada correctamente.");
 				init(bill.getUseCode());
 			} catch (Exception e) {
@@ -176,12 +204,23 @@ public class BillerController implements Serializable {
         Object oldValue = event.getOldValue();
         Object newValue = event.getNewValue();
         
-        lstBillDetail.get(event.getRowIndex()).setTotal(lstBillDetail.get(event.getRowIndex()).getProCode().getProValue() * (Float) newValue);
+        lstBillDetail.get(event.getRowIndex()).setTotal((lstBillDetail.get(event.getRowIndex()).getProCode().getProValue() * lstBillDetail.get(event.getRowIndex()).getBilDetCant())-lstBillDetail.get(event.getRowIndex()).getDiscount());
         total = 0F;
+        bill.setBilDiscount(0F);
+        Float total12 = 0F;
         for(BillDetail bill: lstBillDetail){
         	total += bill.getTotal();
+        	this.bill.setBilDiscount(this.bill.getBilDiscount()+bill.getDiscount());
+        	if(bill.getProCode().getIvaCode().getIvaCodeType()==2){
+        		total12 += bill.getTotal();
+        	}
         }
-         
+        bill.setBilIva(JsfUtil.round(total12*0.12F, 2));
+        if(bill.getBilTip() != null && bill.getBilTip()){
+        	bill.setBilTotalFinal(total+bill.getBilIva()+bill.getBilTipValue());
+        }else{
+        	bill.setBilTotalFinal(total+bill.getBilIva());
+        }
         if(newValue != null && !newValue.equals(oldValue)) {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
             FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -196,13 +235,25 @@ public class BillerController implements Serializable {
 					billDetail.setBilCode(bill);
 					billDetail.setProCode(prod);
 					billDetail.setBilDetCant(1F);
+					billDetail.setDiscount(0F);
 					billDetail.setTotal(billDetail.getProCode().getProValue());
 					lstBillDetail.add(billDetail);
 				}
 				total = 0F;
+				Float total12 = 0F;
 		        for(BillDetail bill: lstBillDetail){
 		        	total += bill.getTotal();
+		        	if(bill.getProCode().getIvaCode().getIvaCodeType()==2){
+		        		total12 += bill.getTotal();
+		        	}
 		        }
+		        bill.setBilIva(JsfUtil.round(total12*0.12F, 2));
+		        if(bill.getBilTip() != null && bill.getBilTip()){
+		        	bill.setBilTotalFinal(total+bill.getBilIva()+bill.getBilTipValue());
+		        }else{
+		        	bill.setBilTotalFinal(total+bill.getBilIva());
+		        }
+		        
 				RequestContext context = RequestContext.getCurrentInstance();
 				context.execute("PF('productDialog').hide();");
 			}
@@ -230,45 +281,122 @@ public class BillerController implements Serializable {
 			doc.setRootElement(factura);
 
 			Element infoTributaria = new Element("infoTributaria");
-			infoTributaria.addContent(new Element("ambiente").setText("1"));
-			infoTributaria.addContent(new Element("tipoEmision").setText("1"));
-			infoTributaria.addContent(new Element("razonSocial").setText(bill.getUseCode().getUseFirstName()+ " "+bill.getUseCode().getUseLastName()));
-			infoTributaria.addContent(new Element("nombreComercial").setText(bill.getUseCode().getUseComName()));
-			infoTributaria.addContent(new Element("ruc").setText(bill.getUseCode().getUseRuc()));
-			infoTributaria.addContent(new Element("claveAcceso").setText(bill.getAccessKey()));
-			infoTributaria.addContent(new Element("codDoc").setText("01"));
-			infoTributaria.addContent(new Element("estab").setText(String.format("%03d", Integer.valueOf(bill.getUseCode().getUseEmissionPoint()))));
-			infoTributaria.addContent(new Element("ptoEmi").setText(String.format("%03d", Integer.valueOf(bill.getUseCode().getUseLocalCode()))));
-			infoTributaria.addContent(new Element("secuencial").setText(bill.getBillNumber()));
-			infoTributaria.addContent(new Element("dirMatriz").setText(bill.getUseCode().getUsePrincipalAddr()));
+				infoTributaria.addContent(new Element("ambiente").setText("1"));
+				infoTributaria.addContent(new Element("tipoEmision").setText("1"));
+				infoTributaria.addContent(new Element("razonSocial").setText(bill.getUseCode().getUseFirstName()+ " "+bill.getUseCode().getUseLastName()));
+				infoTributaria.addContent(new Element("nombreComercial").setText(bill.getUseCode().getUseComName()));
+				infoTributaria.addContent(new Element("ruc").setText(bill.getUseCode().getUseRuc()));
+				infoTributaria.addContent(new Element("claveAcceso").setText(bill.getAccessKey()));
+				infoTributaria.addContent(new Element("codDoc").setText("01"));
+				infoTributaria.addContent(new Element("estab").setText(String.format("%03d", Integer.valueOf(bill.getUseCode().getUseEmissionPoint()))));
+				infoTributaria.addContent(new Element("ptoEmi").setText(String.format("%03d", Integer.valueOf(bill.getUseCode().getUseLocalCode()))));
+				infoTributaria.addContent(new Element("secuencial").setText(bill.getBillNumber()));
+				infoTributaria.addContent(new Element("dirMatriz").setText(bill.getUseCode().getUsePrincipalAddr()));
 			doc.getRootElement().addContent(infoTributaria);
 
 			Element infoFactura = new Element("infoFactura");
-			DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-			String reportDate = df.format(bill.getBilDate());
-			infoFactura.addContent(new Element("fechaEmision").setText(reportDate));
-			infoFactura.addContent(new Element("dirEstablecimiento").setText(bill.getUseCode().getUseLocalAddr()));
-			if(bill.getUseCode().getUseResolution() != null && !bill.getUseCode().getUseResolution().isEmpty()){
-				infoFactura.addContent(new Element("contribuyenteEspecial").setText(bill.getUseCode().getUseResolution()));
-			}
-			if(bill.getUseCode().getUseAccounting()){
-				infoFactura.addContent(new Element("obligadoContabilidad").setText("SI"));
-			}else{
-				infoFactura.addContent(new Element("obligadoContabilidad").setText("NO"));
-			}
-			infoFactura.addContent(new Element("tipoIdentificacionComprador").setText(bill.getCliCode().getIdeCode().getIdeCodeExt()));
-			infoFactura.addContent(new Element("razonSocialComprador").setText(bill.getCliCode().getCliSocialReason()));
-			infoFactura.addContent(new Element("identificacionComprador").setText(bill.getCliCode().getCliId()));
-			infoFactura.addContent(new Element("totalSinImpuestos").setText(bill.getBilTotal().toString()));
+				DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+				String reportDate = df.format(bill.getBilDate());
+				infoFactura.addContent(new Element("fechaEmision").setText(reportDate));
+				infoFactura.addContent(new Element("dirEstablecimiento").setText(bill.getUseCode().getUseLocalAddr()));
+				if(bill.getUseCode().getUseResolution() != null && !bill.getUseCode().getUseResolution().isEmpty()){
+					infoFactura.addContent(new Element("contribuyenteEspecial").setText(bill.getUseCode().getUseResolution()));
+				}
+				if(bill.getUseCode().getUseAccounting()){
+					infoFactura.addContent(new Element("obligadoContabilidad").setText("SI"));
+				}else{
+					infoFactura.addContent(new Element("obligadoContabilidad").setText("NO"));
+				}
+				infoFactura.addContent(new Element("tipoIdentificacionComprador").setText(bill.getCliCode().getIdeCode().getIdeCodeExt()));
+				infoFactura.addContent(new Element("razonSocialComprador").setText(bill.getCliCode().getCliSocialReason()));
+				infoFactura.addContent(new Element("identificacionComprador").setText(bill.getCliCode().getCliId()));
+				infoFactura.addContent(new Element("totalSinImpuestos").setText(bill.getBilTotal().toString()));
+				infoFactura.addContent(new Element("totalDescuento").setText(bill.getBilDiscount().toString()));
+				
+					Element totalConImpuestos = new Element("totalConImpuestos");
+					float total12 = 0;
+					float total0 = 0;
+					float totalNo = 0;
+					for(BillDetail billDet:bill.getBillDetailList()){
+						if(billDet.getProCode().getIvaCode().getIvaCodeType() == 0){
+							total0 += billDet.getTotal(); 
+						}else if(billDet.getProCode().getIvaCode().getIvaCodeType() == 2){
+							total12 += billDet.getTotal();
+						}else if(billDet.getProCode().getIvaCode().getIvaCodeType() == 6){
+							totalNo += billDet.getTotal();
+						}
+					}
+					if(total0 >0){
+						Element totalImpuesto = new Element("totalImpuesto");
+						totalImpuesto.addContent(new Element("codigo").setText("2"));
+						totalImpuesto.addContent(new Element("codigoPorcentaje").setText("0"));
+						totalImpuesto.addContent(new Element("baseImponible").setText(""+total0));
+						totalImpuesto.addContent(new Element("valor").setText("0.00"));
+						totalConImpuestos.addContent(totalImpuesto);
+					}
+					if(total12 >0){
+						Element totalImpuesto = new Element("totalImpuesto");
+						totalImpuesto.addContent(new Element("codigo").setText("2"));
+						totalImpuesto.addContent(new Element("codigoPorcentaje").setText("2"));
+						totalImpuesto.addContent(new Element("baseImponible").setText(""+total12));
+						totalImpuesto.addContent(new Element("valor").setText(""+total12*0.12));
+						totalConImpuestos.addContent(totalImpuesto);
+					}
+					if(totalNo >0){
+						Element totalImpuesto = new Element("totalImpuesto");
+						totalImpuesto.addContent(new Element("codigo").setText("2"));
+						totalImpuesto.addContent(new Element("codigoPorcentaje").setText("6"));
+						totalImpuesto.addContent(new Element("baseImponible").setText(""+totalNo));
+						totalImpuesto.addContent(new Element("valor").setText("0.00"));
+						totalConImpuestos.addContent(totalImpuesto);
+					}
+					infoFactura.addContent(totalConImpuestos);
+				if(bill.getBilTip() != null && bill.getBilTip())
+					infoFactura.addContent(new Element("propina").setText(bill.getBilTipValue().toString()));
+				else
+					infoFactura.addContent(new Element("propina").setText("0.00"));
+				infoFactura.addContent(new Element("importeTotal").setText(bill.getBilTotalFinal().toString()));
+				infoFactura.addContent(new Element("moneda").setText("DOLAR"));
+				
 			doc.getRootElement().addContent(infoFactura);
-
+			
+			Element detalles = new Element("detalles");
+				for(BillDetail billDetail:bill.getBillDetailList()){
+					Element detalle = new Element("detalle");
+					detalle.addContent(new Element("codigoPrincipal").setText(billDetail.getProCode().getProPrincipalCode()));
+					if(billDetail.getProCode().getProAuxCode() != null && !billDetail.getProCode().getProAuxCode().isEmpty()){
+						detalle.addContent(new Element("codigoAuxiliar").setText(billDetail.getProCode().getProAuxCode()));
+					}
+					detalle.addContent(new Element("descripcion").setText(billDetail.getProCode().getProName()));
+					detalle.addContent(new Element("cantidad").setText(billDetail.getBilDetCant().toString()));
+					detalle.addContent(new Element("precioUnitario").setText(""+billDetail.getProCode().getProValue()));
+					detalle.addContent(new Element("descuento").setText(billDetail.getDiscount().toString()));
+					detalle.addContent(new Element("precioTotalSinImpuesto").setText(""+((billDetail.getBilDetCant()*billDetail.getProCode().getProValue())-billDetail.getDiscount())));
+						Element impuestos = new Element("impuestos");
+							Element impuesto = new Element("impuesto");
+								impuesto.addContent(new Element("codigo").setText("2"));
+								impuesto.addContent(new Element("codigoPorcentaje").setText(""+billDetail.getProCode().getIvaCode().getIvaCodeType()));
+								if(billDetail.getProCode().getIvaCode().getIvaCodeInt() == 2){
+									impuesto.addContent(new Element("tarifa").setText("12.00"));
+								}else{
+									impuesto.addContent(new Element("tarifa").setText("0.00"));
+								}
+								impuesto.addContent(new Element("baseImponible").setText(""+JsfUtil.round(((billDetail.getBilDetCant()*billDetail.getProCode().getProValue())-billDetail.getDiscount()),2)));
+								impuesto.addContent(new Element("valor").setText(""+JsfUtil.round((billDetail.getProCode().getIvaCode().getIvaValue()*((billDetail.getBilDetCant()*billDetail.getProCode().getProValue())-billDetail.getDiscount())),2)));
+							impuestos.addContent(impuesto);
+						detalle.addContent(impuestos);
+					detalles.addContent(detalle);
+				}
+			doc.getRootElement().addContent(detalles);
+			
 			// new XMLOutputter().output(doc, System.out);
 			XMLOutputter xmlOutput = new XMLOutputter();
 
 			// display nice nice
 			xmlOutput.setFormat(Format.getPrettyFormat());
-			xmlOutput.output(doc, new FileWriter("//home//jairo//Documentos//file.xml"));
-
+			xmlOutput.output(doc, new FileWriter("//home//jairo//Documentos//facturas//"+bill.getAccessKey()+".xml"));
+			bill.setXml("//home//jairo//Documentos//facturas//"+bill.getAccessKey()+".xml");
+			ejbBillFacade.merge(bill);
 			System.out.println("File Saved!");
 		  } catch (IOException io) {
 			System.out.println(io.getMessage());
