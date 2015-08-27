@@ -69,7 +69,7 @@ public class Bill implements Serializable {
     @Column(name = "BIL_TOTAL")
     private Float bilTotal;
     @JoinColumn(name = "CLI_CODE", referencedColumnName = "CLI_CODE")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private Client cliCode;
     @JoinColumn(name = "USE_CODE", referencedColumnName = "USE_CODE")
     @ManyToOne(optional = false)
@@ -86,7 +86,9 @@ public class Bill implements Serializable {
     private Float bilIva;
     @Column(name = "BILL_TOTAL_FINAL")
     private Float bilTotalFinal;
-
+    @Column(name = "BILL_FINAL_CLIENT")
+    private Boolean bilFinalClient;
+    
     public Bill() {
     }
 
@@ -238,6 +240,14 @@ public class Bill implements Serializable {
 
 	public void setBilTotalFinal(Float bilTotalFinal) {
 		this.bilTotalFinal = bilTotalFinal;
+	}
+
+	public Boolean getBilFinalClient() {
+		return bilFinalClient;
+	}
+
+	public void setBilFinalClient(Boolean bilFinalClient) {
+		this.bilFinalClient = bilFinalClient;
 	}
     
 }

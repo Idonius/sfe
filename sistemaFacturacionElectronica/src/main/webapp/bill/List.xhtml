@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListRolTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="RolListForm">
+                <p:dataTable id="datalist" value="#{billListController.lstBill}" var="item"
+                             paginator="true"
+                             rowKey="#{item.bilCode}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             rowIndexVar="row"
+                             >
+
+                    <f:facet name="header">         
+                        <h:panelGrid columns="2" styleClass="borderLess">
+                            <h:outputLabel value="Lista de Facturas" style="float:left;" />
+                        </h:panelGrid>  
+                    </f:facet>
+                    <p:column style="text-align:center;">
+                        <f:facet name="header">
+                            <h:outputText value="Factura N:"/>
+                        </f:facet>
+                        <h:outputText value="#{item.useCode.useEmissionPoint}">
+                        	<f:convertNumber pattern="000"/>
+                        </h:outputText>
+                        -
+                        <h:outputText value="#{item.useCode.useLocalCode}">
+                        	<f:convertNumber pattern="000"/>
+                        </h:outputText>
+                        -
+                        <h:outputText value="#{item.billNumber}"/>
+                    </p:column>
+                    <p:column style="text-align:center;" sortBy="#{item.bilDate}" >
+                        <f:facet name="header">
+                            <h:outputText value="Fecha"/>
+                        </f:facet>
+                        <h:outputText value="#{item.bilDate}">
+                        	<f:convertDateTime pattern="dd/MM/YYYY"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align:center;" sortBy="#{item.bilDate}" >
+                        <f:facet name="header">
+                            <h:outputText value="Fecha"/>
+                        </f:facet>
+                        <h:outputText value="#{item.bilDate}">
+                        	<f:convertDateTime pattern="dd/MM/YYYY"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="text-align:center;">
+                        <f:facet name="header">
+                            <h:outputText value="Accion"/>
+                        </f:facet>
+                        <h:panelGrid columns="3" cellpadding="1" styleClass="actions">
+                            <p:commandButton id="editButton"   icon="fa fa-pencil fa-lg" value="Ver" update=":BillViewForm" oncomplete="PF('BillViewDialog').show()" >
+                                <f:setPropertyActionListener value="#{item}" target="#{billListController.bill}" />
+                            </p:commandButton>
+                        </h:panelGrid>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+            <p:dialog id="BillViewDlg" widgetVar="BillViewDialog" modal="true" resizable="false" appendTo="@(body)" header="Factura" height="300">
+	            <h:form id="BillViewForm">
+	            	<p:commandButton value="Print" type="button" icon="ui-icon-print" style="display:block;margin-bottom: 20px">
+					    <p:printer target="display" />
+					</p:commandButton>
+	                <h:panelGroup id="display">
+	                    <p:panelGrid columns="1" >
+		                    <p:panelGrid columns="2" style="width:100%;">
+		                    	<p:panelGrid columns="1" style="text-align:center; width:100%;">
+		                    		<p:graphicImage value="#{billListController.bill.useCode.useImage}" width="200px" height="200px"></p:graphicImage>
+		                    		<h:outputText value="#{billListController.bill.useCode.useComName}"  style="font-weight: bold;"/>
+		                    		<h:outputText value="#{billListController.bill.useCode.useFirstName} #{billListController.bill.useCode.useLastName}"  style="font-weight: bold;"/>
+		                    		<p:panelGrid columns="2" style="text-align:center; width:100%;">
+		                    			<h:outputText value="Dirección Matriz:"  style="font-weight: bold;"/>
+		                    			<h:outputText value="#{billListController.bill.useCode.usePrincipalAddr}" />
+		                    			<h:outputText value="Dirección Sucursal:"  style="font-weight: bold;"/>
+		                    			<h:outputText value="#{billListController.bill.useCode.useLocalAddr}" />
+		                    			<h:outputText value="Contribuyente Especial Nro:" style="font-weight: bold;" rendered="#{billListController.bill.useCode.useResolution !=null or empty billListController.bill.useCode.useResolution}"/>
+		                    			<h:outputText value="#{billListController.bill.useCode.useResolution}" rendered="#{billListController.bill.useCode.useResolution !=null or empty billListController.bill.useCode.useResolution}"/>
+		                    			<h:outputText value="Obligado a llevar contabilidad:"  style="font-weight: bold;"/>
+		                    			<h:outputText value="#{billListController.bill.useCode.useAccounting ? 'Si' : 'No'}" />
+		                    		</p:panelGrid>
+		                    	</p:panelGrid>
+		                    	<p:panelGrid columns="1" style="text-align:center; width:100%;" >
+		                    		<p:panelGrid columns="2" style="width:100%;">
+										<h:outputText value="R.U.C:" style="font-weight: bold;"/>
+										<h:outputText value="#{billListController.bill.cliCode.cliId}" />
+									</p:panelGrid>
+									<h:outputText value="FACTURA" style="font-weight: bold; width:100%;" />
+									<p:panelGrid columns="2" style="width:100%;">
+										<h:outputText value="No." style="font-weight: bold;"/>
+										<h:outputText value="#{billListController.bill.useCode.useEmissionPoint}-#{billListController.bill.useCode.useLocalCode}-#{billListController.bill.billNumber}" >
+											<f:convertNumber pattern="000-000-000000000"/>
+										</h:outputText>
+									</p:panelGrid>
+									<h:outputText value="NÚMERO DE AUTORIZACIÓN " style="font-weight: bold; text-align:center;"/>
+									<h:outputText value="#{billListController.bill.accessKey}" />
+									<p:panelGrid columns="2" style="width:100%;">
+										<h:outputText value="AMBIENTE: " style="font-weight: bold;"/>
+										<h:outputText value="PRUEBAS" />
+									</p:panelGrid>
+									<p:panelGrid columns="2" style="width:100%;">
+										<h:outputText value="EMISIÓN: " style="font-weight: bold;"/>
+										<h:outputText value="NORMAL" />
+									</p:panelGrid>
+									<h:outputText value="CLAVE DE ACCESO" style="font-weight: bold; text-align:center;"/>
+    								<p:barcode value="#{billListController.bill.accessKey}" type="qr"/>
+		                    	</p:panelGrid>
+		                    </p:panelGrid>
+		                    <p:panelGrid columns="4" style="width:100%">
+		                    	<h:outputText value="Razón Social/Nombres Apellidos:"  style="font-weight: bold;"/>
+		                    	<h:outputText value="#{billListController.bill.cliCode.cliSocialReason != null ? billListController.bill.cliCode.cliSocialReason : billListController.bill.cliCode.cliFirstName}" />
+		                    	<h:outputText value="Identificación:"  style="font-weight: bold;"/>
+		                    	<h:outputText value="#{billListController.bill.cliCode.cliId}" />
+		                    	<h:outputText value="Fecha Emisión:"  style="font-weight: bold;"/>
+		                    	<h:outputText value="#{billListController.bill.bilDate}" >
+		                    		<f:convertDateTime pattern="dd/MM/yyyy"/>
+		                    	</h:outputText>
+		                    	<p:spacer></p:spacer>
+		                    	<p:spacer></p:spacer>
+		                    </p:panelGrid>
+		                    <p:panelGrid columns="1" style="width:100%">
+		                    	<p:dataTable id="billDetailLst" value="#{billListController.bill.billDetailList}" var="item"
+				                             rowKey="#{item.proCode.proCode}"
+				                             rowIndexVar="row"
+				                             reflow="true"
+				                             style="width:850px;"
+				                             >
+									<p:column>
+					                	<f:facet name="header">
+									        <h:outputText value="Cod Principal"/>
+									    </f:facet>
+					                  	<h:outputText value="#{item.proCode.proPrincipalCode}" />
+							        </p:column>
+							        <p:column>
+					                	<f:facet name="header">
+									        <h:outputText value="Cod Auxiliar"/>
+									    </f:facet>
+					                  	<h:outputText value="#{item.proCode.proAuxCode}" />
+							        </p:column>
+				                    <p:column>
+					                	<f:facet name="header">
+									        <h:outputText value="Cantidad"/>
+									    </f:facet>
+					                  	<h:outputText value="#{item.bilDetCant}" />
+							        </p:column>
+				                    <p:column>
+				                        <f:facet name="header">
+				                            <h:outputText value="Descripción"/>
+				                        </f:facet>
+				                        <h:outputText value="#{item.proCode.proName}"/>
+				                    </p:column>
+				                    <p:column>
+				                        <f:facet name="header">
+				                            <h:outputText value="Detalle Adicional"/>
+				                        </f:facet>
+				                        <h:outputText value="#{item.proCode.proAttribute1}"/>
+				                    </p:column>
+				                    <p:column>
+				                        <f:facet name="header">
+				                            <h:outputText value="Detalle Adicional"/>
+				                        </f:facet>
+				                        <h:outputText value="#{item.proCode.proAttribute2}"/>
+				                    </p:column>
+				                    <p:column>
+				                        <f:facet name="header">
+				                            <h:outputText value="Detalle Adicional"/>
+				                        </f:facet>
+				                        <h:outputText value="#{item.proCode.proAttribute3}"/>
+				                    </p:column>
+				                    <p:column>
+				                        <f:facet name="header">
+				                            <h:outputText value="Precio Unitario"/>
+				                        </f:facet>
+				                        <h:outputText value="#{item.proCode.proValue}">
+				                			<f:convertNumber type="currency" currencySymbol="$" />
+				                		</h:outputText>
+				                    </p:column>
+				                    <p:column>
+				                        <f:facet name="header">
+				                            <h:outputText value="Descuento"/>
+				                        </f:facet>
+				                        <h:outputText value="#{item.discount}">
+				                			<f:convertNumber type="currency" currencySymbol="$" />
+				                		</h:outputText>
+				                    </p:column>
+				                    <p:column >
+				                        <f:facet name="header">
+				                            <h:outputText value="Precio Total"/>
+				                        </f:facet>
+				                        <h:outputText value="#{(item.proCode.proValue - item.discount)*item.bilDetCant}">
+				                			<f:convertNumber type="currency" currencySymbol="$" />
+				                		</h:outputText>
+				                    </p:column>
+				                    <p:columnGroup type="footer">
+							            <p:row>
+							            	<p:column colspan="7"  />
+							                <p:column colspan="2" style="text-align:right" footerText="Total sin impuestos:" />
+							                <p:column>
+							                	<f:facet name="footer">
+							                		<h:outputText value="#{billListController.bill.bilTotal}" >
+							                			<f:convertNumber type="currency" currencySymbol="$" />
+							                		</h:outputText>
+							                	</f:facet>
+							                </p:column>
+							            </p:row>
+							            <p:row>
+							            	<p:column colspan="6" style="text-align:Center" footerText="Información Adicional" />
+							            	<p:column colspan="1"/>
+							                <p:column colspan="2" style="text-align:right" footerText="Total descuento:" />
+							                <p:column>
+							                	<f:facet name="footer">
+							                		<h:outputText value="#{billListController.bill.bilDiscount}" >
+							                			<f:convertNumber type="currency" currencySymbol="$" />
+							                		</h:outputText>
+							                	</f:facet>
+							                </p:column>
+							            </p:row>
+							            <p:row>
+							            	<p:column colspan="2" style="text-align:right" footerText="Dirección:" />
+							            	<p:column colspan="4" style="text-align:center" footerText="#{billListController.bill.cliCode.cliAddr}" />
+							            	<p:column colspan="1"/>
+							                <p:column colspan="2" style="text-align:right" footerText="Iva 12%:" />
+							                <p:column>
+							                	<f:facet name="footer">
+							                		<h:outputText value="#{billListController.bill.bilIva}" >
+							                			<f:convertNumber type="currency" currencySymbol="$" />
+							                		</h:outputText>
+							                	</f:facet>
+							                </p:column>
+							            </p:row>
+							            <p:row>
+							            	<p:column colspan="2" style="text-align:right" footerText="Telefóno:" />
+							            	<p:column colspan="4" style="text-align:center" footerText="#{billListController.bill.cliCode.cliCellPhone}" />
+							            	<p:column colspan="1"/>
+							                <p:column colspan="2" style="text-align:right" >
+							               		<f:facet name="footer">
+							               			<h:outputText value="Propina 10%:" />
+							               			<p:spacer width="10px" height="1px"></p:spacer>
+							                		<p:selectBooleanCheckbox value="#{billListControllerController.bill.bilTip}" disabled="true"/>
+							                	</f:facet>
+							                </p:column>
+							                <p:column>
+							                	<f:facet name="footer">
+							                		<h:outputText value="#{billListController.bill.bilTipValue}" >
+							                			<f:convertNumber type="currency" currencySymbol="$" />
+							                		</h:outputText>
+							                	</f:facet>
+							                </p:column>
+							           	</p:row>
+							           	<p:row>
+							           		<p:column colspan="2" style="text-align:right" footerText="e-mail:" />
+							            	<p:column colspan="4" style="text-align:center" footerText="#{billListController.bill.cliCode.cliEmail}" />
+							            	<p:column colspan="1"/>
+						                	<p:column colspan="2" style="text-align:right" footerText="Total:" />
+						                	<p:column>
+							                	<f:facet name="footer">
+							                		<h:outputText value="#{billListController.bill.bilTotalFinal}" >
+							                			<f:convertNumber type="currency" currencySymbol="$" />
+							                		</h:outputText>
+							                	</f:facet>
+							                </p:column>
+							            </p:row>
+							        </p:columnGroup>
+				                </p:dataTable>
+		                    </p:panelGrid>
+	                    </p:panelGrid>
+	                </h:panelGroup>
+	            </h:form>
+	        </p:dialog>
+        </ui:define>
+    </ui:composition>
+</html>

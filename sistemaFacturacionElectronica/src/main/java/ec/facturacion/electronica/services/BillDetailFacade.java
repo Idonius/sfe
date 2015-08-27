@@ -9,6 +9,7 @@ import ec.facturacion.electronica.entities.Bill;
 import ec.facturacion.electronica.entities.BillDetail;
 import ec.facturacion.electronica.entities.Identification;
 import ec.facturacion.electronica.entities.Iva;
+import ec.facturacion.electronica.entities.User;
 
 import java.util.List;
 
@@ -33,5 +34,13 @@ public class BillDetailFacade extends AbstractFacade<BillDetail> {
     public BillDetailFacade() {
         super(BillDetail.class);
     }
+    
+    public List<BillDetail> findByBill(Bill bill){
+		try {
+			return findByParameters("from BillDetail b where b.bilCode.bilCode = ?1", bill.getBilCode());
+		} catch (Exception e) {
+			return null;
+		}
+	}
     
 }
