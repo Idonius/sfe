@@ -70,6 +70,20 @@ public class BillerController implements Serializable {
 	public BillerController() {
 	}
 	
+	public void checkFinalClient() {
+		if(bill.getBilFinalClient()){
+			bill.setCliCode(null);
+		}else{
+			if(bill.getCliCode() == null){
+				bill.setCliCode(new Client());
+			}
+		}
+		if(total > 200F){
+			bill.setBilFinalClient(new Boolean(false));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Se necesitan los datos del cliente para un consumo mayor a $200"));
+		}
+    }
+	
 	public void createTip(){
 		if(bill.getBilTip()){
 			bill.setBilTipValue(JsfUtil.round((total*0.10F), 2));
@@ -86,12 +100,16 @@ public class BillerController implements Serializable {
         		total12 += bill.getTotal();
         	}
         }
+        if(this.bill.getBilDiscount() == null){
+    		this.bill.setBilDiscount(0F);
+    	}
         bill.setBilIva(JsfUtil.round(total12*0.12F, 2));
         if(bill.getBilTip() != null && bill.getBilTip()){
         	bill.setBilTotalFinal(JsfUtil.round(total+bill.getBilIva()+bill.getBilTipValue(), 2));
         }else{
         	bill.setBilTotalFinal(JsfUtil.round(total+bill.getBilIva(),2));
         }
+        checkFinalClient();
 	}
 	
 	public void init(User user){
@@ -111,7 +129,7 @@ public class BillerController implements Serializable {
 		Date today = Calendar.getInstance().getTime();        
 		String reportDate = df.format(today);
 
-		claveAccceso = reportDate+"01"+active.getUseRuc()+"1"+String.format("%03d", Integer.valueOf(active.getUseLocalCode()))+String.format("%03d", Integer.valueOf(active.getUseEmissionPoint()))+String.format("%09d", showBillNumber())+String.format("%08d", ejbBillFacade.count())+"1";
+		claveAccceso = reportDate+"01"+active.getUseRuc()+"1"+String.format("%03d", Integer.valueOf(active.getUseLocalCode()))+String.format("%03d", Integer.valueOf(active.getUseEmissionPoint()))+String.format("%09d", showBillNumber())+String.format("%08d", 12345678)+"1";
 		claveAccceso = claveAccceso + JsfUtil.obtenerSumaPorDigitos(JsfUtil.invertirCadena(claveAccceso));
 	}
 	
@@ -131,7 +149,13 @@ public class BillerController implements Serializable {
 	}
 	
 	public void saveBill(){
-		if(lstBillDetail != null && !lstBillDetail.isEmpty()){
+		Boolean clienteFinal = false;
+		if(total > 200){
+			if(bill.getCliCode() == null){
+				clienteFinal = true;
+			}
+		}
+		if(lstBillDetail != null && !lstBillDetail.isEmpty() && !clienteFinal){
 			bill.setBilTotal(total);
 			bill.setBillNumber(String.format("%09d", showBillNumber()));		
 			updateClaveAcceso();
@@ -149,7 +173,14 @@ public class BillerController implements Serializable {
 				JsfUtil.addErrorMessage("La factura: " + bill.getBillNumber() + " no pudo ser guardada correctamente.");
 			}
 		}else{
-			JsfUtil.addSuccessMessage("Debe añadir un producto como minimo");
+			if(total > 200){
+				if(bill.getCliCode() == null){
+					JsfUtil.addErrorMessage("La factura no pudo ser guardada sin cliente por la compra mayor a $200 correctamente.");
+					checkFinalClient();
+				}
+			}else{
+				JsfUtil.addSuccessMessage("Debe añadir un producto como minimo");
+			}
 		}
 		
 	}
@@ -215,6 +246,9 @@ public class BillerController implements Serializable {
         		total12 += bill.getTotal();
         	}
         }
+        if(this.bill.getBilDiscount() == null){
+    		this.bill.setBilDiscount(0F);
+    	}
         bill.setBilIva(JsfUtil.round(total12*0.12F, 2));
         if(bill.getBilTip() != null && bill.getBilTip()){
         	bill.setBilTotalFinal(total+bill.getBilIva()+bill.getBilTipValue());
@@ -225,6 +259,7 @@ public class BillerController implements Serializable {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
+        checkFinalClient();
     }
 	
 	public void addProduct(){
@@ -239,10 +274,12 @@ public class BillerController implements Serializable {
 					billDetail.setTotal(billDetail.getProCode().getProValue());
 					lstBillDetail.add(billDetail);
 				}
+				bill.setBilDiscount(0F);
 				total = 0F;
 				Float total12 = 0F;
 		        for(BillDetail bill: lstBillDetail){
 		        	total += bill.getTotal();
+		        	this.bill.setBilDiscount(this.bill.getBilDiscount()+bill.getDiscount());
 		        	if(bill.getProCode().getIvaCode().getIvaCodeType()==2){
 		        		total12 += bill.getTotal();
 		        	}
@@ -253,9 +290,10 @@ public class BillerController implements Serializable {
 		        }else{
 		        	bill.setBilTotalFinal(total+bill.getBilIva());
 		        }
-		        
+		        checkFinalClient();
 				RequestContext context = RequestContext.getCurrentInstance();
 				context.execute("PF('productDialog').hide();");
+				
 			}
 		}catch(Exception ex){
 			JsfUtil.addErrorMessage(ex,"No se pudo asignar los productos seleccionados");
@@ -268,7 +306,7 @@ public class BillerController implements Serializable {
 		Date today = bill.getBilDate();
 		String reportDate = df.format(today);
 		claveAccceso = "";
-		claveAccceso = reportDate+"01"+active.getUseRuc()+"1"+String.format("%03d", Integer.valueOf(active.getUseLocalCode()))+String.format("%03d", Integer.valueOf(active.getUseEmissionPoint()))+String.format("%09d", showBillNumber())+String.format("%08d", ejbBillFacade.count())+"1";
+		claveAccceso = reportDate+"01"+active.getUseRuc()+"1"+String.format("%03d", Integer.valueOf(active.getUseLocalCode()))+String.format("%03d", Integer.valueOf(active.getUseEmissionPoint()))+String.format("%09d", showBillNumber())+String.format("%08d", 12345678)+"1";
 		claveAccceso = claveAccceso + JsfUtil.obtenerSumaPorDigitos(JsfUtil.invertirCadena(claveAccceso));
 	}
 
@@ -307,9 +345,15 @@ public class BillerController implements Serializable {
 				}else{
 					infoFactura.addContent(new Element("obligadoContabilidad").setText("NO"));
 				}
-				infoFactura.addContent(new Element("tipoIdentificacionComprador").setText(bill.getCliCode().getIdeCode().getIdeCodeExt()));
-				infoFactura.addContent(new Element("razonSocialComprador").setText(bill.getCliCode().getCliSocialReason()));
-				infoFactura.addContent(new Element("identificacionComprador").setText(bill.getCliCode().getCliId()));
+				if(bill.getBilFinalClient() == null || !bill.getBilFinalClient()){
+					infoFactura.addContent(new Element("tipoIdentificacionComprador").setText(bill.getCliCode().getIdeCode().getIdeCodeExt()));
+					infoFactura.addContent(new Element("razonSocialComprador").setText(bill.getCliCode().getCliSocialReason()));
+					infoFactura.addContent(new Element("identificacionCompradori").setText(bill.getCliCode().getCliId()));
+				}else{
+					infoFactura.addContent(new Element("tipoIdentificacionComprador").setText("07"));
+					infoFactura.addContent(new Element("razonSocialComprador").setText("CONSUMIDOR FINAL"));
+					infoFactura.addContent(new Element("identificacionCompradori").setText("9999999999999"));
+				}
 				infoFactura.addContent(new Element("totalSinImpuestos").setText(bill.getBilTotal().toString()));
 				infoFactura.addContent(new Element("totalDescuento").setText(bill.getBilDiscount().toString()));
 				

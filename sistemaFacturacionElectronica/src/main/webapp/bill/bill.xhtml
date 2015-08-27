@@ -46,21 +46,31 @@
 	                <p:fieldset legend="Cliente" toggleable="true" toggleSpeed="500">
 		                <p:panelGrid id="info"  columns="4" styleClass="noBorder transparentBackground"  style="width:100%;" >
 		                	<p:panelGrid columns="2" styleClass="noBorder transparentBackground" style="width:20%;" >
-		                		<h:outputText value="Id Cliente:" />
+		                		<h:outputText value="Consumidor Final:" rendered="#{billerController.total lt 200}"/>
+		                		<p:selectBooleanCheckbox value="#{billerController.bill.bilFinalClient}" rendered="#{billerController.total lt 200}">
+						            <p:ajax update=":growl, info"  listener="#{billerController.checkFinalClient}" />
+						        </p:selectBooleanCheckbox>
+		                		<h:outputText value="Id Cliente:" rendered="#{billerController.bill.bilFinalClient == null or !billerController.bill.bilFinalClient}"/>
 		                		<br />
-		                		<p:inputText id="save" value="#{billerController.idClient}" style="width:100px;">
+		                		<p:inputText id="save" value="#{billerController.idClient}" style="width:100px;" rendered="#{billerController.bill.bilFinalClient == null or !billerController.bill.bilFinalClient}">
 		     		           		<p:ajax event="blur" listener="#{billerController.findClient}" update=":ClientEditForm:display" /> 
 						      	</p:inputText> 
-						      	<p:commandButton actionListener="#{billerController.findClient}" id="edit" update=":ClientEditForm:display" icon="fa fa-search" title="Icon Only"  />
+						      	<p:commandButton actionListener="#{billerController.findClient}" id="edit" update=":ClientEditForm:display" icon="fa fa-search" title="Icon Only" rendered="#{billerController.bill.bilFinalClient == null or !billerController.bill.bilFinalClient}" />
 		                	</p:panelGrid>
-		                	<p:panelGrid columns="1" styleClass="noBorder transparentBackground" rendered="#{billerController.bill.cliCode != null}">
-		                		<p:panelGrid columns="4" styleClass="noBorder transparentBackground"  style="width:100%;" rendered="#{billerController.bill.cliCode != null}">
+		                	<p:panelGrid columns="1" styleClass="noBorder transparentBackground" rendered="#{billerController.bill.cliCode != null or (billerController.bill.cliCode == null and (billerController.bill.bilFinalClient != null and billerController.bill.bilFinalClient))}">
+		                		<p:panelGrid columns="4" styleClass="noBorder transparentBackground"  style="width:100%;" rendered="#{billerController.bill.cliCode == null and (billerController.bill.bilFinalClient != null and billerController.bill.bilFinalClient)}">
+			                		<h:outputText value="Nombre:" style="font-weight: bold;"/>
+			                		<h:outputText value="CONSUMIDOR FINAL"/>
+			                		<h:outputText value="CI / RUC:"  style="font-weight: bold;"/>
+			                		<h:outputText value="9999999999999"/>
+			                	</p:panelGrid>
+		                		<p:panelGrid columns="4" styleClass="noBorder transparentBackground"  style="width:100%;" rendered="#{billerController.bill.cliCode != null and (billerController.bill.bilFinalClient == null or !billerController.bill.bilFinalClient)}">
 			                		<h:outputText value="Nombre:" style="font-weight: bold;"/>
 			                		<h:outputText value="#{billerController.bill.cliCode.cliFirstName} #{billerController.bill.cliCode.cliLastName}"/>
 			                		<h:outputText value="CI / RUC:"  style="font-weight: bold;"/>
 			                		<h:outputText value="#{billerController.bill.cliCode.cliId}"/>
 			                	</p:panelGrid>
-			                	<p:panelGrid columns="4" styleClass="noBorder transparentBackground"  style="width:100%;" rendered="#{billerController.bill.cliCode != null}">
+			                	<p:panelGrid columns="4" styleClass="noBorder transparentBackground"  style="width:100%;" rendered="#{billerController.bill.cliCode != null and (billerController.bill.bilFinalClient == null or !billerController.bill.bilFinalClient)}">
 			                		<h:outputText value="Dirección:"  style="font-weight: bold;"/>
 			                		<h:outputText value="#{billerController.bill.cliCode.cliAddr}"/>
 			                	</p:panelGrid>
@@ -77,7 +87,7 @@
 		                </p:panelGrid>
 	                </p:fieldset>
 	                <p:fieldset id="detalle" legend="Detalle" toggleable="true" toggleSpeed="500">
-	                	<p:remoteCommand name="onCellEdit" update="billForm:billDetailLst, :growl" />
+	                	<p:remoteCommand name="onCellEdit" update="billForm:billDetailLst, :growl ,billForm:info" />
 	                	<p:dataTable id="billDetailLst" value="#{billerController.lstBillDetail}" var="item"
 		                             rowKey="#{item.proCode.proCode}"
 		                             rowIndexVar="row"
