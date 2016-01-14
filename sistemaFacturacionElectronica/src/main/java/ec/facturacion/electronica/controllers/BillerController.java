@@ -167,6 +167,8 @@ public class BillerController implements Serializable {
 				}
 				bill.setBillDetailList(lstBillDetail);
 				generateXml(bill);
+//				EnvelopedSignature signature = new EnvelopedSignature("//home//jairo//Documentos//Firma//marcelo_xavier_arroyo_arguello.p12", "hEllo6482", "//home//jairo//Documentos//XMLFirmados", bill.getXml(), bill.getAccessKey()+".xml");
+//				signature.execute();
 				JsfUtil.addSuccessMessage("La Factura: " + bill.getBillNumber() + " fue guardada correctamente.");
 				init(bill.getUseCode());
 			} catch (Exception e) {
@@ -438,8 +440,8 @@ public class BillerController implements Serializable {
 
 			// display nice nice
 			xmlOutput.setFormat(Format.getPrettyFormat());
-			xmlOutput.output(doc, new FileWriter("//home//jairo//Documentos//facturas//"+bill.getAccessKey()+".xml"));
-			bill.setXml("//home//jairo//Documentos//facturas//"+bill.getAccessKey()+".xml");
+			xmlOutput.output(doc, new FileWriter("//home//jairo//Documentos//XMLGenerados//"+bill.getAccessKey()+".xml"));
+			bill.setXml("//home//jairo//Documentos//XMLGenerados//"+bill.getAccessKey()+".xml");
 			ejbBillFacade.merge(bill);
 			System.out.println("File Saved!");
 		  } catch (IOException io) {
