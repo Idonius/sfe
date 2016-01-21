@@ -35,6 +35,7 @@ import ec.facturacion.electronica.services.BillDetailFacade;
 import ec.facturacion.electronica.services.BillFacade;
 import ec.facturacion.electronica.services.ClientFacade;
 import ec.facturacion.electronica.services.ProductFacade;
+import firmado.EnvelopedSignature;
 
 @ManagedBean(name = "billerController")
 @SessionScoped
@@ -167,8 +168,8 @@ public class BillerController implements Serializable {
 				}
 				bill.setBillDetailList(lstBillDetail);
 				generateXml(bill);
-//				EnvelopedSignature signature = new EnvelopedSignature("//home//jairo//Documentos//Firma//marcelo_xavier_arroyo_arguello.p12", "hEllo6482", "//home//jairo//Documentos//XMLFirmados", bill.getXml(), bill.getAccessKey()+".xml");
-//				signature.execute();
+				EnvelopedSignature signature = new EnvelopedSignature("//home//jairo//Documentos//Firma//marcelo_xavier_arroyo_arguello.p12", "hEllo6482", "//home//jairo//Documentos//XMLFirmados//", bill.getXml(), bill.getAccessKey()+".xml");
+				signature.execute();
 				JsfUtil.addSuccessMessage("La Factura: " + bill.getBillNumber() + " fue guardada correctamente.");
 				init(bill.getUseCode());
 			} catch (Exception e) {

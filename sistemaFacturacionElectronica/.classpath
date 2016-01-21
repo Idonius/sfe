@@ -28,15 +28,5 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/jairo/Documentos/componentes-1.1.7/core/xmlsec-1.4.2-ADSI-1.1.jar"/>
-	<classpathentry kind="lib" path="/home/jairo/Documentos/componentes-1.1.7/core/MITyCLibXADES-1.1.7.jar"/>
-	<classpathentry kind="lib" path="/home/jairo/Documentos/componentes-1.1.7/core/MITyCLibTSA-1.1.7.jar"/>
-	<classpathentry kind="lib" path="/home/jairo/Documentos/componentes-1.1.7/core/MITyCLibTrust-1.1.7.jar"/>
-	<classpathentry kind="lib" path="/home/jairo/Documentos/componentes-1.1.7/core/MITyCLibPolicy-1.1.7.jar"/>
-	<classpathentry kind="lib" path="/home/jairo/Documentos/componentes-1.1.7/core/MITyCLibOCSP-1.1.7.jar"/>
-	<classpathentry kind="lib" path="/home/jairo/Documentos/componentes-1.1.7/core/MITyCLibCrypt-1.1.7.jar"/>
-	<classpathentry kind="lib" path="/home/jairo/Documentos/componentes-1.1.7/core/MITyCLibCert-1.1.7.jar"/>
-	<classpathentry kind="lib" path="/home/jairo/Documentos/componentes-1.1.7/core/MITyCLibAPI-1.1.7.jar"/>
-	<classpathentry kind="lib" path="/home/jairo/Descargas/componentes-1.1.7/deps/xalan-2.7.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

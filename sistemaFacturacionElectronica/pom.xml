@@ -242,6 +242,14 @@
 		    <artifactId>barcode4j-light</artifactId>
 		    <version>2.1</version>
 		</dependency>
+		
+        <dependency>
+	        <groupId>Firmado</groupId>
+	        <artifactId>firmado</artifactId>
+	        <version>1.0</version>
+	    </dependency>
+	
+		
 
     </dependencies>
 
