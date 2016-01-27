@@ -66,6 +66,12 @@
                             <p:commandButton id="editButton"   icon="fa fa-pencil fa-lg" value="Ver" update=":BillViewForm" oncomplete="PF('BillViewDialog').show()" >
                                 <f:setPropertyActionListener value="#{item}" target="#{billListController.bill}" />
                             </p:commandButton>
+                            <p:commandButton id="signButton" icon="fa fa-pencil fa-lg" value="Firmar" update=":BillViewForm, :growl" action="#{signController.signXML()}" >
+                                <f:setPropertyActionListener value="#{item}" target="#{signController.bill}" />
+                            </p:commandButton>
+                            <p:commandButton id="sendButton" icon="fa fa-pencil fa-lg" value="Enviar" update=":BillViewForm, :growl" action="#{signController.sendXML()}" >
+                                <f:setPropertyActionListener value="#{item}" target="#{signController.bill}" />
+                            </p:commandButton>
                         </h:panelGrid>
                     </p:column>
                 </p:dataTable>
