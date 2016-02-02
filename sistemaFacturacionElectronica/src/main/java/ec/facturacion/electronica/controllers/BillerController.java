@@ -317,7 +317,7 @@ public class BillerController implements Serializable {
 		try {
 			Element factura = new Element("factura");
 			factura.setAttribute(new Attribute("id", "comprobante"));
-			factura.setAttribute(new Attribute("version", "1.1.0"));
+			factura.setAttribute(new Attribute("version", "1.0.0"));
 			Document doc = new Document(factura);
 			doc.setRootElement(factura);
 
@@ -336,7 +336,7 @@ public class BillerController implements Serializable {
 			doc.getRootElement().addContent(infoTributaria);
 
 			Element infoFactura = new Element("infoFactura");
-				DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+				DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 				String reportDate = df.format(bill.getBilDate());
 				infoFactura.addContent(new Element("fechaEmision").setText(reportDate));
 				infoFactura.addContent(new Element("dirEstablecimiento").setText(bill.getUseCode().getUseLocalAddr()));
@@ -351,7 +351,7 @@ public class BillerController implements Serializable {
 				if(bill.getBilFinalClient() == null || !bill.getBilFinalClient()){
 					infoFactura.addContent(new Element("tipoIdentificacionComprador").setText(bill.getCliCode().getIdeCode().getIdeCodeExt()));
 					infoFactura.addContent(new Element("razonSocialComprador").setText(bill.getCliCode().getCliSocialReason()));
-					infoFactura.addContent(new Element("identificacionCompradori").setText(bill.getCliCode().getCliId()));
+					infoFactura.addContent(new Element("identificacionComprador").setText(bill.getCliCode().getCliId()));
 				}else{
 					infoFactura.addContent(new Element("tipoIdentificacionComprador").setText("07"));
 					infoFactura.addContent(new Element("razonSocialComprador").setText("CONSUMIDOR FINAL"));
