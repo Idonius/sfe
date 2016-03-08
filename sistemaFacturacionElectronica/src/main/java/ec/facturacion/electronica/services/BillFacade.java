@@ -42,4 +42,12 @@ public class BillFacade extends AbstractFacade<Bill> {
 			return -1;
 		}
 	}
+    
+    public List<Bill> findByClient(Client cliente){
+		try {
+			return findByParameters("from Bill b where b.cliCode.cliId = ?1", cliente.getCliId());
+		} catch (Exception e) {
+			return null;
+		}
+	}
 }

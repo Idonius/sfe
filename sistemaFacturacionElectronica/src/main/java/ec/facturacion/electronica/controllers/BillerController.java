@@ -350,12 +350,14 @@ public class BillerController implements Serializable {
 				}
 				if(bill.getBilFinalClient() == null || !bill.getBilFinalClient()){
 					infoFactura.addContent(new Element("tipoIdentificacionComprador").setText(bill.getCliCode().getIdeCode().getIdeCodeExt()));
+					infoFactura.addContent(new Element("guiaRemision").setText(String.format("%03d", Integer.valueOf(bill.getUseCode().getUseEmissionPoint()))+"-"+String.format("%03d", Integer.valueOf(bill.getUseCode().getUseLocalCode()))+"-"+bill.getBillNumber()));
 					infoFactura.addContent(new Element("razonSocialComprador").setText(bill.getCliCode().getCliSocialReason()));
 					infoFactura.addContent(new Element("identificacionComprador").setText(bill.getCliCode().getCliId()));
 				}else{
 					infoFactura.addContent(new Element("tipoIdentificacionComprador").setText("07"));
+					infoFactura.addContent(new Element("guiaRemision").setText(String.format("%03d", Integer.valueOf(bill.getUseCode().getUseEmissionPoint()))+"-"+String.format("%03d", Integer.valueOf(bill.getUseCode().getUseLocalCode()))+"-"+bill.getBillNumber()));
 					infoFactura.addContent(new Element("razonSocialComprador").setText("CONSUMIDOR FINAL"));
-					infoFactura.addContent(new Element("identificacionCompradori").setText("9999999999999"));
+					infoFactura.addContent(new Element("identificacionComprador").setText("9999999999999"));
 				}
 				infoFactura.addContent(new Element("totalSinImpuestos").setText(bill.getBilTotal().toString()));
 				infoFactura.addContent(new Element("totalDescuento").setText(bill.getBilDiscount().toString()));

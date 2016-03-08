@@ -88,6 +88,15 @@ public class Bill implements Serializable {
     private Float bilTotalFinal;
     @Column(name = "BILL_FINAL_CLIENT")
     private Boolean bilFinalClient;
+    @Size(max = 255)
+    @Column(name = "BILL_XML_SIGNED")
+    private String xmlSigned;
+    @Size(max = 255)
+    @Column(name = "BILL_XML_RETURNED")
+    private String xmlReturned;
+    @Size(max = 255)
+    @Column(name = "BILL_PDF")
+    private String xmlPdf;
     
     public Bill() {
     }
@@ -248,6 +257,30 @@ public class Bill implements Serializable {
 
 	public void setBilFinalClient(Boolean bilFinalClient) {
 		this.bilFinalClient = bilFinalClient;
+	}
+
+	public String getXmlSigned() {
+		return xmlSigned;
+	}
+
+	public void setXmlSigned(String xmlSigned) {
+		this.xmlSigned = xmlSigned;
+	}
+
+	public String getXmlReturned() {
+		return xmlReturned;
+	}
+
+	public void setXmlReturned(String xmlReturned) {
+		this.xmlReturned = xmlReturned;
+	}
+
+	public String getXmlPdf() {
+		return xmlPdf;
+	}
+
+	public void setXmlPdf(String xmlPdf) {
+		this.xmlPdf = xmlPdf;
 	}
     
 }

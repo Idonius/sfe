@@ -118,7 +118,13 @@ public class User implements Serializable {
     @JoinColumn(name = "EMI_TYP_CODE", referencedColumnName = "EMI_TYP_CODE")
     @ManyToOne(optional = false)
     private EmissionType emiTypCode;
-
+    @Size(max = 255)
+    @Column(name = "USE_PATH_KEY")
+    private String usePathkey;
+    @Size(max = 45)
+    @Column(name = "USE_PASS_KEY")
+    private String usePasskey;
+    
     public User() {
     }
 
@@ -288,7 +294,23 @@ public class User implements Serializable {
         this.emiTypCode = emiTypCode;
     }
 
-    @Override
+    public String getUsePathkey() {
+		return usePathkey;
+	}
+
+	public void setUsePathkey(String usePathkey) {
+		this.usePathkey = usePathkey;
+	}
+
+	public String getUsePasskey() {
+		return usePasskey;
+	}
+
+	public void setUsePasskey(String usePasskey) {
+		this.usePasskey = usePasskey;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (useCode != null ? useCode.hashCode() : 0);

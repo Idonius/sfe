@@ -44,6 +44,10 @@
                         <p:selectBooleanCheckbox id="useAccounting" value="#{userController.selected.useAccounting}" />
                         <p:outputLabel value="#{bundle.CreateUserLabel_useImage}"  />
                         <p:fileUpload id="userImg" fileUploadListener="#{userController.handleFileUpload}" mode="advanced" dragDropSupport="true" update=":growl" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                        <p:outputLabel value="Firma:"  />
+                        <p:fileUpload id="userKey" fileUploadListener="#{userController.handleFileUploadKey}" mode="advanced" dragDropSupport="true" update=":growl" allowTypes="/(\.|\/)(p12)$/" />
+                        <p:outputLabel value="Clave Firma:"  />
+                        <p:inputText id="useKeyPass" value="#{userController.selected.usePasskey}" title="Clave Firma" />
                         <p:outputLabel value="#{bundle.CreateUserLabel_useEmissionPoint}" for="useEmissionPoint" />
                         <p:inputText id="useEmissionPoint" value="#{userController.selected.useEmissionPoint}" title="#{bundle.CreateUserTitle_useEmissionPoint}" />
                    		<p:outputLabel value="#{bundle.CreateUserLabel_emiTypCode}" for="emiTypCode" />

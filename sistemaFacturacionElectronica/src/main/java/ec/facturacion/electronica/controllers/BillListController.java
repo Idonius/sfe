@@ -14,6 +14,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
@@ -35,6 +36,7 @@ import ec.facturacion.electronica.services.BillDetailFacade;
 import ec.facturacion.electronica.services.BillFacade;
 import ec.facturacion.electronica.services.ClientFacade;
 import ec.facturacion.electronica.services.ProductFacade;
+import ec.facturacion.electronica.util.LoginSession;
 
 @ManagedBean(name = "billListController")
 @SessionScoped
@@ -48,6 +50,10 @@ public class BillListController implements Serializable {
 	private BillFacade ejbBillFacade;
 	@EJB
 	private BillDetailFacade ejbBillDetailFacade;
+
+    @ManagedProperty(value="#{loginManager}")
+    private LoginSession loginBean;
+    
 	private Bill bill = new Bill();
 	private List<Bill> lstBill = new ArrayList<Bill>();
 	
@@ -64,12 +70,20 @@ public class BillListController implements Serializable {
 	}
 
 	public List<Bill> getLstBill() {
-		lstBill=ejbBillFacade.findAll();
+		if(loginBean.getCliente() != null){
+			lstBill = ejbBillFacade.findByClient(loginBean.getCliente());
+		}else{
+			lstBill=ejbBillFacade.findAll();
+		}
 		return lstBill;
 	}
 
 	public void setLstBill(List<Bill> lstBill) {
 		this.lstBill = lstBill;
+	}
+
+	public void setLoginBean(LoginSession loginBean) {
+		this.loginBean = loginBean;
 	}
 	
 	

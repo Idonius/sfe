@@ -45,10 +45,15 @@
                         <p:fileUpload id="userImg" fileUploadListener="#{userController.handleFileUpload}" mode="advanced" dragDropSupport="true" update=":growl" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
                         <p:outputLabel value="Ver"  />
                         <p:commandButton value="Imagen" oncomplete="PF('verDialog').show();" update=":verForm:content" disabled="#{userController.selected.useImage == null or userController.selected.useImage == ''}"/>
+                        <p:outputLabel value="Firma:"  />
+                        <p:fileUpload id="userKey" fileUploadListener="#{userController.handleFileUploadKey}" mode="advanced" dragDropSupport="true" update=":growl" allowTypes="/(\.|\/)(p12)$/" />
+                        <p:outputLabel value="Clave Firma:"  />
+                        <p:inputText id="useKeyPass" value="#{userController.selected.usePasskey}" title="Clave Firma" />
                         <p:outputLabel value="#{bundle.EditUserLabel_useEmissionPoint}" for="useEmissionPoint" />
                         <p:inputText id="useEmissionPoint" value="#{userController.selected.useEmissionPoint}" title="#{bundle.EditUserTitle_useEmissionPoint}" />
                         <p:outputLabel value="#{bundle.EditUserLabel_emiTypCode}" for="emiTypCode" />
                         <p:selectOneMenu id="emiTypCode" value="#{userController.selected.emiTypCode}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_emiTypCode}">
+                        
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{emissionTypeController.itemsAvailableSelectOne}"
                                            var="emiTypCodeItem"

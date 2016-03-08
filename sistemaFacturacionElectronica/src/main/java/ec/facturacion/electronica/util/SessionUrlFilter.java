@@ -43,7 +43,7 @@ public class SessionUrlFilter implements Filter{
         
         boolean redireccionarPeticion;
         
-        if(session.getAttribute("active")==null)
+        if(session.getAttribute("active")==null && session.getAttribute("cliente") == null)
         {            
             redireccionarPeticion=true;
             

@@ -81,6 +81,30 @@ public class UserController implements Serializable {
             JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
     	}
     }
+    
+    public void handleFileUploadKey(FileUploadEvent event) {
+    	try{
+    		String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
+            String name = event.getFile().getFileName();
+            
+            File file = new File(path + "/resources/key/" + name);
+            InputStream is = event.getFile().getInputstream();
+            OutputStream out = new FileOutputStream(file);
+            byte buf[] = new byte[1024];
+            int len;
+            while ((len = is.read(buf)) > 0)
+                out.write(buf, 0, len);
+            is.close();
+            out.close();
+            selected.setUsePathkey("/resources/key/" + name);
+            FacesMessage message = new FacesMessage("la firma: ", event.getFile().getFileName() + " fue guardada correctamente.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+    	}catch(Exception ex){
+    		selected.setUsePathkey("");
+    		Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+            JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+    	}
+    }
 
     public User prepareCreate() {
         selected = new User();
